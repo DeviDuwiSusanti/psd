@@ -1,7 +1,9 @@
 # WELCOME TO MY GITHUB
 
 **Nama : Devi Duwi Susanti**
+
 **NIM : 220411100043**
+
 **Mata Kuliah : Proyek Sains Data D**
 
 
