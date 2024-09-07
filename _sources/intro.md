@@ -1,10 +1,10 @@
-# WELCOME TO MY GITHUB
+# WELCOME
 
-**Nama : Devi Duwi Susanti**
+Nama : Devi Duwi Susanti
 
-**NIM : 220411100043**
+NIM : 220411100043
 
-**Mata Kuliah : Proyek Sains Data D**
+Mata Kuliah : Proyek Sains Data D
 
 
 <!-- This is a small sample book to give you a feel for how book content is
