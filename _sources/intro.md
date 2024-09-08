@@ -1,10 +1,13 @@
-# Home🏠
+# Home🏠 - Welcome
+
+Hai 🖐️🖐️🖐️
 
 Nama : Devi Duwi Susanti
 
 NIM : 220411100043
 
 Mata Kuliah : Proyek Sains Data D
+
 
 
 Welcome to My science data project🙌
