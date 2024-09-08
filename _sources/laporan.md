@@ -24,7 +24,6 @@ Saham merupakan tanda kepemilikan dalam suatu perusahaan yang dapat memberikan h
 ANTAM mempunyai visi untuk menjadi korporasi global terkemuka melalui diversifikasi dan integrasi usaha berbasis sumber daya alam. Untuk memenuhi visi ini, ANTAM memiliki misi yaitu dengan memaksimalkan nilai perusahaan bagi pemegang saham dan pemangku kepentingan dengan cara mengelola biaya secara efisien dan meningkatkan produksi.</p></p>
 <p style="text-align: justify;">
 <p style="text-indent: 2em;">
-
 Namun, harga saham ANTAM kerap mengalami fluktuasi yang disebabkan oleh faktor-faktor eksternal seperti harga komoditas global dan kondisi ekonomi yang dapat mempersullit para investor dalam membuat keputusan investasi yang tepat.</p></p>
 <p style="text-align: justify;">
 <p style="text-indent: 2em;">
