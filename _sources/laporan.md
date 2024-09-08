@@ -16,37 +16,32 @@ kernelspec:
 ## Pendahuluan
 
 ### Latar Belakang
-<p style="text-align: justify;">
-<p style="text-indent: 2em;">
-Saham merupakan tanda kepemilikan dalam suatu perusahaan yang dapat memberikan hak bagi pemegang saham untuk mendapatkan keuntungan dan ikut serta dalam pengambilan keputusan perusahaan. PT Aneka Tambang Tbk (ANTAM) adalah perusahaan sektor tambang yang memproduksi nikel, emas, dan bauksit, serta sudah terdaftar di Bursa Efek Indonesia sejak 1997. </p></p>
-<p style="text-align: justify;">
-<p style="text-indent: 2em;">
-ANTAM mempunyai visi untuk menjadi korporasi global terkemuka melalui diversifikasi dan integrasi usaha berbasis sumber daya alam. Untuk memenuhi visi ini, ANTAM memiliki misi yaitu dengan memaksimalkan nilai perusahaan bagi pemegang saham dan pemangku kepentingan dengan cara mengelola biaya secara efisien dan meningkatkan produksi.</p></p>
-<p style="text-align: justify;">
-<p style="text-indent: 2em;">
-Namun, harga saham ANTAM kerap mengalami fluktuasi yang disebabkan oleh faktor-faktor eksternal seperti harga komoditas global dan kondisi ekonomi yang dapat mempersullit para investor dalam membuat keputusan investasi yang tepat.</p></p>
-<p style="text-align: justify;">
-<p style="text-indent: 2em;">
+Saham merupakan tanda kepemilikan dalam suatu perusahaan yang dapat memberikan hak bagi pemegang saham untuk mendapatkan keuntungan dan ikut serta dalam pengambilan keputusan perusahaan. PT Aneka Tambang Tbk (ANTAM) adalah perusahaan sektor tambang yang memproduksi nikel, emas, dan bauksit, serta sudah terdaftar di Bursa Efek Indonesia sejak 1997. 
+
+ANTAM mempunyai visi untuk menjadi korporasi global terkemuka melalui diversifikasi dan integrasi usaha berbasis sumber daya alam. Untuk memenuhi visi ini, ANTAM memiliki misi yaitu dengan memaksimalkan nilai perusahaan bagi pemegang saham dan pemangku kepentingan dengan cara mengelola biaya secara efisien dan meningkatkan produksi.
+
+Namun, harga saham ANTAM kerap mengalami fluktuasi yang disebabkan oleh faktor-faktor eksternal seperti harga komoditas global dan kondisi ekonomi yang dapat mempersullit para investor dalam membuat keputusan investasi yang tepat.
+
 Untuk mengatasi tantangan ini, diperlukan adanya teknologi yang dapat memprediksi pergerakan harga saham di masa depan, seperti machine learning. Hal ini bertujuan untuk meminimalkan risiko dan membantu investor dalam mengambil keputusan yang tepat.
-</p></p>
+
+
 
 ### Tujuan Proyek
-<p style="text-align: justify;">
-<p style="text-indent: 2em;">
-Proyek ini bertujuan untuk mengembangkan model prediksi harga saham di PT Aneka Tambang Tbk (ANTAM)  berakurasi tinggi dengan menggunakan data historis. Dengan analisis ini, diharapkan bisa membantu investor dalam mengambil keputusan investasi, serta dapat memberikan wawasan yang dapat membantu ANTAM dalam merumuskan strategi yang lebih baik untuk meningkatkan nilai saham dan mencapai tujuan pertumbuhannya.</p></p>
+Proyek ini bertujuan untuk mengembangkan model prediksi harga saham di PT Aneka Tambang Tbk (ANTAM)  berakurasi tinggi dengan menggunakan data historis. Dengan analisis ini, diharapkan bisa membantu investor dalam mengambil keputusan investasi, serta dapat memberikan wawasan yang dapat membantu ANTAM dalam merumuskan strategi yang lebih baik untuk meningkatkan nilai saham dan mencapai tujuan pertumbuhannya.
+
 
 ### Rumusan Masalah
-<p style="text-align: justify;">
-•	Bagaimana cara untuk mengembangkan sebuah model prediksi harga saham PT Aneka Tambang Tbk (ANTAM) yang akurat dengan menggunakan data historis?</p>
-<p style="text-align: justify;">
-•	Bagaimana hasil prediksi harga saham dapat dimanfaatkan utuk mendukung keputusan investasi yang lebih baik dan membantu ANTAM  merancang strategi agar meningkatkan nilai saham dan pertumbuhan perusahaan?</p>
+•	Bagaimana cara untuk mengembangkan sebuah model prediksi harga saham PT Aneka Tambang Tbk (ANTAM) yang akurat dengan menggunakan data historis?
+
+•	Bagaimana hasil prediksi harga saham dapat dimanfaatkan utuk mendukung keputusan investasi yang lebih baik dan membantu ANTAM  merancang strategi agar meningkatkan nilai saham dan pertumbuhan perusahaan?
+
 
 ## METODOLOGI
 ### Data Understanding
-a.	Sumber Data
+#### a.	Sumber Data
 Disini kita menjelaskan bagaimana menemukan data yang relevan untuk proyek kita, termasuk sumber data, cara memperolehnya, serta alat dan teknologi yang digunakan. Sumber data dapat berupa data internal Perusahaan, data dari situs web, atau data public yang tersedia secara online.
 
-b.	Deskripsi Data Set
+#### b.	Deskripsi Data Set
 Deskripsi tentang dataset yang digunakan, seperti atribut-atribut dalam data, jenis data, serta gambaran umum tentang kualitas data.
 
 ### Data Preprocessing
@@ -54,13 +49,13 @@ Menjelaskan langkah-langkah yang dilakukan untuk pembersihan dan mempersiapkan d
 
 ### Modelling
 Menjelaskan proses pembuatan model berdasarkan data yang sudah kita proses
-a.	Pembagian Data
+#### a.	Pembagian Data
 Data dibagi menjadi dua, yaitu data pelatihan untuk melatih model dan data pengujian untuk mengecek seberapa baik model bekerja.
 
-b.	Pembangunan Model
+#### b.	Pembangunan Model
 Pemilihan algoritma seperti SVM, Naïve Bayes, atau yang lainnya dan melatih model menggunakan data pelatihan untuk mengenali pola dalam data.
 
-c.	Pengujian Model
+#### c.	Pengujian Model
 Model diuji dengan data pengujian untuk melihat seberapa akurat prediksi yang dihasilkan.
 
 ### Evaluation
