@@ -77,13 +77,16 @@ from sklearn.metrics import mean_squared_error
 # Membaca data
 df = pd.read_csv('https://raw.githubusercontent.com/DeviDuwiSusanti/dataset/main/data_saham_antam4.csv')
 
+# Menggeser kolom Adj Close untuk memprediksi keesokan harinya
 df['Adj Close Target'] = df['Adj Close'].shift(-1)
+
+# Hapus baris terakhir yang targetnya NaN (karena pergeseran)
 df = df[:-1]
-print(df.head())
+print(df)
 
 df.info()
 print('Ukuran data ', df.shape)
-``` 
+```
 
 ```{code-cell}
 df[['Open', 'High', 'Low', 'Close', 'Adj Close', 'Volume', 'Adj Close Target']].describe()
