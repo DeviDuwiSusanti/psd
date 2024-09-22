@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Laporan Proyek Sains Data &#8212; Proyek Sains Data</title>
+    <title>Pengembangan Model Prediksi Harga Saham PT Aneka Tambang Tbk (ANTAM) Menggunakan Data Historis untuk Mendukung Keputusan Investasi &#8212; Proyek Sains Data</title>
   
   
   
@@ -180,7 +180,7 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Laporan Proyek Sains Data</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Pengembangan Model Prediksi Harga Saham PT Aneka Tambang Tbk (ANTAM) Menggunakan Data Historis untuk Mendukung Keputusan Investasi</a></li>
 </ul>
 
     </div>
@@ -319,7 +319,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Laporan Proyek Sains Data</h1>
+    <h1>Pengembangan Model Prediksi Harga Saham PT Aneka Tambang Tbk (ANTAM) Menggunakan Data Historis untuk Mendukung Keputusan Investasi</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -341,7 +341,12 @@ document.write(`
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-deskripsi-data-set">b.	Deskripsi Data Set</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preprocessing">Data Preprocessing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preprocessing">Data Preprocessing</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-mengecek-missing-value">a.	Mengecek missing value</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-pemisahan-fitur-dan-target">b.	Pemisahan fitur dan target</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#c-normalisasi-data">c.	 Normalisasi data</a></li>
+</ul>
+</li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelling">Modelling</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-pembagian-data">a.	Pembagian Data</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-pembangunan-model">b.	Pembangunan Model</a></li>
@@ -364,8 +369,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="laporan-proyek-sains-data">
-<h1>Laporan Proyek Sains Data<a class="headerlink" href="#laporan-proyek-sains-data" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="pengembangan-model-prediksi-harga-saham-pt-aneka-tambang-tbk-antam-menggunakan-data-historis-untuk-mendukung-keputusan-investasi">
+<h1>Pengembangan Model Prediksi Harga Saham PT Aneka Tambang Tbk (ANTAM) Menggunakan Data Historis untuk Mendukung Keputusan Investasi<a class="headerlink" href="#pengembangan-model-prediksi-harga-saham-pt-aneka-tambang-tbk-antam-menggunakan-data-historis-untuk-mendukung-keputusan-investasi" title="Link to this heading">#</a></h1>
 <section id="pendahuluan">
 <h2>Pendahuluan<a class="headerlink" href="#pendahuluan" title="Link to this heading">#</a></h2>
 <section id="latar-belakang">
@@ -410,7 +415,7 @@ document.write(`
 </section>
 <section id="b-deskripsi-data-set">
 <h4>b.	Deskripsi Data Set<a class="headerlink" href="#b-deskripsi-data-set" title="Link to this heading">#</a></h4>
-<p>Data set ini terdiri dari 7 fitur atau kolom, dan 966 record.
+<p>Data set ini terdiri dari 8 fitur atau kolom, dan 2230 record atau baris.
 Atribut-atribut data set :</p>
 <ul class="simple">
 <li><p>Date		: tanggal data harga saham, biasanya memiliki format YYYY-MM-DD.</p></li>
@@ -601,7 +606,58 @@ Ukuran data  (2230, 8)
 </section>
 <section id="data-preprocessing">
 <h3>Data Preprocessing<a class="headerlink" href="#data-preprocessing" title="Link to this heading">#</a></h3>
-<p>Menjelaskan langkah-langkah yang dilakukan untuk pembersihan dan mempersiapkan data sebelum dimodelkan. Seperti menjelaskan tentang penanganan data yang hilang (missing values), tokenisasi dan normalisasi.</p>
+<p>Langkah-langkah pada tahap ini adalah sebagai berikut :</p>
+<section id="a-mengecek-missing-value">
+<h4>a.	Mengecek missing value<a class="headerlink" href="#a-mengecek-missing-value" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Date                0
+Open                0
+High                0
+Low                 0
+Close               0
+Adj Close           0
+Volume              0
+Adj Close Target    0
+dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Tujuan : memeriksa apakah ada nilai yang hilang (missing values) dalam dataset.
+Fungsi : menampilkan jumlah nilai yang hilang untuk setiap kolom, sehingga jika memang terdapat missing values, kita dapat tangani dengan mengisinya atau menghapus baris-baris yang memiliki missing values.</p>
+</section>
+<section id="b-pemisahan-fitur-dan-target">
+<h4>b.	Pemisahan fitur dan target<a class="headerlink" href="#b-pemisahan-fitur-dan-target" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;Open&#39;</span><span class="p">,</span> <span class="s1">&#39;High&#39;</span><span class="p">,</span> <span class="s1">&#39;Low&#39;</span><span class="p">,</span> <span class="s1">&#39;Adj Close&#39;</span><span class="p">,</span> <span class="s1">&#39;Volume&#39;</span><span class="p">]]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Close&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Tujuan : memisahkan dataset menjadi fitur (X) dan target (y).
+Fungsi : fitur (X) merupakan data yang akan digunakan untuk membuat predikski, sedangkan target (y) adalah nilai yang ingin diprediksi.</p>
+</section>
+<section id="c-normalisasi-data">
+<h4>c.	 Normalisasi data<a class="headerlink" href="#c-normalisasi-data" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scaler</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
+<span class="n">X_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Tujuan : menormalkan data fitur ke dalam rentang [0,1].
+Fungsi : menggunakan MinMaxScaler untuk memastikan bahwa semua fitur berada dalam rentang yang sama supaya skla data konsisten, agar algoritma berfungsi dengan baik.</p>
+</section>
 </section>
 <section id="modelling">
 <h3>Modelling<a class="headerlink" href="#modelling" title="Link to this heading">#</a></h3>
@@ -699,7 +755,12 @@ Ukuran data  (2230, 8)
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-deskripsi-data-set">b.	Deskripsi Data Set</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preprocessing">Data Preprocessing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preprocessing">Data Preprocessing</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-mengecek-missing-value">a.	Mengecek missing value</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-pemisahan-fitur-dan-target">b.	Pemisahan fitur dan target</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#c-normalisasi-data">c.	 Normalisasi data</a></li>
+</ul>
+</li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelling">Modelling</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-pembagian-data">a.	Pembagian Data</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-pembangunan-model">b.	Pembangunan Model</a></li>

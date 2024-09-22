@@ -12,7 +12,7 @@ kernelspec:
   name: python3
 ---
 
-# Laporan Proyek Sains Data
+# Pengembangan Model Prediksi Harga Saham PT Aneka Tambang Tbk (ANTAM) Menggunakan Data Historis untuk Mendukung Keputusan Investasi
 ## Pendahuluan
 
 ### Latar Belakang
@@ -53,17 +53,17 @@ data.to_csv('data_saham_antam4.csv')
 print("Data telah disimpan ke file data_saham_antam4.csv")
 ```
 #### b.	Deskripsi Data Set
-Data set ini terdiri dari 7 fitur atau kolom, dan 966 record.
+Data set ini terdiri dari 8 fitur atau kolom, dan 2230 record atau baris.
 Atribut-atribut data set :
--	Date		: tanggal data harga saham, biasanya memiliki format YYYY-MM-DD.
--	Open		: harga pembukaan saham pada tanggal tersebut.
--	High		: harga tertinggi yang dicapai pada tanggal tersebut.
--	Low		: harga terendah saham pada tanggal tersebut.
--	Close		: harga penutupan saham pada tanggal tersebut.
--	Adj Close	: harga penutupan yang sudah disesuaikan dengan pembagian saham,     
+- Date		: tanggal data harga saham, biasanya memiliki format YYYY-MM-DD.
+- Open		: harga pembukaan saham pada tanggal tersebut.
+- High		: harga tertinggi yang dicapai pada tanggal tersebut.
+- Low		: harga terendah saham pada tanggal tersebut.
+- Close		: harga penutupan saham pada tanggal tersebut.
+- Adj Close	: harga penutupan yang sudah disesuaikan dengan pembagian saham,     
   		  dividen, dan corporate actions lainnya.
--	Volume	: jumlah saham yang diperdagangkan pada tanggal tersebut.
--	Adj Close Target : harga target yang akan diprediksi untuk besok hari
+- Volume	: jumlah saham yang diperdagangkan pada tanggal tersebut.
+- Adj Close Target : harga target yang akan diprediksi untuk besok hari
 
 ```{code-cell}
 import numpy as np
@@ -88,20 +88,41 @@ print('Ukuran data ', df.shape)
 df[['Open', 'High', 'Low', 'Close', 'Adj Close', 'Volume', 'Adj Close Target']].describe()
 ```
 
-
-
 ### Data Preprocessing
-Menjelaskan langkah-langkah yang dilakukan untuk pembersihan dan mempersiapkan data sebelum dimodelkan. Seperti menjelaskan tentang penanganan data yang hilang (missing values), tokenisasi dan normalisasi.
+Langkah-langkah pada tahap ini adalah sebagai berikut :
+##### a.	Mengecek missing value
+
+```{code-cell}
+df.isnull().sum()
+```
+Tujuan : memeriksa apakah ada nilai yang hilang (missing values) dalam dataset.
+Fungsi : menampilkan jumlah nilai yang hilang untuk setiap kolom, sehingga jika memang terdapat missing values, kita dapat tangani dengan mengisinya atau menghapus baris-baris yang memiliki missing values.
+
+##### b.	Pemisahan fitur dan target
+```{code-cell}
+X = df[['Open', 'High', 'Low', 'Adj Close', 'Volume']]
+y = df['Close']
+```
+Tujuan : memisahkan dataset menjadi fitur (X) dan target (y).
+Fungsi : fitur (X) merupakan data yang akan digunakan untuk membuat predikski, sedangkan target (y) adalah nilai yang ingin diprediksi.
+
+#####  c.	 Normalisasi data
+```{code-cell}
+scaler = MinMaxScaler()
+X_scaled = scaler.fit_transform(X)
+```
+Tujuan : menormalkan data fitur ke dalam rentang [0,1].
+Fungsi : menggunakan MinMaxScaler untuk memastikan bahwa semua fitur berada dalam rentang yang sama supaya skla data konsisten, agar algoritma berfungsi dengan baik.
 
 ### Modelling
 Menjelaskan proses pembuatan model berdasarkan data yang sudah kita proses
-#### a.	Pembagian Data
+##### a.	Pembagian Data
 Data dibagi menjadi dua, yaitu data pelatihan untuk melatih model dan data pengujian untuk mengecek seberapa baik model bekerja.
 
-#### b.	Pembangunan Model
+##### b.	Pembangunan Model
 Pemilihan algoritma seperti SVM, Naïve Bayes, atau yang lainnya dan melatih model menggunakan data pelatihan untuk mengenali pola dalam data.
 
-#### c.	Pengujian Model
+##### c.	Pengujian Model
 Model diuji dengan data pengujian untuk melihat seberapa akurat prediksi yang dihasilkan.
 
 ### Evaluation
