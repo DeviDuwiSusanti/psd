@@ -83,8 +83,8 @@ print(df.head())
 
 df.info()
 print('Ukuran data ', df.shape)
-``` -->
-<!-- 
+``` 
+
 ```{code-cell}
 df[['Open', 'High', 'Low', 'Close', 'Adj Close', 'Volume', 'Adj Close Target']].describe()
 ```
