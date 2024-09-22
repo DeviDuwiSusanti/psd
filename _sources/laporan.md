@@ -35,10 +35,60 @@ Proyek ini bertujuan untuk mengembangkan model prediksi harga saham di PT Aneka 
 ## METODOLOGI
 ### Data Understanding
 #### a.	Sumber Data
-Disini kita menjelaskan bagaimana menemukan data yang relevan untuk proyek kita, termasuk sumber data, cara memperolehnya, serta alat dan teknologi yang digunakan. Sumber data dapat berupa data internal Perusahaan, data dari situs web, atau data public yang tersedia secara online.
+Data yang dipakai pada proyek ini didapat dari website Yahoo Finance, yaitu sebuah platform online yang menyediakan data keuangan dan pasar saham secara real-time. Di website tersebut kita bisa menemukan informasi atau data historis harga saham dari PT Aneka Tambang Tbk (ANTM) di Bursa Efek Jakarta. Di dalam proyek ini, digunakan data histori dari tanggal 09-09-2015 sampai 10-09-2024 dalam bentuk dokumen csv. Dalam pengambilan data dari Yahoo Finance, kita bisa menggunakan google colab untuk mendownload data yang kita butuhkan. Berikut adalah code yang bisa digunakan :
 
+```python
+import yfinance as yf
+import pandas as pd
+
+# Unduh data saham ANTAM dari Yahoo Finance
+data = yf.download("ANTM.JK", start="2015-09-09", end="2024-09-10")
+
+# Tampilkan beberapa baris pertama dari data untuk verifikasi
+print(data.head())
+
+# Simpan data ke file CSV
+data.to_csv('data_saham_antam4.csv')
+
+print("Data telah disimpan ke file data_saham_antam4.csv")
+```
 #### b.	Deskripsi Data Set
-Deskripsi tentang dataset yang digunakan, seperti atribut-atribut dalam data, jenis data, serta gambaran umum tentang kualitas data.
+Data set ini terdiri dari 7 fitur atau kolom, dan 966 record.
+Atribut-atribut data set :
+-	Date		: tanggal data harga saham, biasanya memiliki format YYYY-MM-DD.
+-	Open		: harga pembukaan saham pada tanggal tersebut.
+-	High		: harga tertinggi yang dicapai pada tanggal tersebut.
+-	Low		: harga terendah saham pada tanggal tersebut.
+-	Close		: harga penutupan saham pada tanggal tersebut.
+-	Adj Close	: harga penutupan yang sudah disesuaikan dengan pembagian saham,     
+  		  dividen, dan corporate actions lainnya.
+-	Volume	: jumlah saham yang diperdagangkan pada tanggal tersebut.
+-	Adj Close Target : harga target yang akan diprediksi untuk besok hari
+
+```{code-cell}
+import numpy as np
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error
+
+# Membaca data
+df = pd.read_csv('https://raw.githubusercontent.com/DeviDuwiSusanti/dataset/main/data_saham_antam4.csv')
+
+df['Adj Close Target'] = df['Adj Close'].shift(-1)
+df = df[:-1]
+print(df.head())
+
+df.info()
+print('Ukuran data ', df.shape)
+```
+
+```{code-cell}
+df[['Open', 'High', 'Low', 'Close', 'Adj Close', 'Volume', 'Adj Close Target']].describe()
+```
+
+
 
 ### Data Preprocessing
 Menjelaskan langkah-langkah yang dilakukan untuk pembersihan dan mempersiapkan data sebelum dimodelkan. Seperti menjelaskan tentang penanganan data yang hilang (missing values), tokenisasi dan normalisasi.
