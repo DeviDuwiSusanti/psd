@@ -36,7 +36,7 @@ Proyek ini bertujuan untuk mengembangkan model prediksi harga saham di PT Aneka 
 ## METODOLOGI
 ### Data Understanding
 #### a.	Sumber Data
-Data yang dipakai pada proyek ini didapat dari website Yahoo Finance, yaitu sebuah platform online yang menyediakan data keuangan dan pasar saham secara real-time. Di website tersebut kita bisa menemukan informasi atau data historis harga saham dari PT Aneka Tambang Tbk (ANTM) di Bursa Efek Jakarta. Di dalam proyek ini, digunakan data histori dari tanggal 09-09-2015 sampai 10-09-2024 dalam bentuk dokumen csv. Dalam pengambilan data dari Yahoo Finance, kita bisa menggunakan google colab untuk mendownload data yang kita butuhkan. Berikut adalah code yang bisa digunakan :
+Data yang dipakai pada proyek ini didapat dari website https://finance.yahoo.com/quote/ANTM.JK/history/, yaitu sebuah platform online yang menyediakan data keuangan dan pasar saham secara real-time. Di website tersebut kita bisa menemukan informasi atau data historis harga saham dari PT Aneka Tambang Tbk (ANTM) di Bursa Efek Jakarta. Di dalam proyek ini, digunakan data histori dari tanggal 09-09-2015 sampai 10-09-2024 dalam bentuk dokumen csv. Dalam pengambilan data dari Yahoo Finance, kita bisa menggunakan google colab untuk mendownload data yang kita butuhkan. Berikut adalah code yang bisa digunakan :
 
 ```python
 import yfinance as yf
@@ -62,7 +62,7 @@ Atribut-atribut data set :
 - Low		: harga terendah saham pada tanggal tersebut.
 - Close		: harga penutupan saham pada tanggal tersebut.
 - Adj Close	: harga penutupan yang sudah disesuaikan dengan pembagian saham,     
-  		  dividen, dan corporate actions lainnya.
+  		       dividen, dan corporate actions lainnya.
 - Volume	: jumlah saham yang diperdagangkan pada tanggal tersebut.
 - Adj Close Target : harga target yang akan diprediksi untuk besok hari
 
@@ -83,8 +83,8 @@ print(df.head())
 
 df.info()
 print('Ukuran data ', df.shape)
-```
-
+``` -->
+<!-- 
 ```{code-cell}
 df[['Open', 'High', 'Low', 'Close', 'Adj Close', 'Volume', 'Adj Close Target']].describe()
 ```
@@ -101,19 +101,19 @@ Fungsi : menampilkan jumlah nilai yang hilang untuk setiap kolom, sehingga jika 
 
 ##### b.	Pemisahan fitur dan target
 ```{code-cell}
-X = df[['Open', 'High', 'Low', 'Adj Close', 'Volume']]
-y = df['Close']
+X = df[['Open', 'High', 'Low', 'Close', 'Adj Close']]
+y = df['Adj Close Target']
 ```
 Tujuan : memisahkan dataset menjadi fitur (X) dan target (y).
 Fungsi : fitur (X) merupakan data yang akan digunakan untuk membuat predikski, sedangkan target (y) adalah nilai yang ingin diprediksi.
 
 #####  c.	 Normalisasi data
-```{code-cell}
+<!-- ```{code-cell}
 scaler = MinMaxScaler()
 X_scaled = scaler.fit_transform(X)
 ```
 Tujuan : menormalkan data fitur ke dalam rentang [0,1].
-Fungsi : menggunakan MinMaxScaler untuk memastikan bahwa semua fitur berada dalam rentang yang sama supaya skla data konsisten, agar algoritma berfungsi dengan baik.
+Fungsi : menggunakan MinMaxScaler untuk memastikan bahwa semua fitur berada dalam rentang yang sama supaya skla data konsisten, agar algoritma berfungsi dengan baik. -->
 
 ### Modelling
 Menjelaskan proses pembuatan model berdasarkan data yang sudah kita proses
