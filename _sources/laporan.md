@@ -12,7 +12,8 @@ kernelspec:
   name: python3
 ---
 
-# Pengembangan Model Prediksi Harga Saham PT Aneka Tambang Tbk (ANTAM) Menggunakan Data Historis untuk Mendukung Keputusan Investasi
+# Laporan Proyek Sains Data
+## Pengembangan Model Prediksi Harga Saham PT Aneka Tambang Tbk (ANTAM) Menggunakan Data Historis untuk Mendukung Keputusan Investasi
 ## Pendahuluan
 
 ### Latar Belakang
