@@ -51,8 +51,8 @@ data.to_csv('data_saham_antam4.csv')
 
 Untuk tampilan datanya bisa dilihat di bawah ini:
 ```{code-cell}
-# import library yang dibutuhkan
 import pandas as pd
+import numpy as np
 
 # Membaca data
 df = pd.read_csv('https://raw.githubusercontent.com/DeviDuwiSusanti/dataset/main/data_saham_antam4.csv')
@@ -125,7 +125,30 @@ for col in df.columns:
     plt.grid(True)
     plt.show()
 ```
-Dari boxplot di atas terlihat bahwa fitur 'Volume' memiliki cukup banyak outlier.
+Dari boxplot di atas terlihat bahwa fitur 'Volume' memiliki cukup banyak outlier. Sehingga diperlukan adanya penananganan outliernya
+
+```{code-cell}
+# Menghitung Z-score untuk kolom Volume
+mean_volume = df['Volume'].mean()  # Rata-rata kolom Volume
+std_volume = df['Volume'].std()    # Standar deviasi kolom Volume
+df['Z_score'] = (df['Volume'] - mean_volume) / std_volume  # Menghitung Z-score
+
+# Menampilkan outlier (Z-score di luar rentang -3 hingga 3)
+outliers = df[(df['Z_score'] < -3) | (df['Z_score'] > 3)]
+print(f'Jumlah outlier: {outliers.shape[0]}')
+print(outliers[['Volume', 'Z_score']])  # Menampilkan kolom yang relevan
+
+# Menghapus outlier dari dataset
+df_cleaned = df[(df['Z_score'] >= -3) & (df['Z_score'] <= 3)].copy()  # Buat salinan DataFrame bersih
+
+# Menghapus kolom Z_score setelah pembersihan
+df_cleaned.drop(columns=['Z_score'], inplace=True)  # Hapus kolom Z_score
+
+# Menampilkan jumlah data setelah menghapus outlier
+print(f'Jumlah data setelah outlier dihapus: {df_cleaned.shape[0]}')
+
+df = df_cleaned
+```
 ###### Menghitung Korelasi Antar Fitur
 ```{code-cell}
 correlation_matrix = df.corr()
@@ -137,14 +160,14 @@ plt.show()
 ```
 Dari heatmap di atas, bisa dilihat bahwa:
 Fitur pembukaan (Open), tertinggi (High), penutupan (Close), dan harga pennutupan yang disesuaikan (Adj Close) mempunyai korelasi yang kuat antara satu sama lain (mendekati 1 atau 1). Hal ini menunjukkan fitur-fitur tersebut saling berkaitan dan bergerak sejalan. Sedangkan fitur 'Volume' mempunyai korelasi rendah dengan fitur lainnya (sekitar 0.23 - 0.27) yang menunjukkan bahwa perubahan volume tidak berpengaruh langsung dengan perubahan harga.
-###### Seleksi Fitur
+<!-- ###### Seleksi Fitur
 Fitur yang ingin diprediksi adalah fitur Low dimana ini dapat membantu kita untuk mengetahui seberapa rendah harga saham bisa turun. Para investor juga bisa menggunakan prediksi ini untuk membeli saham saat harganya rendah, dan meningkatkan peluang mendapatkan keuntungan saat harga saham naik lagi.
 ```{code-cell}
 # SELEKSI FITUR
 df = df.drop(['Open', 'High', 'Adj Close', 'Close', 'Volume'], axis=1)
 
 df
-```
+``` -->
 ### Data Preprocessing
 <!-- Langkah-langkah pada tahap ini adalah sebagai berikut :
 ##### a.	Mengecek missing value -->

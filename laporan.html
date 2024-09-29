@@ -347,7 +347,6 @@ document.write(`
 <li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#menampilkan-trend-setiap-fitur">Menampilkan Trend Setiap Fitur</a></li>
 <li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#mencari-outlier">Mencari Outlier</a></li>
 <li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#menghitung-korelasi-antar-fitur">Menghitung Korelasi Antar Fitur</a></li>
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#seleksi-fitur">Seleksi Fitur</a></li>
 </ul>
 </li>
 </ul>
@@ -419,8 +418,8 @@ document.write(`
 <p>Untuk tampilan datanya bisa dilihat di bawah ini:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import library yang dibutuhkan</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <span class="c1"># Membaca data</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/DeviDuwiSusanti/dataset/main/data_saham_antam4.csv&#39;</span><span class="p">)</span>
@@ -755,7 +754,89 @@ Requirement already satisfied: six&gt;=1.5 in c:\users\heviaa\appdata\local\prog
 <img alt="_images/4a023bba5e4fda21d52ddfd5db2bb12d2605dc6d275b909d3e7771f9b2f72c80.png" src="_images/4a023bba5e4fda21d52ddfd5db2bb12d2605dc6d275b909d3e7771f9b2f72c80.png" />
 </div>
 </div>
-<p>Dari boxplot di atas terlihat bahwa fitur ‘Volume’ memiliki cukup banyak outlier.</p>
+<p>Dari boxplot di atas terlihat bahwa fitur ‘Volume’ memiliki cukup banyak outlier. Sehingga diperlukan adanya penananganan outliernya</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Menghitung Z-score untuk kolom Volume</span>
+<span class="n">mean_volume</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Volume&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>  <span class="c1"># Rata-rata kolom Volume</span>
+<span class="n">std_volume</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Volume&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>    <span class="c1"># Standar deviasi kolom Volume</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Z_score&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Volume&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">mean_volume</span><span class="p">)</span> <span class="o">/</span> <span class="n">std_volume</span>  <span class="c1"># Menghitung Z-score</span>
+
+<span class="c1"># Menampilkan outlier (Z-score di luar rentang -3 hingga 3)</span>
+<span class="n">outliers</span> <span class="o">=</span> <span class="n">df</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Z_score&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mi">3</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Z_score&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">)]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Jumlah outlier: </span><span class="si">{</span><span class="n">outliers</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">outliers</span><span class="p">[[</span><span class="s1">&#39;Volume&#39;</span><span class="p">,</span> <span class="s1">&#39;Z_score&#39;</span><span class="p">]])</span>  <span class="c1"># Menampilkan kolom yang relevan</span>
+
+<span class="c1"># Menghapus outlier dari dataset</span>
+<span class="n">df_cleaned</span> <span class="o">=</span> <span class="n">df</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Z_score&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="o">-</span><span class="mi">3</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Z_score&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">3</span><span class="p">)]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>  <span class="c1"># Buat salinan DataFrame bersih</span>
+
+<span class="c1"># Menghapus kolom Z_score setelah pembersihan</span>
+<span class="n">df_cleaned</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Z_score&#39;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># Hapus kolom Z_score</span>
+
+<span class="c1"># Menampilkan jumlah data setelah menghapus outlier</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Jumlah data setelah outlier dihapus: </span><span class="si">{</span><span class="n">df_cleaned</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">df_cleaned</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jumlah outlier: 48
+                Volume    Z_score
+Date                             
+2015-10-28   720207900   3.455607
+2020-10-14  1116793100   5.713869
+2020-10-15  1510069900   7.953292
+2020-10-19  1158293800   5.950185
+2020-10-20   789265700   3.848841
+2020-10-21  1370011500   7.155762
+2020-11-09   846313500   4.173686
+2020-11-18   853419900   4.214152
+2020-12-02   803420400   3.929442
+2020-12-10   686885600   3.265861
+2020-12-16  1272844700   6.602469
+2020-12-18  1083731700   5.525609
+2020-12-22   678922000   3.220515
+2020-12-23   659296400   3.108761
+2020-12-28   992175000   5.004261
+2020-12-29   739754900   3.566913
+2021-01-04  1040753400   5.280879
+2021-01-05  1139014700   5.840405
+2021-01-07  1982112200  10.641227
+2021-01-08  1052618000   5.348439
+2021-01-12  1147172800   5.886859
+2021-01-13  1280852600   6.648068
+2021-01-14  1499058400   7.890590
+2021-01-15   915912100   4.569999
+2021-01-18   930618200   4.653740
+2021-01-20  1983213100  10.647496
+2021-01-21  1273877400   6.608349
+2021-01-22   894766800   4.449592
+2021-01-25  1222991300   6.318590
+2021-01-26   786819300   3.834911
+2021-01-27  1341364800   6.992640
+2021-01-28   731854900   3.521929
+2021-02-01  2186652700  11.805935
+2021-02-02   942434300   4.721024
+2021-02-03   948031000   4.752893
+2021-02-04   874173400   4.332328
+2021-02-05  1157647700   5.946506
+2021-02-08   977135300   4.918621
+2021-02-09   877784900   4.352893
+2021-02-10  1401720500   7.336322
+2021-02-22   834610300   4.107045
+2021-02-26  1305042600   6.785812
+2021-03-05   745024700   3.596921
+2021-03-26   652293400   3.068884
+2022-03-07   642031000   3.010447
+2022-03-08  1404951500   7.354720
+2022-03-09   706107000   3.375313
+2024-08-30   764070300   3.705372
+Jumlah data setelah outlier dihapus: 2183
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="menghitung-korelasi-antar-fitur">
 <h5>Menghitung Korelasi Antar Fitur<a class="headerlink" href="#menghitung-korelasi-antar-fitur" title="Link to this heading">#</a></h5>
@@ -771,100 +852,19 @@ Requirement already satisfied: six&gt;=1.5 in c:\users\heviaa\appdata\local\prog
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/a212a3014e3915326de0a4aa29f0421b2f3ca580184ffd821a32545468bc3644.png" src="_images/a212a3014e3915326de0a4aa29f0421b2f3ca580184ffd821a32545468bc3644.png" />
+<img alt="_images/b98265a9521fb6b40dd8851cbdd7a95c2390709fcf7b01c7dd7ea7532bec11c7.png" src="_images/b98265a9521fb6b40dd8851cbdd7a95c2390709fcf7b01c7dd7ea7532bec11c7.png" />
 </div>
 </div>
 <p>Dari heatmap di atas, bisa dilihat bahwa:
 Fitur pembukaan (Open), tertinggi (High), penutupan (Close), dan harga pennutupan yang disesuaikan (Adj Close) mempunyai korelasi yang kuat antara satu sama lain (mendekati 1 atau 1). Hal ini menunjukkan fitur-fitur tersebut saling berkaitan dan bergerak sejalan. Sedangkan fitur ‘Volume’ mempunyai korelasi rendah dengan fitur lainnya (sekitar 0.23 - 0.27) yang menunjukkan bahwa perubahan volume tidak berpengaruh langsung dengan perubahan harga.</p>
-</section>
-<section id="seleksi-fitur">
-<h5>Seleksi Fitur<a class="headerlink" href="#seleksi-fitur" title="Link to this heading">#</a></h5>
-<p>Fitur yang ingin diprediksi adalah fitur Low dimana ini dapat membantu kita untuk mengetahui seberapa rendah harga saham bisa turun. Para investor juga bisa menggunakan prediksi ini untuk membeli saham saat harganya rendah, dan meningkatkan peluang mendapatkan keuntungan saat harga saham naik lagi.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># SELEKSI FITUR</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;Open&#39;</span><span class="p">,</span> <span class="s1">&#39;High&#39;</span><span class="p">,</span> <span class="s1">&#39;Adj Close&#39;</span><span class="p">,</span> <span class="s1">&#39;Close&#39;</span><span class="p">,</span> <span class="s1">&#39;Volume&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<!-- ###### Seleksi Fitur
+Fitur yang ingin diprediksi adalah fitur Low dimana ini dapat membantu kita untuk mengetahui seberapa rendah harga saham bisa turun. Para investor juga bisa menggunakan prediksi ini untuk membeli saham saat harganya rendah, dan meningkatkan peluang mendapatkan keuntungan saat harga saham naik lagi.
+```{code-cell}
+# SELEKSI FITUR
+df = df.drop(['Open', 'High', 'Adj Close', 'Close', 'Volume'], axis=1)
 
-<span class="n">df</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Low</th>
-    </tr>
-    <tr>
-      <th>Date</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>2015-09-09</th>
-      <td>404.868835</td>
-    </tr>
-    <tr>
-      <th>2015-09-10</th>
-      <td>404.868835</td>
-    </tr>
-    <tr>
-      <th>2015-09-11</th>
-      <td>407.388763</td>
-    </tr>
-    <tr>
-      <th>2015-09-14</th>
-      <td>405.708832</td>
-    </tr>
-    <tr>
-      <th>2015-09-15</th>
-      <td>400.668945</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>2024-09-03</th>
-      <td>1365.000000</td>
-    </tr>
-    <tr>
-      <th>2024-09-04</th>
-      <td>1340.000000</td>
-    </tr>
-    <tr>
-      <th>2024-09-05</th>
-      <td>1330.000000</td>
-    </tr>
-    <tr>
-      <th>2024-09-06</th>
-      <td>1330.000000</td>
-    </tr>
-    <tr>
-      <th>2024-09-09</th>
-      <td>1305.000000</td>
-    </tr>
-  </tbody>
-</table>
-<p>2231 rows × 1 columns</p>
-</div></div></div>
-</div>
+df
+``` -->
 </section>
 </section>
 </section>
@@ -990,7 +990,6 @@ Fungsi : menggunakan MinMaxScaler untuk memastikan bahwa semua fitur berada dala
 <li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#menampilkan-trend-setiap-fitur">Menampilkan Trend Setiap Fitur</a></li>
 <li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#mencari-outlier">Mencari Outlier</a></li>
 <li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#menghitung-korelasi-antar-fitur">Menghitung Korelasi Antar Fitur</a></li>
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#seleksi-fitur">Seleksi Fitur</a></li>
 </ul>
 </li>
 </ul>
