@@ -45,14 +45,21 @@ import pandas as pd
 # Unduh data saham ANTAM dari Yahoo Finance
 data = yf.download("ANTM.JK", start="2015-09-09", end="2024-09-10")
 
-# Tampilkan beberapa baris pertama dari data untuk verifikasi
-print(data.head())
-
 # Simpan data ke file CSV
 data.to_csv('data_saham_antam4.csv')
-
-print("Data telah disimpan ke file data_saham_antam4.csv")
 ```
+
+Untuk tampilan datanya bisa dilihat di bawah ini:
+```{code-cell}
+# import library yang dibutuhkan
+import pandas as pd
+
+# Membaca data
+df = pd.read_csv('https://raw.githubusercontent.com/DeviDuwiSusanti/dataset/main/data_saham_antam4.csv')
+
+print(df.head())
+```
+
 #### b.	Deskripsi Data Set
 Data set ini terdiri dari 8 fitur atau kolom, dan 2230 record atau baris.
 Atribut-atribut data set :
@@ -67,48 +74,90 @@ Atribut-atribut data set :
 - Adj Close Target : harga target yang akan diprediksi untuk besok hari
 
 ```{code-cell}
-import numpy as np
-import pandas as pd
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import MinMaxScaler
-from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_squared_error
-
-# Membaca data
-df = pd.read_csv('https://raw.githubusercontent.com/DeviDuwiSusanti/dataset/main/data_saham_antam4.csv')
-
-# Menggeser kolom Adj Close untuk memprediksi keesokan harinya
-df['Adj Close Target'] = df['Adj Close'].shift(-1)
-
-# Hapus baris terakhir yang targetnya NaN (karena pergeseran)
-df = df[:-1]
-print(df)
-
 df.info()
 print('Ukuran data ', df.shape)
 ```
-
 ```{code-cell}
-df[['Open', 'High', 'Low', 'Close', 'Adj Close', 'Volume', 'Adj Close Target']].describe()
+df[['Open', 'High', 'Low', 'Close', 'Adj Close', 'Volume']].describe()
 ```
 
+####  c. Eksplorasi Data
+###### Mencari Missing Value
+```{code-cell}
+df.isnull().sum()
+```
+###### Mencari Data yang Duplikat
+```{code-cell}
+duplicates = df[df.duplicated()]
+print(duplicates)
+```
+###### Mengubah kolom Date menjadi Index
+Hal ini agar memudahkan akses dan analisis data berdasarkan waktu.
+```{code-cell}
+df['Date'] = pd.to_datetime(df['Date'])
+df.set_index('Date', inplace=True)
+print(df.head())
+```
+###### Menampilkan Trend Setiap Fitur
+```{code-cell}
+!pip install seaborn
+```
+```{code-cell}
+import matplotlib.pyplot as plt
+import seaborn as sns
+for col in df:
+    plt.figure(figsize=(7, 3))
+    sns.lineplot(data=df, x='Date', y=col)
+    plt.title(f'Trend of {col}')
+    plt.xlabel('Date')
+    plt.ylabel(col)
+    plt.grid(True)
+    plt.xticks(rotation=45) 
+    plt.show()
+
+```
+###### Melihat Outlier
+```{code-cell}
+for col in df.columns:
+    plt.subplots(figsize=(6, 2))
+    sns.boxplot(data=df, x=col)
+    plt.title(f'Boxplot of {col}')
+    plt.grid(True)
+    plt.show()
+```
+Dari boxplot di atas terlihat bahwa fitur 'Volume' memiliki cukup banyak outlier.
+###### Menghitung Korelasi Antar Fitur
+```{code-cell}
+correlation_matrix = df.corr()
+
+plt.figure(figsize=(7, 3))
+sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', linewidths=0.5)
+plt.title('Heatmap Korelasi Antar Fitur')
+plt.show()
+```
+Dari heatmap di atas, bisa dilihat bahwa:
+Fitur pembukaan (Open), tertinggi (High), penutupan (Close), dan harga pennutupan yang disesuaikan (Adj Close) mempunyai korelasi yang kuat antara satu sama lain (mendekati 1 atau 1). Hal ini menunjukkan fitur-fitur tersebut saling berkaitan dan bergerak sejalan. Sedangkan fitur 'Volume' mempunyai korelasi rendah dengan fitur lainnya (sekitar 0.23 - 0.27) yang menunjukkan bahwa perubahan volume tidak berpengaruh langsung dengan perubahan harga.
+###### Seleksi Fitur
+Fitur yang ingin diprediksi adalah fitur Low dimana ini dapat membantu kita untuk mengetahui seberapa rendah harga saham bisa turun. Para investor juga bisa menggunakan prediksi ini untuk membeli saham saat harganya rendah, dan meningkatkan peluang mendapatkan keuntungan saat harga saham naik lagi.
+```{code-cell}
+# SELEKSI FITUR
+df = df.drop(['Open', 'High', 'Adj Close', 'Close', 'Volume'], axis=1)
+
+df
+```
 ### Data Preprocessing
 Langkah-langkah pada tahap ini adalah sebagai berikut :
 ##### a.	Mengecek missing value
 
-```{code-cell}
+<!-- ```{code-cell}
 df.isnull().sum()
 ```
 Tujuan : memeriksa apakah ada nilai yang hilang (missing values) dalam dataset.
-Fungsi : menampilkan jumlah nilai yang hilang untuk setiap kolom, sehingga jika memang terdapat missing values, kita dapat tangani dengan mengisinya atau menghapus baris-baris yang memiliki missing values.
+Fungsi : menampilkan jumlah nilai yang hilang untuk setiap kolom, sehingga jika memang terdapat missing values, kita dapat tangani dengan mengisinya atau menghapus baris-baris yang memiliki missing values. -->
 
 ##### b.	Pemisahan fitur dan target
-```{code-cell}
-X = df[['Open', 'High', 'Low', 'Close', 'Adj Close']]
-y = df['Adj Close Target']
-```
-Tujuan : memisahkan dataset menjadi fitur (X) dan target (y).
-Fungsi : fitur (X) merupakan data yang akan digunakan untuk membuat predikski, sedangkan target (y) adalah nilai yang ingin diprediksi.
+<!-- Tujuan : memisahkan dataset menjadi fitur (X) dan target (y).
+Fungsi : fitur (X) merupakan data yang akan digunakan untuk membuat predikski, sedangkan target (y) adalah nilai yang ingin diprediksi.  -->
 
 #####  c.	 Normalisasi data
 <!-- ```{code-cell}
