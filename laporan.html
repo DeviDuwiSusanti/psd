@@ -345,19 +345,14 @@ document.write(`
 <li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#mencari-data-yang-duplikat">Mencari Data yang Duplikat</a></li>
 <li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#mengubah-kolom-date-menjadi-index">Mengubah kolom Date menjadi Index</a></li>
 <li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#menampilkan-trend-setiap-fitur">Menampilkan Trend Setiap Fitur</a></li>
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#melihat-outlier">Melihat Outlier</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#mencari-outlier">Mencari Outlier</a></li>
 <li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#menghitung-korelasi-antar-fitur">Menghitung Korelasi Antar Fitur</a></li>
 <li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#seleksi-fitur">Seleksi Fitur</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preprocessing">Data Preprocessing</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-mengecek-missing-value">a.	Mengecek missing value</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-pemisahan-fitur-dan-target">b.	Pemisahan fitur dan target</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#c-normalisasi-data">c.	 Normalisasi data</a></li>
-</ul>
-</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preprocessing">Data Preprocessing</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelling">Modelling</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-pembagian-data">a.	Pembagian Data</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-pembangunan-model">b.	Pembangunan Model</a></li>
@@ -738,8 +733,8 @@ Requirement already satisfied: six&gt;=1.5 in c:\users\heviaa\appdata\local\prog
 </div>
 </div>
 </section>
-<section id="melihat-outlier">
-<h5>Melihat Outlier<a class="headerlink" href="#melihat-outlier" title="Link to this heading">#</a></h5>
+<section id="mencari-outlier">
+<h5>Mencari Outlier<a class="headerlink" href="#mencari-outlier" title="Link to this heading">#</a></h5>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
@@ -875,29 +870,23 @@ Fitur pembukaan (Open), tertinggi (High), penutupan (Close), dan harga pennutupa
 </section>
 <section id="data-preprocessing">
 <h3>Data Preprocessing<a class="headerlink" href="#data-preprocessing" title="Link to this heading">#</a></h3>
-<p>Langkah-langkah pada tahap ini adalah sebagai berikut :</p>
-<section id="a-mengecek-missing-value">
-<h4>a.	Mengecek missing value<a class="headerlink" href="#a-mengecek-missing-value" title="Link to this heading">#</a></h4>
+<!-- Langkah-langkah pada tahap ini adalah sebagai berikut :
+##### a.	Mengecek missing value -->
 <!-- ```{code-cell}
 df.isnull().sum()
 ```
 Tujuan : memeriksa apakah ada nilai yang hilang (missing values) dalam dataset.
 Fungsi : menampilkan jumlah nilai yang hilang untuk setiap kolom, sehingga jika memang terdapat missing values, kita dapat tangani dengan mengisinya atau menghapus baris-baris yang memiliki missing values. -->
-</section>
-<section id="b-pemisahan-fitur-dan-target">
-<h4>b.	Pemisahan fitur dan target<a class="headerlink" href="#b-pemisahan-fitur-dan-target" title="Link to this heading">#</a></h4>
+<!-- ##### b.	Pemisahan fitur dan target -->
 <!-- Tujuan : memisahkan dataset menjadi fitur (X) dan target (y).
 Fungsi : fitur (X) merupakan data yang akan digunakan untuk membuat predikski, sedangkan target (y) adalah nilai yang ingin diprediksi.  -->
-</section>
-<section id="c-normalisasi-data">
-<h4>c.	 Normalisasi data<a class="headerlink" href="#c-normalisasi-data" title="Link to this heading">#</a></h4>
+<!-- #####  c.	 Normalisasi data -->
 <!-- ```{code-cell}
 scaler = MinMaxScaler()
 X_scaled = scaler.fit_transform(X)
 ```
 Tujuan : menormalkan data fitur ke dalam rentang [0,1].
 Fungsi : menggunakan MinMaxScaler untuk memastikan bahwa semua fitur berada dalam rentang yang sama supaya skla data konsisten, agar algoritma berfungsi dengan baik. -->
-</section>
 </section>
 <section id="modelling">
 <h3>Modelling<a class="headerlink" href="#modelling" title="Link to this heading">#</a></h3>
@@ -999,19 +988,14 @@ Fungsi : menggunakan MinMaxScaler untuk memastikan bahwa semua fitur berada dala
 <li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#mencari-data-yang-duplikat">Mencari Data yang Duplikat</a></li>
 <li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#mengubah-kolom-date-menjadi-index">Mengubah kolom Date menjadi Index</a></li>
 <li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#menampilkan-trend-setiap-fitur">Menampilkan Trend Setiap Fitur</a></li>
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#melihat-outlier">Melihat Outlier</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#mencari-outlier">Mencari Outlier</a></li>
 <li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#menghitung-korelasi-antar-fitur">Menghitung Korelasi Antar Fitur</a></li>
 <li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#seleksi-fitur">Seleksi Fitur</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preprocessing">Data Preprocessing</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-mengecek-missing-value">a.	Mengecek missing value</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-pemisahan-fitur-dan-target">b.	Pemisahan fitur dan target</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#c-normalisasi-data">c.	 Normalisasi data</a></li>
-</ul>
-</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preprocessing">Data Preprocessing</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelling">Modelling</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-pembagian-data">a.	Pembagian Data</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-pembangunan-model">b.	Pembangunan Model</a></li>

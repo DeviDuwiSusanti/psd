@@ -116,7 +116,7 @@ for col in df:
     plt.show()
 
 ```
-###### Melihat Outlier
+###### Mencari Outlier
 ```{code-cell}
 for col in df.columns:
     plt.subplots(figsize=(6, 2))
@@ -146,8 +146,8 @@ df = df.drop(['Open', 'High', 'Adj Close', 'Close', 'Volume'], axis=1)
 df
 ```
 ### Data Preprocessing
-Langkah-langkah pada tahap ini adalah sebagai berikut :
-##### a.	Mengecek missing value
+<!-- Langkah-langkah pada tahap ini adalah sebagai berikut :
+##### a.	Mengecek missing value -->
 
 <!-- ```{code-cell}
 df.isnull().sum()
@@ -155,11 +155,11 @@ df.isnull().sum()
 Tujuan : memeriksa apakah ada nilai yang hilang (missing values) dalam dataset.
 Fungsi : menampilkan jumlah nilai yang hilang untuk setiap kolom, sehingga jika memang terdapat missing values, kita dapat tangani dengan mengisinya atau menghapus baris-baris yang memiliki missing values. -->
 
-##### b.	Pemisahan fitur dan target
+<!-- ##### b.	Pemisahan fitur dan target -->
 <!-- Tujuan : memisahkan dataset menjadi fitur (X) dan target (y).
 Fungsi : fitur (X) merupakan data yang akan digunakan untuk membuat predikski, sedangkan target (y) adalah nilai yang ingin diprediksi.  -->
 
-#####  c.	 Normalisasi data
+<!-- #####  c.	 Normalisasi data -->
 <!-- ```{code-cell}
 scaler = MinMaxScaler()
 X_scaled = scaler.fit_transform(X)
