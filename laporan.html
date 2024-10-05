@@ -346,6 +346,7 @@ document.write(`
 <li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#mengubah-kolom-date-menjadi-index">Mengubah kolom Date menjadi Index</a></li>
 <li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#menampilkan-trend-setiap-fitur">Menampilkan Trend Setiap Fitur</a></li>
 <li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#mencari-outlier">Mencari Outlier</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#rekayasa-fitur">Rekayasa Fitur</a></li>
 <li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#menghitung-korelasi-antar-fitur">Menghitung Korelasi Antar Fitur</a></li>
 </ul>
 </li>
@@ -424,27 +425,92 @@ document.write(`
 <span class="c1"># Membaca data</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/DeviDuwiSusanti/dataset/main/data_saham_antam4.csv&#39;</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>         Date        Open        High         Low       Close   Adj Close  \
-0  2015-09-09  408.228760  416.628510  404.868835  414.108582  350.495972   
-1  2015-09-10  411.588654  411.588654  404.868835  404.868835  342.675568   
-2  2015-09-11  407.388763  424.188324  407.388763  407.388763  344.808380   
-3  2015-09-14  411.588654  414.108582  405.708832  405.708832  343.386505   
-4  2015-09-15  404.868835  407.388763  400.668945  400.668945  339.120819   
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
-     Volume  
-0  17822276  
-1   6254934  
-2  36223022  
-3  12273195  
-4   5246096  
-</pre></div>
-</div>
-</div>
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Date</th>
+      <th>Open</th>
+      <th>High</th>
+      <th>Low</th>
+      <th>Close</th>
+      <th>Adj Close</th>
+      <th>Volume</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2015-09-09</td>
+      <td>408.228760</td>
+      <td>416.628510</td>
+      <td>404.868835</td>
+      <td>414.108582</td>
+      <td>350.495972</td>
+      <td>17822276</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2015-09-10</td>
+      <td>411.588654</td>
+      <td>411.588654</td>
+      <td>404.868835</td>
+      <td>404.868835</td>
+      <td>342.675568</td>
+      <td>6254934</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2015-09-11</td>
+      <td>407.388763</td>
+      <td>424.188324</td>
+      <td>407.388763</td>
+      <td>407.388763</td>
+      <td>344.808380</td>
+      <td>36223022</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2015-09-14</td>
+      <td>411.588654</td>
+      <td>414.108582</td>
+      <td>405.708832</td>
+      <td>405.708832</td>
+      <td>343.386505</td>
+      <td>12273195</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2015-09-15</td>
+      <td>404.868835</td>
+      <td>407.388763</td>
+      <td>400.668945</td>
+      <td>400.668945</td>
+      <td>339.120819</td>
+      <td>5246096</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 </section>
 <section id="b-deskripsi-data-set">
@@ -649,29 +715,95 @@ Index: []
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">])</span>
 <span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                  Open        High         Low       Close   Adj Close  \
-Date                                                                     
-2015-09-09  408.228760  416.628510  404.868835  414.108582  350.495972   
-2015-09-10  411.588654  411.588654  404.868835  404.868835  342.675568   
-2015-09-11  407.388763  424.188324  407.388763  407.388763  344.808380   
-2015-09-14  411.588654  414.108582  405.708832  405.708832  343.386505   
-2015-09-15  404.868835  407.388763  400.668945  400.668945  339.120819   
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
-              Volume  
-Date                  
-2015-09-09  17822276  
-2015-09-10   6254934  
-2015-09-11  36223022  
-2015-09-14  12273195  
-2015-09-15   5246096  
-</pre></div>
-</div>
-</div>
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Open</th>
+      <th>High</th>
+      <th>Low</th>
+      <th>Close</th>
+      <th>Adj Close</th>
+      <th>Volume</th>
+    </tr>
+    <tr>
+      <th>Date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2015-09-09</th>
+      <td>408.228760</td>
+      <td>416.628510</td>
+      <td>404.868835</td>
+      <td>414.108582</td>
+      <td>350.495972</td>
+      <td>17822276</td>
+    </tr>
+    <tr>
+      <th>2015-09-10</th>
+      <td>411.588654</td>
+      <td>411.588654</td>
+      <td>404.868835</td>
+      <td>404.868835</td>
+      <td>342.675568</td>
+      <td>6254934</td>
+    </tr>
+    <tr>
+      <th>2015-09-11</th>
+      <td>407.388763</td>
+      <td>424.188324</td>
+      <td>407.388763</td>
+      <td>407.388763</td>
+      <td>344.808380</td>
+      <td>36223022</td>
+    </tr>
+    <tr>
+      <th>2015-09-14</th>
+      <td>411.588654</td>
+      <td>414.108582</td>
+      <td>405.708832</td>
+      <td>405.708832</td>
+      <td>343.386505</td>
+      <td>12273195</td>
+    </tr>
+    <tr>
+      <th>2015-09-15</th>
+      <td>404.868835</td>
+      <td>407.388763</td>
+      <td>400.668945</td>
+      <td>400.668945</td>
+      <td>339.120819</td>
+      <td>5246096</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 </section>
 <section id="menampilkan-trend-setiap-fitur">
@@ -838,6 +970,114 @@ Jumlah data setelah outlier dihapus: 2183
 </div>
 </div>
 </section>
+<section id="rekayasa-fitur">
+<h5>Rekayasa Fitur<a class="headerlink" href="#rekayasa-fitur" title="Link to this heading">#</a></h5>
+<p>Karena dalam penelitian ini kita akan memprediksi harga Low pada hari berikutnya, maka perlu variabel baru untuk target.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Menggeser kolom Adj Close untuk memprediksi keesokan harinya</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Low Target&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Low&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Hapus baris terakhir yang targetnya NaN (karena pergeseran)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Open</th>
+      <th>High</th>
+      <th>Low</th>
+      <th>Close</th>
+      <th>Adj Close</th>
+      <th>Volume</th>
+      <th>Low Target</th>
+    </tr>
+    <tr>
+      <th>Date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2015-09-09</th>
+      <td>408.228760</td>
+      <td>416.628510</td>
+      <td>404.868835</td>
+      <td>414.108582</td>
+      <td>350.495972</td>
+      <td>17822276</td>
+      <td>404.868835</td>
+    </tr>
+    <tr>
+      <th>2015-09-10</th>
+      <td>411.588654</td>
+      <td>411.588654</td>
+      <td>404.868835</td>
+      <td>404.868835</td>
+      <td>342.675568</td>
+      <td>6254934</td>
+      <td>407.388763</td>
+    </tr>
+    <tr>
+      <th>2015-09-11</th>
+      <td>407.388763</td>
+      <td>424.188324</td>
+      <td>407.388763</td>
+      <td>407.388763</td>
+      <td>344.808380</td>
+      <td>36223022</td>
+      <td>405.708832</td>
+    </tr>
+    <tr>
+      <th>2015-09-14</th>
+      <td>411.588654</td>
+      <td>414.108582</td>
+      <td>405.708832</td>
+      <td>405.708832</td>
+      <td>343.386505</td>
+      <td>12273195</td>
+      <td>400.668945</td>
+    </tr>
+    <tr>
+      <th>2015-09-15</th>
+      <td>404.868835</td>
+      <td>407.388763</td>
+      <td>400.668945</td>
+      <td>400.668945</td>
+      <td>339.120819</td>
+      <td>5246096</td>
+      <td>399.828979</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
 <section id="menghitung-korelasi-antar-fitur">
 <h5>Menghitung Korelasi Antar Fitur<a class="headerlink" href="#menghitung-korelasi-antar-fitur" title="Link to this heading">#</a></h5>
 <div class="cell docutils container">
@@ -852,11 +1092,104 @@ Jumlah data setelah outlier dihapus: 2183
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/b98265a9521fb6b40dd8851cbdd7a95c2390709fcf7b01c7dd7ea7532bec11c7.png" src="_images/b98265a9521fb6b40dd8851cbdd7a95c2390709fcf7b01c7dd7ea7532bec11c7.png" />
+<img alt="_images/a75ee90b1524ca650ae404b03d4e182139875a3b6b13676a50ff1fbb47f6c7bf.png" src="_images/a75ee90b1524ca650ae404b03d4e182139875a3b6b13676a50ff1fbb47f6c7bf.png" />
 </div>
 </div>
 <p>Dari heatmap di atas, bisa dilihat bahwa:
-Fitur pembukaan (Open), tertinggi (High), penutupan (Close), dan harga pennutupan yang disesuaikan (Adj Close) mempunyai korelasi yang kuat antara satu sama lain (mendekati 1 atau 1). Hal ini menunjukkan fitur-fitur tersebut saling berkaitan dan bergerak sejalan. Sedangkan fitur ‘Volume’ mempunyai korelasi rendah dengan fitur lainnya (sekitar 0.23 - 0.27) yang menunjukkan bahwa perubahan volume tidak berpengaruh langsung dengan perubahan harga.</p>
+Fitur pembukaan (Open), tertinggi (High), penutupan (Close), dan harga pennutupan yang disesuaikan (Adj Close) mempunyai korelasi yang kuat antara satu sama lain (mendekati 1 atau 1). Hal ini menunjukkan fitur-fitur tersebut saling berkaitan dan bergerak sejalan. Sedangkan fitur ‘Volume’ mempunyai korelasi rendah dengan fitur lainnya (sekitar 0.15 - 0.17) yang menunjukkan bahwa perubahan volume tidak berpengaruh langsung dengan perubahan harga. Sehingga fitur volume tidak perlu digunakan untuk analisis prediksi pada projek ini.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Volume&#39;</span><span class="p">])</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Open</th>
+      <th>High</th>
+      <th>Low</th>
+      <th>Close</th>
+      <th>Adj Close</th>
+      <th>Low Target</th>
+    </tr>
+    <tr>
+      <th>Date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2015-09-09</th>
+      <td>408.228760</td>
+      <td>416.628510</td>
+      <td>404.868835</td>
+      <td>414.108582</td>
+      <td>350.495972</td>
+      <td>404.868835</td>
+    </tr>
+    <tr>
+      <th>2015-09-10</th>
+      <td>411.588654</td>
+      <td>411.588654</td>
+      <td>404.868835</td>
+      <td>404.868835</td>
+      <td>342.675568</td>
+      <td>407.388763</td>
+    </tr>
+    <tr>
+      <th>2015-09-11</th>
+      <td>407.388763</td>
+      <td>424.188324</td>
+      <td>407.388763</td>
+      <td>407.388763</td>
+      <td>344.808380</td>
+      <td>405.708832</td>
+    </tr>
+    <tr>
+      <th>2015-09-14</th>
+      <td>411.588654</td>
+      <td>414.108582</td>
+      <td>405.708832</td>
+      <td>405.708832</td>
+      <td>343.386505</td>
+      <td>400.668945</td>
+    </tr>
+    <tr>
+      <th>2015-09-15</th>
+      <td>404.868835</td>
+      <td>407.388763</td>
+      <td>400.668945</td>
+      <td>400.668945</td>
+      <td>339.120819</td>
+      <td>399.828979</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
 <!-- ###### Seleksi Fitur
 Fitur yang ingin diprediksi adalah fitur Low dimana ini dapat membantu kita untuk mengetahui seberapa rendah harga saham bisa turun. Para investor juga bisa menggunakan prediksi ini untuk membeli saham saat harganya rendah, dan meningkatkan peluang mendapatkan keuntungan saat harga saham naik lagi.
 ```{code-cell}
@@ -989,6 +1322,7 @@ Fungsi : menggunakan MinMaxScaler untuk memastikan bahwa semua fitur berada dala
 <li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#mengubah-kolom-date-menjadi-index">Mengubah kolom Date menjadi Index</a></li>
 <li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#menampilkan-trend-setiap-fitur">Menampilkan Trend Setiap Fitur</a></li>
 <li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#mencari-outlier">Mencari Outlier</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#rekayasa-fitur">Rekayasa Fitur</a></li>
 <li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#menghitung-korelasi-antar-fitur">Menghitung Korelasi Antar Fitur</a></li>
 </ul>
 </li>

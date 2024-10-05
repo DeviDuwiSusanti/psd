@@ -57,7 +57,7 @@ import numpy as np
 # Membaca data
 df = pd.read_csv('https://raw.githubusercontent.com/DeviDuwiSusanti/dataset/main/data_saham_antam4.csv')
 
-print(df.head())
+df.head()
 ```
 
 #### b.	Deskripsi Data Set
@@ -96,7 +96,7 @@ Hal ini agar memudahkan akses dan analisis data berdasarkan waktu.
 ```{code-cell}
 df['Date'] = pd.to_datetime(df['Date'])
 df.set_index('Date', inplace=True)
-print(df.head())
+df.head()
 ```
 ###### Menampilkan Trend Setiap Fitur
 ```{code-cell}
@@ -149,6 +149,16 @@ print(f'Jumlah data setelah outlier dihapus: {df_cleaned.shape[0]}')
 
 df = df_cleaned
 ```
+###### Rekayasa Fitur
+Karena dalam penelitian ini kita akan memprediksi harga Low pada hari berikutnya, maka perlu variabel baru untuk target.
+```{code-cell}
+# Menggeser kolom Adj Close untuk memprediksi keesokan harinya
+df['Low Target'] = df['Low'].shift(-1)
+
+# Hapus baris terakhir yang targetnya NaN (karena pergeseran)
+df = df[:-1]
+df.head()
+```
 ###### Menghitung Korelasi Antar Fitur
 ```{code-cell}
 correlation_matrix = df.corr()
@@ -159,7 +169,12 @@ plt.title('Heatmap Korelasi Antar Fitur')
 plt.show()
 ```
 Dari heatmap di atas, bisa dilihat bahwa:
-Fitur pembukaan (Open), tertinggi (High), penutupan (Close), dan harga pennutupan yang disesuaikan (Adj Close) mempunyai korelasi yang kuat antara satu sama lain (mendekati 1 atau 1). Hal ini menunjukkan fitur-fitur tersebut saling berkaitan dan bergerak sejalan. Sedangkan fitur 'Volume' mempunyai korelasi rendah dengan fitur lainnya (sekitar 0.23 - 0.27) yang menunjukkan bahwa perubahan volume tidak berpengaruh langsung dengan perubahan harga.
+Fitur pembukaan (Open), tertinggi (High), penutupan (Close), dan harga pennutupan yang disesuaikan (Adj Close) mempunyai korelasi yang kuat antara satu sama lain (mendekati 1 atau 1). Hal ini menunjukkan fitur-fitur tersebut saling berkaitan dan bergerak sejalan. Sedangkan fitur 'Volume' mempunyai korelasi rendah dengan fitur lainnya (sekitar 0.15 - 0.17) yang menunjukkan bahwa perubahan volume tidak berpengaruh langsung dengan perubahan harga. Sehingga fitur volume tidak perlu digunakan untuk analisis prediksi pada projek ini.
+
+```{code-cell}
+df = df.drop(columns=['Volume'])
+df.head()
+```
 <!-- ###### Seleksi Fitur
 Fitur yang ingin diprediksi adalah fitur Low dimana ini dapat membantu kita untuk mengetahui seberapa rendah harga saham bisa turun. Para investor juga bisa menggunakan prediksi ini untuk membeli saham saat harganya rendah, dan meningkatkan peluang mendapatkan keuntungan saat harga saham naik lagi.
 ```{code-cell}
