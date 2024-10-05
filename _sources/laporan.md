@@ -56,7 +56,7 @@ import numpy as np
 
 # Membaca data
 df = pd.read_csv('https://raw.githubusercontent.com/DeviDuwiSusanti/dataset/main/data_saham_antam4.csv')
-
+pd.options.display.float_format = '{:.0f}'.format
 df.head()
 ```
 
