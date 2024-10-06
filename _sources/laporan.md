@@ -150,7 +150,7 @@ print(f'Jumlah data setelah outlier dihapus: {df_cleaned.shape[0]}')
 df = df_cleaned
 ```
 ###### Rekayasa Fitur
-Karena dalam penelitian ini kita akan memprediksi harga Low pada hari berikutnya, maka perlu variabel baru untuk target.
+Karena dalam penelitian ini kita akan memprediksi harga Low pada hari berikutnya, maka perlu variabel baru untuk target. Dimana fitur ini dapat membantu kita untuk mengetahui seberapa rendah harga saham bisa turun. Para investor juga bisa menggunakan prediksi ini untuk membeli saham saat harganya rendah, dan meningkatkan peluang mendapatkan keuntungan saat harga saham naik lagi.
 ```{code-cell}
 # Menggeser kolom Adj Close untuk memprediksi keesokan harinya
 df['Low Target'] = df['Low'].shift(-1)
