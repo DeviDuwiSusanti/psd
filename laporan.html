@@ -342,7 +342,6 @@ document.write(`
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-deskripsi-data-set">b.	Deskripsi Data Set</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#c-eksplorasi-data">c. Eksplorasi Data</a><ul class="nav section-nav flex-column">
 <li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#mencari-missing-value">Mencari Missing Value</a></li>
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#mencari-data-yang-duplikat">Mencari Data yang Duplikat</a></li>
 <li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#mengubah-kolom-date-menjadi-index">Mengubah kolom Date menjadi Index</a></li>
 <li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#menampilkan-trend-setiap-fitur">Menampilkan Trend Setiap Fitur</a></li>
 <li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#mencari-outlier">Mencari Outlier</a></li>
@@ -405,17 +404,18 @@ document.write(`
 <h3>Data Understanding<a class="headerlink" href="#data-understanding" title="Link to this heading">#</a></h3>
 <section id="a-sumber-data">
 <h4>a.	Sumber Data<a class="headerlink" href="#a-sumber-data" title="Link to this heading">#</a></h4>
-<p>Data yang dipakai pada proyek ini didapat dari website <a class="reference external" href="https://finance.yahoo.com/quote/ANTM.JK/history/">https://finance.yahoo.com/quote/ANTM.JK/history/</a>, yaitu sebuah platform online yang menyediakan data keuangan dan pasar saham secara real-time. Di website tersebut kita bisa menemukan informasi atau data historis harga saham dari PT Aneka Tambang Tbk (ANTM) di Bursa Efek Jakarta. Di dalam proyek ini, digunakan data histori dari tanggal 09-09-2015 sampai 10-09-2024 dalam bentuk dokumen csv. Dalam pengambilan data dari Yahoo Finance, kita bisa menggunakan google colab untuk mendownload data yang kita butuhkan. Berikut adalah code yang bisa digunakan :</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">yfinance</span> <span class="k">as</span> <span class="nn">yf</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<p>Data yang dipakai pada proyek ini didapat dari website <a class="reference external" href="https://finance.yahoo.com/quote/ANTM.JK/history/">https://finance.yahoo.com/quote/ANTM.JK/history/</a>, yaitu sebuah platform online yang menyediakan data keuangan dan pasar saham secara real-time. Di website tersebut kita bisa menemukan informasi atau data historis harga saham dari PT Aneka Tambang Tbk (ANTM) di Bursa Efek Jakarta. Di dalam proyek ini, digunakan data histori dari tanggal 09-09-2015 sampai 10-09-2024 dalam bentuk dokumen csv.</p>
+<!-- Dalam pengambilan data dari Yahoo Finance, kita bisa menggunakan google colab untuk mendownload data yang kita butuhkan. Berikut adalah code yang bisa digunakan : -->
+<!-- ```python
+import yfinance as yf
+import pandas as pd
 
-<span class="c1"># Unduh data saham ANTAM dari Yahoo Finance</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;ANTM.JK&quot;</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="s2">&quot;2015-09-09&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;2024-09-10&quot;</span><span class="p">)</span>
+# Unduh data saham ANTAM dari Yahoo Finance
+data = yf.download("ANTM.JK", start="2015-09-09", end="2024-09-10")
 
-<span class="c1"># Simpan data ke file CSV</span>
-<span class="n">data</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;data_saham_antam4.csv&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
+# Simpan data ke file CSV
+data.to_csv('data_saham_antam4.csv')
+``` -->
 <p>Untuk tampilan datanya bisa dilihat di bawah ini:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -526,7 +526,6 @@ Atribut-atribut data set :</p>
 <li><p>Adj Close	: harga penutupan yang sudah disesuaikan dengan pembagian saham,<br />
 dividen, dan corporate actions lainnya.</p></li>
 <li><p>Volume	: jumlah saham yang diperdagangkan pada tanggal tersebut.</p></li>
-<li><p>Adj Close Target : harga target yang akan diprediksi untuk besok hari</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -689,24 +688,11 @@ dtype: int64
 </div>
 </div>
 </div>
-</section>
-<section id="mencari-data-yang-duplikat">
-<h5>Mencari Data yang Duplikat<a class="headerlink" href="#mencari-data-yang-duplikat" title="Link to this heading">#</a></h5>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">duplicates</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">duplicated</span><span class="p">()]</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">duplicates</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Empty DataFrame
-Columns: [Date, Open, High, Low, Close, Adj Close, Volume]
-Index: []
-</pre></div>
-</div>
-</div>
-</div>
+<!-- ###### Mencari Data yang Duplikat
+```{code-cell}
+duplicates = df[df.duplicated()]
+print(duplicates)
+``` -->
 </section>
 <section id="mengubah-kolom-date-menjadi-index">
 <h5>Mengubah kolom Date menjadi Index<a class="headerlink" href="#mengubah-kolom-date-menjadi-index" title="Link to this heading">#</a></h5>
@@ -975,10 +961,8 @@ Jumlah data setelah outlier dihapus: 2183
 <p>Karena dalam penelitian ini kita akan memprediksi harga Low pada hari berikutnya, maka perlu variabel baru untuk target. Dimana fitur ini dapat membantu kita untuk mengetahui seberapa rendah harga saham bisa turun. Para investor juga bisa menggunakan prediksi ini untuk membeli saham saat harganya rendah, dan meningkatkan peluang mendapatkan keuntungan saat harga saham naik lagi.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Menggeser kolom Adj Close untuk memprediksi keesokan harinya</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Low Target&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Low&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Low Target&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Low&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 
-<span class="c1"># Hapus baris terakhir yang targetnya NaN (karena pergeseran)</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 <span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
@@ -1319,7 +1303,6 @@ Fungsi : menggunakan MinMaxScaler untuk memastikan bahwa semua fitur berada dala
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-deskripsi-data-set">b.	Deskripsi Data Set</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#c-eksplorasi-data">c. Eksplorasi Data</a><ul class="nav section-nav flex-column">
 <li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#mencari-missing-value">Mencari Missing Value</a></li>
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#mencari-data-yang-duplikat">Mencari Data yang Duplikat</a></li>
 <li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#mengubah-kolom-date-menjadi-index">Mengubah kolom Date menjadi Index</a></li>
 <li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#menampilkan-trend-setiap-fitur">Menampilkan Trend Setiap Fitur</a></li>
 <li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#mencari-outlier">Mencari Outlier</a></li>

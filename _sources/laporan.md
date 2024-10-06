@@ -36,9 +36,10 @@ Proyek ini bertujuan untuk mengembangkan model prediksi harga saham di PT Aneka 
 ## METODOLOGI
 ### Data Understanding
 #### a.	Sumber Data
-Data yang dipakai pada proyek ini didapat dari website https://finance.yahoo.com/quote/ANTM.JK/history/, yaitu sebuah platform online yang menyediakan data keuangan dan pasar saham secara real-time. Di website tersebut kita bisa menemukan informasi atau data historis harga saham dari PT Aneka Tambang Tbk (ANTM) di Bursa Efek Jakarta. Di dalam proyek ini, digunakan data histori dari tanggal 09-09-2015 sampai 10-09-2024 dalam bentuk dokumen csv. Dalam pengambilan data dari Yahoo Finance, kita bisa menggunakan google colab untuk mendownload data yang kita butuhkan. Berikut adalah code yang bisa digunakan :
+Data yang dipakai pada proyek ini didapat dari website https://finance.yahoo.com/quote/ANTM.JK/history/, yaitu sebuah platform online yang menyediakan data keuangan dan pasar saham secara real-time. Di website tersebut kita bisa menemukan informasi atau data historis harga saham dari PT Aneka Tambang Tbk (ANTM) di Bursa Efek Jakarta. Di dalam proyek ini, digunakan data histori dari tanggal 09-09-2015 sampai 10-09-2024 dalam bentuk dokumen csv. 
+<!-- Dalam pengambilan data dari Yahoo Finance, kita bisa menggunakan google colab untuk mendownload data yang kita butuhkan. Berikut adalah code yang bisa digunakan : -->
 
-```python
+<!-- ```python
 import yfinance as yf
 import pandas as pd
 
@@ -47,7 +48,7 @@ data = yf.download("ANTM.JK", start="2015-09-09", end="2024-09-10")
 
 # Simpan data ke file CSV
 data.to_csv('data_saham_antam4.csv')
-```
+``` -->
 
 Untuk tampilan datanya bisa dilihat di bawah ini:
 ```{code-cell}
@@ -71,7 +72,6 @@ Atribut-atribut data set :
 - Adj Close	: harga penutupan yang sudah disesuaikan dengan pembagian saham,     
   		       dividen, dan corporate actions lainnya.
 - Volume	: jumlah saham yang diperdagangkan pada tanggal tersebut.
-- Adj Close Target : harga target yang akan diprediksi untuk besok hari
 
 ```{code-cell}
 df.info()
@@ -86,11 +86,11 @@ df[['Open', 'High', 'Low', 'Close', 'Adj Close', 'Volume']].describe()
 ```{code-cell}
 df.isnull().sum()
 ```
-###### Mencari Data yang Duplikat
+<!-- ###### Mencari Data yang Duplikat
 ```{code-cell}
 duplicates = df[df.duplicated()]
 print(duplicates)
-```
+``` -->
 ###### Mengubah kolom Date menjadi Index
 Hal ini agar memudahkan akses dan analisis data berdasarkan waktu.
 ```{code-cell}
@@ -152,10 +152,8 @@ df = df_cleaned
 ###### Rekayasa Fitur
 Karena dalam penelitian ini kita akan memprediksi harga Low pada hari berikutnya, maka perlu variabel baru untuk target. Dimana fitur ini dapat membantu kita untuk mengetahui seberapa rendah harga saham bisa turun. Para investor juga bisa menggunakan prediksi ini untuk membeli saham saat harganya rendah, dan meningkatkan peluang mendapatkan keuntungan saat harga saham naik lagi.
 ```{code-cell}
-# Menggeser kolom Adj Close untuk memprediksi keesokan harinya
 df['Low Target'] = df['Low'].shift(-1)
 
-# Hapus baris terakhir yang targetnya NaN (karena pergeseran)
 df = df[:-1]
 df.head()
 ```
