@@ -13,72 +13,70 @@ kernelspec:
 ---
 
 # Laporan Proyek 2
-## Pengembangan Model Prediksi Harga Saham PT Aneka Tambang Tbk (ANTAM) Menggunakan Data Historis untuk Mendukung Keputusan Investasi
+## Pengembangan Model Prediksi Kurs Jisdor Menggunakan Data Historis Time Series
 ## Pendahuluan
 
 ### Latar Belakang
-Saham merupakan tanda kepemilikan dalam suatu perusahaan yang dapat memberikan hak bagi pemegang saham untuk mendapatkan keuntungan dan ikut serta dalam pengambilan keputusan perusahaan. PT Aneka Tambang Tbk (ANTAM) adalah perusahaan sektor tambang yang memproduksi nikel, emas, dan bauksit, serta sudah terdaftar di Bursa Efek Indonesia sejak 1997. 
-
-ANTAM mempunyai visi untuk menjadi korporasi global terkemuka melalui diversifikasi dan integrasi usaha berbasis sumber daya alam. Untuk memenuhi visi ini, ANTAM memiliki misi yaitu memaksimalkan nilai perusahaan bagi pemegang saham dan pemangku kepentingan dengan cara mengelola biaya secara efisien dan meningkatkan produksi.
-
-Namun, harga saham ANTAM kerap mengalami fluktuasi yang disebabkan oleh faktor-faktor eksternal seperti harga komoditas global dan kondisi ekonomi yang dapat mempersulit para investor dalam membuat keputusan investasi yang tepat.
-
-Untuk mengatasi tantangan ini, diperlukan adanya teknologi yang dapat memprediksi pergerakan harga saham di masa depan, seperti machine learning. Hal ini bertujuan untuk meminimalkan risiko dan membantu investor dalam mengambil keputusan yang tepat.
+Kurs JISDOR (Jakarta Interbank Spot Dollar Rate) merupakan acuan untuk nilai tukar resmi yang dikeluarkan Bank Indonesia berdasarkan transaksi antarbank di Indonesia. Kurs ini juga menjadi acuan penting di berbagai aktivitas ekonomi dan keuangan, termasuk perdagangan internasionall dan investasi.
 
 ### Tujuan Proyek
-Proyek ini bertujuan untuk mengembangkan model prediksi harga saham di PT Aneka Tambang Tbk (ANTAM)  berakurasi tinggi dengan menggunakan data historis. Dengan analisis ini, diharapkan bisa membantu investor dalam mengambil keputusan investasi, serta dapat memberikan wawasan yang dapat membantu ANTAM dalam merumuskan strategi yang lebih baik untuk meningkatkan nilai saham dan mencapai tujuan pertumbuhannya.
+Proyek ini bertujuan untuk mengembangkan model prediksi kurs JISDOR berbasis data historis time series yang memiliki tingkat akurasi tinggi. Model prediksi ini diharapkan dapat:
+
+•	Membantu pelaku usaha, investor, dan pembuat kebijakan dalam mengambil keputusan yang lebih baik terkait nilai tukar.
+
+•	Memberikan wawasan strategis yang dapat digunakan untuk merancang kebijakan ekonomi yang lebih tanggap terhadap fluktuasi nilai tukar.
 
 ### Rumusan Masalah
-•	Bagaimana cara untuk mengembangkan sebuah model prediksi harga saham PT Aneka Tambang Tbk (ANTAM) yang akurat dengan menggunakan data historis?
+•	Bagaimana cara mengembangkan model prediksi kurs JISDOR yang akurat dengan memanfaatkan data historis time series?
 
-•	Bagaimana hasil prediksi harga saham dapat dimanfaatkan untuk mendukung keputusan investasi yang lebih baik dan membantu ANTAM  merancang strategi agar meningkatkan nilai saham dan pertumbuhan perusahaan?
+•	Bagaimana hasil prediksi kurs JISDOR dapat digunakan untuk mendukung pengambilan keputusan strategis dan memitigasi risiko terkait fluktuasi nilai tukar?
 
 ## METODOLOGI
 ### Data Understanding
 #### a.	Sumber Data
-Data yang dipakai pada proyek ini didapat dari website https://finance.yahoo.com/quote/ANTM.JK/history/, yaitu sebuah platform online yang menyediakan data keuangan dan pasar saham secara real-time. Di website tersebut kita bisa menemukan informasi atau data historis harga saham dari PT Aneka Tambang Tbk (ANTM) di Bursa Efek Jakarta. Di dalam proyek ini, digunakan data histori dari tanggal 09-09-2015 sampai 10-09-2024 dalam bentuk dokumen csv. 
-<!-- Dalam pengambilan data dari Yahoo Finance, kita bisa menggunakan google colab untuk mendownload data yang kita butuhkan. Berikut adalah code yang bisa digunakan : -->
+Data yang digunakan dalam proyek ini diperoleh dari situs resmi Bank Indonesia, sebuah platform yang menyediakan data kurs JISDOR secara real-time dan historis. Di situs tersebut, tersedia informasi lengkap mengenai nilai tukar Rupiah terhadap Dolar Amerika Serikat berdasarkan transaksi antarbank.
 
-<!-- ```python
-import yfinance as yf
-import pandas as pd
+Dalam proyek ini, digunakan data historis kurs JISDOR mulai dari tanggal 03 Agustus 2020 hingga 27 September 2024, yang telah diunduh dalam format CSV. Data ini mencakup nilai tukar harian yang menjadi dasar analisis untuk mengembangkan model prediksi menggunakan metode berbasis machine learning.
 
-# Unduh data saham ANTAM dari Yahoo Finance
-data = yf.download("ANTM.JK", start="2015-09-09", end="2024-09-10")
-
-# Simpan data ke file CSV
-data.to_csv('data_saham_antam4.csv')
-``` -->
 
 Untuk tampilan datanya bisa dilihat di bawah ini:
 ```{code-cell}
-import pandas as pd
 import numpy as np
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.linear_model import LinearRegression
+from sklearn.ensemble import BaggingRegressor
+from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_percentage_error
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 # Membaca data
-df = pd.read_csv('https://raw.githubusercontent.com/DeviDuwiSusanti/dataset/main/data_saham_antam4.csv')
-pd.options.display.float_format = '{:.0f}'.format
-df.head()
+df = pd.read_csv('https://raw.githubusercontent.com/DeviDuwiSusanti/dataset/main/kurs_jisdor.csv')
+
+# mengubah kolom 'Date' dalam format datetime
+df['Tanggal'] = pd.to_datetime(df['Tanggal'])
+
+# Mengatur kolom 'Date' sebagai indeks
+df.set_index('Tanggal', inplace=True)
+
+# Mensortir data berdasarkan kolom tanggal dari terkecil ke terbesar
+df = df.sort_values(by='Tanggal')
+df
 ```
 
 #### b.	Deskripsi Data Set
 Data set ini terdiri dari 8 fitur atau kolom, dan 2230 record atau baris.
 Atribut-atribut data set :
-- Date		: tanggal data harga saham, biasanya memiliki format YYYY-MM-DD.
-- Open		: harga pembukaan saham pada tanggal tersebut.
-- High		: harga tertinggi yang dicapai pada tanggal tersebut.
-- Low		: harga terendah saham pada tanggal tersebut.
-- Close		: harga penutupan saham pada tanggal tersebut.
-- Adj Close	: harga penutupan yang sudah disesuaikan dengan pembagian saham,     
-  		       dividen, dan corporate actions lainnya.
-- Volume	: jumlah saham yang diperdagangkan pada tanggal tersebut.
+- Date		: tanggal data harga kurs berlaku, biasanya memiliki format YYYY-MM-DD.
+- Kurs		: harga kurs pada tanggal tersebut.
 
 ```{code-cell}
 df.info()
 print('Ukuran data ', df.shape)
 ```
 ```{code-cell}
-df[['Open', 'High', 'Low', 'Close', 'Adj Close', 'Volume']].describe()
+df.describe()
 ```
 
 ####  c. Eksplorasi Data

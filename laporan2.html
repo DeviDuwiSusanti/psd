@@ -330,7 +330,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pengembangan-model-prediksi-harga-saham-pt-aneka-tambang-tbk-antam-menggunakan-data-historis-untuk-mendukung-keputusan-investasi">Pengembangan Model Prediksi Harga Saham PT Aneka Tambang Tbk (ANTAM) Menggunakan Data Historis untuk Mendukung Keputusan Investasi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pengembangan-model-prediksi-kurs-jisdor-menggunakan-data-historis-time-series">Pengembangan Model Prediksi Kurs Jisdor Menggunakan Data Historis Time Series</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pendahuluan">Pendahuluan</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#latar-belakang">Latar Belakang</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tujuan-proyek">Tujuan Proyek</a></li>
@@ -377,26 +377,25 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="laporan-proyek-2">
 <h1>Laporan Proyek 2<a class="headerlink" href="#laporan-proyek-2" title="Link to this heading">#</a></h1>
-<section id="pengembangan-model-prediksi-harga-saham-pt-aneka-tambang-tbk-antam-menggunakan-data-historis-untuk-mendukung-keputusan-investasi">
-<h2>Pengembangan Model Prediksi Harga Saham PT Aneka Tambang Tbk (ANTAM) Menggunakan Data Historis untuk Mendukung Keputusan Investasi<a class="headerlink" href="#pengembangan-model-prediksi-harga-saham-pt-aneka-tambang-tbk-antam-menggunakan-data-historis-untuk-mendukung-keputusan-investasi" title="Link to this heading">#</a></h2>
+<section id="pengembangan-model-prediksi-kurs-jisdor-menggunakan-data-historis-time-series">
+<h2>Pengembangan Model Prediksi Kurs Jisdor Menggunakan Data Historis Time Series<a class="headerlink" href="#pengembangan-model-prediksi-kurs-jisdor-menggunakan-data-historis-time-series" title="Link to this heading">#</a></h2>
 </section>
 <section id="pendahuluan">
 <h2>Pendahuluan<a class="headerlink" href="#pendahuluan" title="Link to this heading">#</a></h2>
 <section id="latar-belakang">
 <h3>Latar Belakang<a class="headerlink" href="#latar-belakang" title="Link to this heading">#</a></h3>
-<p>Saham merupakan tanda kepemilikan dalam suatu perusahaan yang dapat memberikan hak bagi pemegang saham untuk mendapatkan keuntungan dan ikut serta dalam pengambilan keputusan perusahaan. PT Aneka Tambang Tbk (ANTAM) adalah perusahaan sektor tambang yang memproduksi nikel, emas, dan bauksit, serta sudah terdaftar di Bursa Efek Indonesia sejak 1997.</p>
-<p>ANTAM mempunyai visi untuk menjadi korporasi global terkemuka melalui diversifikasi dan integrasi usaha berbasis sumber daya alam. Untuk memenuhi visi ini, ANTAM memiliki misi yaitu memaksimalkan nilai perusahaan bagi pemegang saham dan pemangku kepentingan dengan cara mengelola biaya secara efisien dan meningkatkan produksi.</p>
-<p>Namun, harga saham ANTAM kerap mengalami fluktuasi yang disebabkan oleh faktor-faktor eksternal seperti harga komoditas global dan kondisi ekonomi yang dapat mempersulit para investor dalam membuat keputusan investasi yang tepat.</p>
-<p>Untuk mengatasi tantangan ini, diperlukan adanya teknologi yang dapat memprediksi pergerakan harga saham di masa depan, seperti machine learning. Hal ini bertujuan untuk meminimalkan risiko dan membantu investor dalam mengambil keputusan yang tepat.</p>
+<p>Kurs JISDOR (Jakarta Interbank Spot Dollar Rate) merupakan acuan untuk nilai tukar resmi yang dikeluarkan Bank Indonesia berdasarkan transaksi antarbank di Indonesia. Kurs ini juga menjadi acuan penting di berbagai aktivitas ekonomi dan keuangan, termasuk perdagangan internasionall dan investasi.</p>
 </section>
 <section id="tujuan-proyek">
 <h3>Tujuan Proyek<a class="headerlink" href="#tujuan-proyek" title="Link to this heading">#</a></h3>
-<p>Proyek ini bertujuan untuk mengembangkan model prediksi harga saham di PT Aneka Tambang Tbk (ANTAM)  berakurasi tinggi dengan menggunakan data historis. Dengan analisis ini, diharapkan bisa membantu investor dalam mengambil keputusan investasi, serta dapat memberikan wawasan yang dapat membantu ANTAM dalam merumuskan strategi yang lebih baik untuk meningkatkan nilai saham dan mencapai tujuan pertumbuhannya.</p>
+<p>Proyek ini bertujuan untuk mengembangkan model prediksi kurs JISDOR berbasis data historis time series yang memiliki tingkat akurasi tinggi. Model prediksi ini diharapkan dapat:</p>
+<p>•	Membantu pelaku usaha, investor, dan pembuat kebijakan dalam mengambil keputusan yang lebih baik terkait nilai tukar.</p>
+<p>•	Memberikan wawasan strategis yang dapat digunakan untuk merancang kebijakan ekonomi yang lebih tanggap terhadap fluktuasi nilai tukar.</p>
 </section>
 <section id="rumusan-masalah">
 <h3>Rumusan Masalah<a class="headerlink" href="#rumusan-masalah" title="Link to this heading">#</a></h3>
-<p>•	Bagaimana cara untuk mengembangkan sebuah model prediksi harga saham PT Aneka Tambang Tbk (ANTAM) yang akurat dengan menggunakan data historis?</p>
-<p>•	Bagaimana hasil prediksi harga saham dapat dimanfaatkan untuk mendukung keputusan investasi yang lebih baik dan membantu ANTAM  merancang strategi agar meningkatkan nilai saham dan pertumbuhan perusahaan?</p>
+<p>•	Bagaimana cara mengembangkan model prediksi kurs JISDOR yang akurat dengan memanfaatkan data historis time series?</p>
+<p>•	Bagaimana hasil prediksi kurs JISDOR dapat digunakan untuk mendukung pengambilan keputusan strategis dan memitigasi risiko terkait fluktuasi nilai tukar?</p>
 </section>
 </section>
 <section id="metodologi">
@@ -405,28 +404,33 @@ document.write(`
 <h3>Data Understanding<a class="headerlink" href="#data-understanding" title="Link to this heading">#</a></h3>
 <section id="a-sumber-data">
 <h4>a.	Sumber Data<a class="headerlink" href="#a-sumber-data" title="Link to this heading">#</a></h4>
-<p>Data yang dipakai pada proyek ini didapat dari website <a class="reference external" href="https://finance.yahoo.com/quote/ANTM.JK/history/">https://finance.yahoo.com/quote/ANTM.JK/history/</a>, yaitu sebuah platform online yang menyediakan data keuangan dan pasar saham secara real-time. Di website tersebut kita bisa menemukan informasi atau data historis harga saham dari PT Aneka Tambang Tbk (ANTM) di Bursa Efek Jakarta. Di dalam proyek ini, digunakan data histori dari tanggal 09-09-2015 sampai 10-09-2024 dalam bentuk dokumen csv.</p>
-<!-- Dalam pengambilan data dari Yahoo Finance, kita bisa menggunakan google colab untuk mendownload data yang kita butuhkan. Berikut adalah code yang bisa digunakan : -->
-<!-- ```python
-import yfinance as yf
-import pandas as pd
-
-# Unduh data saham ANTAM dari Yahoo Finance
-data = yf.download("ANTM.JK", start="2015-09-09", end="2024-09-10")
-
-# Simpan data ke file CSV
-data.to_csv('data_saham_antam4.csv')
-``` -->
+<p>Data yang digunakan dalam proyek ini diperoleh dari situs resmi Bank Indonesia, sebuah platform yang menyediakan data kurs JISDOR secara real-time dan historis. Di situs tersebut, tersedia informasi lengkap mengenai nilai tukar Rupiah terhadap Dolar Amerika Serikat berdasarkan transaksi antarbank.</p>
+<p>Dalam proyek ini, digunakan data historis kurs JISDOR mulai dari tanggal 03 Agustus 2020 hingga 27 September 2024, yang telah diunduh dalam format CSV. Data ini mencakup nilai tukar harian yang menjadi dasar analisis untuk mengembangkan model prediksi menggunakan metode berbasis machine learning.</p>
 <p>Untuk tampilan datanya bisa dilihat di bawah ini:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">MinMaxScaler</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">BaggingRegressor</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span><span class="p">,</span> <span class="n">r2_score</span><span class="p">,</span> <span class="n">mean_absolute_percentage_error</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 <span class="c1"># Membaca data</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/DeviDuwiSusanti/dataset/main/data_saham_antam4.csv&#39;</span><span class="p">)</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">float_format</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:.0f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span>
-<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/DeviDuwiSusanti/dataset/main/kurs_jisdor.csv&#39;</span><span class="p">)</span>
+
+<span class="c1"># mengubah kolom &#39;Date&#39; dalam format datetime</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Tanggal&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Tanggal&#39;</span><span class="p">])</span>
+
+<span class="c1"># Mengatur kolom &#39;Date&#39; sebagai indeks</span>
+<span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;Tanggal&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Mensortir data berdasarkan kolom tanggal dari terkecil ke terbesar</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;Tanggal&#39;</span><span class="p">)</span>
+<span class="n">df</span>
 </pre></div>
 </div>
 </div>
@@ -449,68 +453,61 @@ data.to_csv('data_saham_antam4.csv')
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>Date</th>
-      <th>Open</th>
-      <th>High</th>
-      <th>Low</th>
-      <th>Close</th>
-      <th>Adj Close</th>
-      <th>Volume</th>
+      <th>Kurs</th>
+    </tr>
+    <tr>
+      <th>Tanggal</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>0</th>
-      <td>2015-09-09</td>
-      <td>408</td>
-      <td>417</td>
-      <td>405</td>
-      <td>414</td>
-      <td>350</td>
-      <td>17822276</td>
+      <th>2020-08-03</th>
+      <td>14713</td>
     </tr>
     <tr>
-      <th>1</th>
-      <td>2015-09-10</td>
-      <td>412</td>
-      <td>412</td>
-      <td>405</td>
-      <td>405</td>
-      <td>343</td>
-      <td>6254934</td>
+      <th>2020-08-04</th>
+      <td>14697</td>
     </tr>
     <tr>
-      <th>2</th>
-      <td>2015-09-11</td>
-      <td>407</td>
-      <td>424</td>
-      <td>407</td>
-      <td>407</td>
-      <td>345</td>
-      <td>36223022</td>
+      <th>2020-08-05</th>
+      <td>14623</td>
     </tr>
     <tr>
-      <th>3</th>
-      <td>2015-09-14</td>
-      <td>412</td>
-      <td>414</td>
-      <td>406</td>
-      <td>406</td>
-      <td>343</td>
-      <td>12273195</td>
+      <th>2020-08-06</th>
+      <td>14587</td>
     </tr>
     <tr>
-      <th>4</th>
-      <td>2015-09-15</td>
-      <td>405</td>
-      <td>407</td>
-      <td>401</td>
-      <td>401</td>
-      <td>339</td>
-      <td>5246096</td>
+      <th>2020-08-07</th>
+      <td>14647</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2024-09-23</th>
+      <td>15191</td>
+    </tr>
+    <tr>
+      <th>2024-09-24</th>
+      <td>15186</td>
+    </tr>
+    <tr>
+      <th>2024-09-25</th>
+      <td>15092</td>
+    </tr>
+    <tr>
+      <th>2024-09-26</th>
+      <td>15171</td>
+    </tr>
+    <tr>
+      <th>2024-09-27</th>
+      <td>15138</td>
     </tr>
   </tbody>
 </table>
+<p>1006 rows × 1 columns</p>
 </div></div></div>
 </div>
 </section>
@@ -519,14 +516,8 @@ data.to_csv('data_saham_antam4.csv')
 <p>Data set ini terdiri dari 8 fitur atau kolom, dan 2230 record atau baris.
 Atribut-atribut data set :</p>
 <ul class="simple">
-<li><p>Date		: tanggal data harga saham, biasanya memiliki format YYYY-MM-DD.</p></li>
-<li><p>Open		: harga pembukaan saham pada tanggal tersebut.</p></li>
-<li><p>High		: harga tertinggi yang dicapai pada tanggal tersebut.</p></li>
-<li><p>Low		: harga terendah saham pada tanggal tersebut.</p></li>
-<li><p>Close		: harga penutupan saham pada tanggal tersebut.</p></li>
-<li><p>Adj Close	: harga penutupan yang sudah disesuaikan dengan pembagian saham,<br />
-dividen, dan corporate actions lainnya.</p></li>
-<li><p>Volume	: jumlah saham yang diperdagangkan pada tanggal tersebut.</p></li>
+<li><p>Date		: tanggal data harga kurs berlaku, biasanya memiliki format YYYY-MM-DD.</p></li>
+<li><p>Kurs		: harga kurs pada tanggal tersebut.</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -537,27 +528,21 @@ dividen, dan corporate actions lainnya.</p></li>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
-RangeIndex: 2231 entries, 0 to 2230
-Data columns (total 7 columns):
- #   Column     Non-Null Count  Dtype  
----  ------     --------------  -----  
- 0   Date       2231 non-null   object 
- 1   Open       2231 non-null   float64
- 2   High       2231 non-null   float64
- 3   Low        2231 non-null   float64
- 4   Close      2231 non-null   float64
- 5   Adj Close  2231 non-null   float64
- 6   Volume     2231 non-null   int64  
-dtypes: float64(5), int64(1), object(1)
-memory usage: 122.1+ KB
-Ukuran data  (2231, 7)
+DatetimeIndex: 1006 entries, 2020-08-03 to 2024-09-27
+Data columns (total 1 columns):
+ #   Column  Non-Null Count  Dtype
+---  ------  --------------  -----
+ 0   Kurs    1006 non-null   int64
+dtypes: int64(1)
+memory usage: 15.7 KB
+Ukuran data  (1006, 1)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[[</span><span class="s1">&#39;Open&#39;</span><span class="p">,</span> <span class="s1">&#39;High&#39;</span><span class="p">,</span> <span class="s1">&#39;Low&#39;</span><span class="p">,</span> <span class="s1">&#39;Close&#39;</span><span class="p">,</span> <span class="s1">&#39;Adj Close&#39;</span><span class="p">,</span> <span class="s1">&#39;Volume&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -580,86 +565,41 @@ Ukuran data  (2231, 7)
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>Open</th>
-      <th>High</th>
-      <th>Low</th>
-      <th>Close</th>
-      <th>Adj Close</th>
-      <th>Volume</th>
+      <th>Kurs</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>count</th>
-      <td>2231</td>
-      <td>2231</td>
-      <td>2231</td>
-      <td>2231</td>
-      <td>2231</td>
-      <td>2231</td>
+      <td>1006.000000</td>
     </tr>
     <tr>
       <th>mean</th>
-      <td>1272</td>
-      <td>1294</td>
-      <td>1249</td>
-      <td>1269</td>
-      <td>1115</td>
-      <td>113350549</td>
+      <td>14966.948310</td>
     </tr>
     <tr>
       <th>std</th>
-      <td>697</td>
-      <td>710</td>
-      <td>683</td>
-      <td>696</td>
-      <td>623</td>
-      <td>175615246</td>
+      <td>635.364559</td>
     </tr>
     <tr>
       <th>min</th>
-      <td>290</td>
-      <td>294</td>
-      <td>285</td>
-      <td>287</td>
-      <td>243</td>
-      <td>0</td>
+      <td>13875.000000</td>
     </tr>
     <tr>
       <th>25%</th>
-      <td>725</td>
-      <td>740</td>
-      <td>715</td>
-      <td>725</td>
-      <td>618</td>
-      <td>36476700</td>
+      <td>14371.000000</td>
     </tr>
     <tr>
       <th>50%</th>
-      <td>905</td>
-      <td>920</td>
-      <td>890</td>
-      <td>905</td>
-      <td>768</td>
-      <td>64158400</td>
+      <td>14888.000000</td>
     </tr>
     <tr>
       <th>75%</th>
-      <td>1945</td>
-      <td>1965</td>
-      <td>1920</td>
-      <td>1945</td>
-      <td>1719</td>
-      <td>119523689</td>
+      <td>15505.500000</td>
     </tr>
     <tr>
       <th>max</th>
-      <td>3300</td>
-      <td>3440</td>
-      <td>3060</td>
-      <td>3190</td>
-      <td>2763</td>
-      <td>2186652700</td>
+      <td>16458.000000</td>
     </tr>
   </tbody>
 </table>
@@ -677,13 +617,7 @@ Ukuran data  (2231, 7)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Date         0
-Open         0
-High         0
-Low          0
-Close        0
-Adj Close    0
-Volume       0
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Kurs    0
 dtype: int64
 </pre></div>
 </div>
@@ -707,90 +641,55 @@ print(duplicates)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
+<span class="nn">File ~\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexes\base.py:3791,</span> in <span class="ni">Index.get_loc</span><span class="nt">(self, key)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3790</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">3791</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="n">casted_key</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3792</span> <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
+<span class="nn">File index.pyx:152,</span> in <span class="ni">pandas._libs.index.IndexEngine.get_loc</span><span class="nt">()</span>
 
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Open</th>
-      <th>High</th>
-      <th>Low</th>
-      <th>Close</th>
-      <th>Adj Close</th>
-      <th>Volume</th>
-    </tr>
-    <tr>
-      <th>Date</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>2015-09-09</th>
-      <td>408</td>
-      <td>417</td>
-      <td>405</td>
-      <td>414</td>
-      <td>350</td>
-      <td>17822276</td>
-    </tr>
-    <tr>
-      <th>2015-09-10</th>
-      <td>412</td>
-      <td>412</td>
-      <td>405</td>
-      <td>405</td>
-      <td>343</td>
-      <td>6254934</td>
-    </tr>
-    <tr>
-      <th>2015-09-11</th>
-      <td>407</td>
-      <td>424</td>
-      <td>407</td>
-      <td>407</td>
-      <td>345</td>
-      <td>36223022</td>
-    </tr>
-    <tr>
-      <th>2015-09-14</th>
-      <td>412</td>
-      <td>414</td>
-      <td>406</td>
-      <td>406</td>
-      <td>343</td>
-      <td>12273195</td>
-    </tr>
-    <tr>
-      <th>2015-09-15</th>
-      <td>405</td>
-      <td>407</td>
-      <td>401</td>
-      <td>401</td>
-      <td>339</td>
-      <td>5246096</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
+<span class="nn">File index.pyx:181,</span> in <span class="ni">pandas._libs.index.IndexEngine.get_loc</span><span class="nt">()</span>
+
+<span class="nn">File pandas\_libs\hashtable_class_helper.pxi:7080,</span> in <span class="ni">pandas._libs.hashtable.PyObjectHashTable.get_item</span><span class="nt">()</span>
+
+<span class="nn">File pandas\_libs\hashtable_class_helper.pxi:7088,</span> in <span class="ni">pandas._libs.hashtable.PyObjectHashTable.get_item</span><span class="nt">()</span>
+
+<span class="ne">KeyError</span>: &#39;Date&#39;
+
+<span class="n">The</span> <span class="n">above</span> <span class="n">exception</span> <span class="n">was</span> <span class="n">the</span> <span class="n">direct</span> <span class="n">cause</span> <span class="n">of</span> <span class="n">the</span> <span class="n">following</span> <span class="n">exception</span><span class="p">:</span>
+
+<span class="ne">KeyError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">])</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+
+<span class="nn">File ~\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\frame.py:3893,</span> in <span class="ni">DataFrame.__getitem__</span><span class="nt">(self, key)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3891</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">nlevels</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">3892</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getitem_multilevel</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">3893</span> <span class="n">indexer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3894</span> <span class="k">if</span> <span class="n">is_integer</span><span class="p">(</span><span class="n">indexer</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">3895</span>     <span class="n">indexer</span> <span class="o">=</span> <span class="p">[</span><span class="n">indexer</span><span class="p">]</span>
+
+<span class="nn">File ~\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexes\base.py:3798,</span> in <span class="ni">Index.get_loc</span><span class="nt">(self, key)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3793</span>     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">casted_key</span><span class="p">,</span> <span class="nb">slice</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">3794</span>         <span class="nb">isinstance</span><span class="p">(</span><span class="n">casted_key</span><span class="p">,</span> <span class="n">abc</span><span class="o">.</span><span class="n">Iterable</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3795</span>         <span class="ow">and</span> <span class="nb">any</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">slice</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">casted_key</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3796</span>     <span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">3797</span>         <span class="k">raise</span> <span class="n">InvalidIndexError</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">3798</span>     <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">err</span>
+<span class="g g-Whitespace">   </span><span class="mi">3799</span> <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">3800</span>     <span class="c1"># If we have a listlike key, _check_indexing_error will raise</span>
+<span class="g g-Whitespace">   </span><span class="mi">3801</span>     <span class="c1">#  InvalidIndexError. Otherwise we fall through and re-raise</span>
+<span class="g g-Whitespace">   </span><span class="mi">3802</span>     <span class="c1">#  the TypeError.</span>
+<span class="g g-Whitespace">   </span><span class="mi">3803</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_check_indexing_error</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+<span class="ne">KeyError</span>: &#39;Date&#39;
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="menampilkan-trend-setiap-fitur">
@@ -798,29 +697,6 @@ print(duplicates)
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>seaborn
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: seaborn in c:\users\heviaa\appdata\local\programs\python\python312\lib\site-packages (0.13.2)
-Requirement already satisfied: numpy!=1.24.0,&gt;=1.20 in c:\users\heviaa\appdata\local\programs\python\python312\lib\site-packages (from seaborn) (1.26.3)
-Requirement already satisfied: pandas&gt;=1.2 in c:\users\heviaa\appdata\local\programs\python\python312\lib\site-packages (from seaborn) (2.1.4)
-Requirement already satisfied: matplotlib!=3.6.1,&gt;=3.4 in c:\users\heviaa\appdata\local\programs\python\python312\lib\site-packages (from seaborn) (3.8.2)
-Requirement already satisfied: contourpy&gt;=1.0.1 in c:\users\heviaa\appdata\local\programs\python\python312\lib\site-packages (from matplotlib!=3.6.1,&gt;=3.4-&gt;seaborn) (1.2.0)
-Requirement already satisfied: cycler&gt;=0.10 in c:\users\heviaa\appdata\local\programs\python\python312\lib\site-packages (from matplotlib!=3.6.1,&gt;=3.4-&gt;seaborn) (0.12.1)
-Requirement already satisfied: fonttools&gt;=4.22.0 in c:\users\heviaa\appdata\local\programs\python\python312\lib\site-packages (from matplotlib!=3.6.1,&gt;=3.4-&gt;seaborn) (4.47.0)
-Requirement already satisfied: kiwisolver&gt;=1.3.1 in c:\users\heviaa\appdata\local\programs\python\python312\lib\site-packages (from matplotlib!=3.6.1,&gt;=3.4-&gt;seaborn) (1.4.5)
-Requirement already satisfied: packaging&gt;=20.0 in c:\users\heviaa\appdata\local\programs\python\python312\lib\site-packages (from matplotlib!=3.6.1,&gt;=3.4-&gt;seaborn) (23.2)
-Requirement already satisfied: pillow&gt;=8 in c:\users\heviaa\appdata\local\programs\python\python312\lib\site-packages (from matplotlib!=3.6.1,&gt;=3.4-&gt;seaborn) (10.2.0)
-Requirement already satisfied: pyparsing&gt;=2.3.1 in c:\users\heviaa\appdata\local\programs\python\python312\lib\site-packages (from matplotlib!=3.6.1,&gt;=3.4-&gt;seaborn) (3.1.1)
-Requirement already satisfied: python-dateutil&gt;=2.7 in c:\users\heviaa\appdata\local\programs\python\python312\lib\site-packages (from matplotlib!=3.6.1,&gt;=3.4-&gt;seaborn) (2.8.2)
-Requirement already satisfied: pytz&gt;=2020.1 in c:\users\heviaa\appdata\local\programs\python\python312\lib\site-packages (from pandas&gt;=1.2-&gt;seaborn) (2023.3.post1)
-Requirement already satisfied: tzdata&gt;=2022.1 in c:\users\heviaa\appdata\local\programs\python\python312\lib\site-packages (from pandas&gt;=1.2-&gt;seaborn) (2023.4)
-Requirement already satisfied: six&gt;=1.5 in c:\users\heviaa\appdata\local\programs\python\python312\lib\site-packages (from python-dateutil&gt;=2.7-&gt;matplotlib!=3.6.1,&gt;=3.4-&gt;seaborn) (1.16.0)
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[notice] A new release of pip is available: 23.2.1 -&gt; 24.3.1
-[notice] To update, run: python.exe -m pip install --upgrade pip
 </pre></div>
 </div>
 </div>
@@ -841,14 +717,6 @@ Requirement already satisfied: six&gt;=1.5 in c:\users\heviaa\appdata\local\prog
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="_images/a2faa76b72263e450708b1aa73e2512ebdcb31752a1782d8c087e9d23bc0c6f6.png" src="_images/a2faa76b72263e450708b1aa73e2512ebdcb31752a1782d8c087e9d23bc0c6f6.png" />
-<img alt="_images/c9370bf1d96578d0bf2baa0a3046f67e5c940ed7268712507e46c76fef929a8f.png" src="_images/c9370bf1d96578d0bf2baa0a3046f67e5c940ed7268712507e46c76fef929a8f.png" />
-<img alt="_images/0f070e39b5f63f534ab09f3726f7dc21c46b444aaabbc96fc76150040d6f0980.png" src="_images/0f070e39b5f63f534ab09f3726f7dc21c46b444aaabbc96fc76150040d6f0980.png" />
-<img alt="_images/991b2fe37dccb579c2b93ed950555216163af02837d52e75d9ad66aba2fb3a54.png" src="_images/991b2fe37dccb579c2b93ed950555216163af02837d52e75d9ad66aba2fb3a54.png" />
-<img alt="_images/16ba69cd46a1119670ac3f433de4e53b4a92a6d5639550ca1a89fac43a32583e.png" src="_images/16ba69cd46a1119670ac3f433de4e53b4a92a6d5639550ca1a89fac43a32583e.png" />
-<img alt="_images/cdc5ddb7ec363809ec5b6e615c5eb5b5fdfcda0a753dc7a1828e70fb8c126f43.png" src="_images/cdc5ddb7ec363809ec5b6e615c5eb5b5fdfcda0a753dc7a1828e70fb8c126f43.png" />
-</div>
 </div>
 </section>
 <section id="mencari-outlier">
@@ -863,14 +731,6 @@ Requirement already satisfied: six&gt;=1.5 in c:\users\heviaa\appdata\local\prog
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/6ccd74edb14813dcc18573f0e084e8cbe0434954c9bc7f1b3cb33dc5e39b3f05.png" src="_images/6ccd74edb14813dcc18573f0e084e8cbe0434954c9bc7f1b3cb33dc5e39b3f05.png" />
-<img alt="_images/7590bb35d1b375fa53e5ccb620ffcb311f3b27ff7eb6419e051862f54256b861.png" src="_images/7590bb35d1b375fa53e5ccb620ffcb311f3b27ff7eb6419e051862f54256b861.png" />
-<img alt="_images/cb3e2e27bc2b9bdd1e14df89fd2d6ecbba3c0758f9f089a201703c7bf4180fb2.png" src="_images/cb3e2e27bc2b9bdd1e14df89fd2d6ecbba3c0758f9f089a201703c7bf4180fb2.png" />
-<img alt="_images/a87b63b5c8eff064a304aab96ee0de6fb1c95b6dca2dfbe3ecb184c3e46bed49.png" src="_images/a87b63b5c8eff064a304aab96ee0de6fb1c95b6dca2dfbe3ecb184c3e46bed49.png" />
-<img alt="_images/97b2609b0b1dc6ed3b7404fdd6164037532d7d5b8068847688c8c69d4a78f1a8.png" src="_images/97b2609b0b1dc6ed3b7404fdd6164037532d7d5b8068847688c8c69d4a78f1a8.png" />
-<img alt="_images/4a023bba5e4fda21d52ddfd5db2bb12d2605dc6d275b909d3e7771f9b2f72c80.png" src="_images/4a023bba5e4fda21d52ddfd5db2bb12d2605dc6d275b909d3e7771f9b2f72c80.png" />
 </div>
 </div>
 <p>Dari boxplot di atas terlihat bahwa fitur ‘Volume’ memiliki cukup banyak outlier. Sehingga diperlukan adanya penananganan outliernya</p>
@@ -899,62 +759,6 @@ Requirement already satisfied: six&gt;=1.5 in c:\users\heviaa\appdata\local\prog
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jumlah outlier: 48
-                Volume  Z_score
-Date                           
-2015-10-28   720207900        3
-2020-10-14  1116793100        6
-2020-10-15  1510069900        8
-2020-10-19  1158293800        6
-2020-10-20   789265700        4
-2020-10-21  1370011500        7
-2020-11-09   846313500        4
-2020-11-18   853419900        4
-2020-12-02   803420400        4
-2020-12-10   686885600        3
-2020-12-16  1272844700        7
-2020-12-18  1083731700        6
-2020-12-22   678922000        3
-2020-12-23   659296400        3
-2020-12-28   992175000        5
-2020-12-29   739754900        4
-2021-01-04  1040753400        5
-2021-01-05  1139014700        6
-2021-01-07  1982112200       11
-2021-01-08  1052618000        5
-2021-01-12  1147172800        6
-2021-01-13  1280852600        7
-2021-01-14  1499058400        8
-2021-01-15   915912100        5
-2021-01-18   930618200        5
-2021-01-20  1983213100       11
-2021-01-21  1273877400        7
-2021-01-22   894766800        4
-2021-01-25  1222991300        6
-2021-01-26   786819300        4
-2021-01-27  1341364800        7
-2021-01-28   731854900        4
-2021-02-01  2186652700       12
-2021-02-02   942434300        5
-2021-02-03   948031000        5
-2021-02-04   874173400        4
-2021-02-05  1157647700        6
-2021-02-08   977135300        5
-2021-02-09   877784900        4
-2021-02-10  1401720500        7
-2021-02-22   834610300        4
-2021-02-26  1305042600        7
-2021-03-05   745024700        4
-2021-03-26   652293400        3
-2022-03-07   642031000        3
-2022-03-08  1404951500        7
-2022-03-09   706107000        3
-2024-08-30   764070300        4
-Jumlah data setelah outlier dihapus: 2183
-</pre></div>
-</div>
-</div>
 </div>
 </section>
 <section id="rekayasa-fitur">
@@ -969,98 +773,6 @@ Jumlah data setelah outlier dihapus: 2183
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Open</th>
-      <th>High</th>
-      <th>Low</th>
-      <th>Close</th>
-      <th>Adj Close</th>
-      <th>Volume</th>
-      <th>Low Target</th>
-    </tr>
-    <tr>
-      <th>Date</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>2015-09-09</th>
-      <td>408</td>
-      <td>417</td>
-      <td>405</td>
-      <td>414</td>
-      <td>350</td>
-      <td>17822276</td>
-      <td>405</td>
-    </tr>
-    <tr>
-      <th>2015-09-10</th>
-      <td>412</td>
-      <td>412</td>
-      <td>405</td>
-      <td>405</td>
-      <td>343</td>
-      <td>6254934</td>
-      <td>407</td>
-    </tr>
-    <tr>
-      <th>2015-09-11</th>
-      <td>407</td>
-      <td>424</td>
-      <td>407</td>
-      <td>407</td>
-      <td>345</td>
-      <td>36223022</td>
-      <td>406</td>
-    </tr>
-    <tr>
-      <th>2015-09-14</th>
-      <td>412</td>
-      <td>414</td>
-      <td>406</td>
-      <td>406</td>
-      <td>343</td>
-      <td>12273195</td>
-      <td>401</td>
-    </tr>
-    <tr>
-      <th>2015-09-15</th>
-      <td>405</td>
-      <td>407</td>
-      <td>401</td>
-      <td>401</td>
-      <td>339</td>
-      <td>5246096</td>
-      <td>400</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 </section>
 <section id="menghitung-korelasi-antar-fitur">
@@ -1076,9 +788,6 @@ Jumlah data setelah outlier dihapus: 2183
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="_images/a75ee90b1524ca650ae404b03d4e182139875a3b6b13676a50ff1fbb47f6c7bf.png" src="_images/a75ee90b1524ca650ae404b03d4e182139875a3b6b13676a50ff1fbb47f6c7bf.png" />
-</div>
 </div>
 <p>Dari heatmap di atas, bisa dilihat bahwa:
 Fitur pembukaan (Open), tertinggi (High), penutupan (Close), dan harga pennutupan yang disesuaikan (Adj Close) mempunyai korelasi yang kuat antara satu sama lain (mendekati 1 atau 1). Hal ini menunjukkan fitur-fitur tersebut saling berkaitan dan bergerak sejalan. Sedangkan fitur ‘Volume’ mempunyai korelasi rendah dengan fitur lainnya (sekitar 0.15 - 0.17) yang menunjukkan bahwa perubahan volume tidak berpengaruh langsung dengan perubahan harga. Sehingga fitur volume tidak perlu digunakan untuk analisis prediksi pada projek ini.</p>
@@ -1089,91 +798,6 @@ Fitur pembukaan (Open), tertinggi (High), penutupan (Close), dan harga pennutupa
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Open</th>
-      <th>High</th>
-      <th>Low</th>
-      <th>Close</th>
-      <th>Adj Close</th>
-      <th>Low Target</th>
-    </tr>
-    <tr>
-      <th>Date</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>2015-09-09</th>
-      <td>408</td>
-      <td>417</td>
-      <td>405</td>
-      <td>414</td>
-      <td>350</td>
-      <td>405</td>
-    </tr>
-    <tr>
-      <th>2015-09-10</th>
-      <td>412</td>
-      <td>412</td>
-      <td>405</td>
-      <td>405</td>
-      <td>343</td>
-      <td>407</td>
-    </tr>
-    <tr>
-      <th>2015-09-11</th>
-      <td>407</td>
-      <td>424</td>
-      <td>407</td>
-      <td>407</td>
-      <td>345</td>
-      <td>406</td>
-    </tr>
-    <tr>
-      <th>2015-09-14</th>
-      <td>412</td>
-      <td>414</td>
-      <td>406</td>
-      <td>406</td>
-      <td>343</td>
-      <td>401</td>
-    </tr>
-    <tr>
-      <th>2015-09-15</th>
-      <td>405</td>
-      <td>407</td>
-      <td>401</td>
-      <td>401</td>
-      <td>339</td>
-      <td>400</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 <p>Dari dataset yang sudah melalui beberapa proses agar siap digunakan, terlihat bahwa fitur input terdiri dari fitur Open, High, Low, Close, Adj Close di hari ini, dan fitur Target Low atau prediksi harga Low besok hari sebagai fitur output.</p>
 <!-- ###### Seleksi Fitur
@@ -1291,7 +915,7 @@ Fungsi : menggunakan MinMaxScaler untuk memastikan bahwa semua fitur berada dala
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pengembangan-model-prediksi-harga-saham-pt-aneka-tambang-tbk-antam-menggunakan-data-historis-untuk-mendukung-keputusan-investasi">Pengembangan Model Prediksi Harga Saham PT Aneka Tambang Tbk (ANTAM) Menggunakan Data Historis untuk Mendukung Keputusan Investasi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pengembangan-model-prediksi-kurs-jisdor-menggunakan-data-historis-time-series">Pengembangan Model Prediksi Kurs Jisdor Menggunakan Data Historis Time Series</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pendahuluan">Pendahuluan</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#latar-belakang">Latar Belakang</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tujuan-proyek">Tujuan Proyek</a></li>
