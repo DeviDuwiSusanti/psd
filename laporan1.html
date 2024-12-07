@@ -331,7 +331,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pengembangan-model-prediksi-harga-saham-pt-aneka-tambang-tbk-antam-menggunakan-data-historis-untuk-mendukung-keputusan-investasi">Pengembangan Model Prediksi Harga Saham PT Aneka Tambang Tbk (ANTAM) Menggunakan Data Historis untuk Mendukung Keputusan Investasi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pengembangan-model-prediksi-harga-cryptocurrency-solana-sol-menggunakan-data-historis-untuk-mendukung-keputusan-investasi">Pengembangan Model Prediksi Harga Cryptocurrency Solana (SOL) Menggunakan Data Historis untuk Mendukung Keputusan Investasi</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pendahuluan">Pendahuluan</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#latar-belakang">Latar Belakang</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tujuan-proyek">Tujuan Proyek</a></li>
@@ -344,22 +344,22 @@ document.write(`
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-deskripsi-data-set">b.	Deskripsi Data Set</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#c-eksplorasi-data">c. Eksplorasi Data</a><ul class="nav section-nav flex-column">
 <li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#mencari-missing-value">Mencari Missing Value</a></li>
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#mengubah-kolom-date-menjadi-index">Mengubah kolom Date menjadi Index</a></li>
 <li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#menampilkan-trend-setiap-fitur">Menampilkan Trend Setiap Fitur</a></li>
 <li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#mencari-outlier">Mencari Outlier</a></li>
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#rekayasa-fitur">Rekayasa Fitur</a></li>
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#menghitung-korelasi-antar-fitur">Menghitung Korelasi Antar Fitur</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#menangani-outliers">Menangani Outliers</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#korelasi-antar-fitur">Korelasi Antar Fitur</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preprocessing">Data Preprocessing</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelling">Modelling</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-pembagian-data">a.	Pembagian Data</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-pembangunan-model">b.	Pembangunan Model</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#c-pengujian-model">c.	Pengujian Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preprocessing">Data Preprocessing</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-menghapus-fitur-yang-tidak-relevan">a. Menghapus Fitur yang tidak relevan</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-rekayasa-fitur">b. Rekayasa Fitur</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#c-pembagian-data">c. Pembagian Data</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#normalisasi-data">Normalisasi Data</a></li>
 </ul>
 </li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelling">Modelling</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation">Evaluation</a></li>
 </ul>
 </li>
@@ -378,26 +378,31 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="laporan-proyek-1">
 <h1>Laporan Proyek 1<a class="headerlink" href="#laporan-proyek-1" title="Link to this heading">#</a></h1>
-<section id="pengembangan-model-prediksi-harga-saham-pt-aneka-tambang-tbk-antam-menggunakan-data-historis-untuk-mendukung-keputusan-investasi">
-<h2>Pengembangan Model Prediksi Harga Saham PT Aneka Tambang Tbk (ANTAM) Menggunakan Data Historis untuk Mendukung Keputusan Investasi<a class="headerlink" href="#pengembangan-model-prediksi-harga-saham-pt-aneka-tambang-tbk-antam-menggunakan-data-historis-untuk-mendukung-keputusan-investasi" title="Link to this heading">#</a></h2>
+<section id="pengembangan-model-prediksi-harga-cryptocurrency-solana-sol-menggunakan-data-historis-untuk-mendukung-keputusan-investasi">
+<h2>Pengembangan Model Prediksi Harga Cryptocurrency Solana (SOL) Menggunakan Data Historis untuk Mendukung Keputusan Investasi<a class="headerlink" href="#pengembangan-model-prediksi-harga-cryptocurrency-solana-sol-menggunakan-data-historis-untuk-mendukung-keputusan-investasi" title="Link to this heading">#</a></h2>
 </section>
 <section id="pendahuluan">
 <h2>Pendahuluan<a class="headerlink" href="#pendahuluan" title="Link to this heading">#</a></h2>
 <section id="latar-belakang">
 <h3>Latar Belakang<a class="headerlink" href="#latar-belakang" title="Link to this heading">#</a></h3>
-<p>Saham merupakan tanda kepemilikan dalam suatu perusahaan yang dapat memberikan hak bagi pemegang saham untuk mendapatkan keuntungan dan ikut serta dalam pengambilan keputusan perusahaan. PT Aneka Tambang Tbk (ANTAM) adalah perusahaan sektor tambang yang memproduksi nikel, emas, dan bauksit, serta sudah terdaftar di Bursa Efek Indonesia sejak 1997.</p>
-<p>ANTAM mempunyai visi untuk menjadi korporasi global terkemuka melalui diversifikasi dan integrasi usaha berbasis sumber daya alam. Untuk memenuhi visi ini, ANTAM memiliki misi yaitu memaksimalkan nilai perusahaan bagi pemegang saham dan pemangku kepentingan dengan cara mengelola biaya secara efisien dan meningkatkan produksi.</p>
-<p>Namun, harga saham ANTAM kerap mengalami fluktuasi yang disebabkan oleh faktor-faktor eksternal seperti harga komoditas global dan kondisi ekonomi yang dapat mempersulit para investor dalam membuat keputusan investasi yang tepat.</p>
-<p>Untuk mengatasi tantangan ini, diperlukan adanya teknologi yang dapat memprediksi pergerakan harga saham di masa depan, seperti machine learning. Hal ini bertujuan untuk meminimalkan risiko dan membantu investor dalam mengambil keputusan yang tepat.</p>
+<p>Cryptocurrency adalah aset digital yang menggunakan teknologi blockchain untuk mencatat transaksi secara transparan dan aman. Salah satu cryptocurrency yang berkembang pesat adalah Solana (SOL), sebuah platform blockchain yang dikenal karena kecepatan transaksi dan biaya rendah. Solana telah menarik perhatian investor karena potensinya dalam mendukung aplikasi terdesentralisasi (dApps) dan proyek berbasis blockchain lainnya.</p>
+<p>Namun, seperti aset cryptocurrency lainnya, harga Solana sangat fluktuatif, dipengaruhi oleh berbagai faktor seperti sentimen pasar, perkembangan teknologi, regulasi, dan kondisi ekonomi global. Fluktuasi ini sering kali menyulitkan investor untuk membuat keputusan investasi yang tepat.</p>
+<p>Untuk membantu investor memahami pergerakan harga Solana, diperlukan teknologi yang dapat memprediksi harga di masa depan, seperti machine learning. Dengan analisis berbasis data historis, teknologi ini dapat membantu meminimalkan risiko dan mendukung pengambilan keputusan investasi yang lebih baik.</p>
 </section>
 <section id="tujuan-proyek">
 <h3>Tujuan Proyek<a class="headerlink" href="#tujuan-proyek" title="Link to this heading">#</a></h3>
-<p>Proyek ini bertujuan untuk mengembangkan model prediksi harga saham di PT Aneka Tambang Tbk (ANTAM)  berakurasi tinggi dengan menggunakan data historis. Dengan analisis ini, diharapkan bisa membantu investor dalam mengambil keputusan investasi, serta dapat memberikan wawasan yang dapat membantu ANTAM dalam merumuskan strategi yang lebih baik untuk meningkatkan nilai saham dan mencapai tujuan pertumbuhannya.</p>
+<p>Proyek ini bertujuan untuk mengembangkan model prediksi harga cryptocurrency Solana (SOL) menggunakan data historis. Analisis ini diharapkan dapat:</p>
+<ul class="simple">
+<li><p>Membantu investor dalam membuat keputusan investasi yang lebih terinformasi.</p></li>
+<li><p>Memberikan wawasan terkait potenonnsi pergerakan harga Solana untuk memaksimalkan keuntungan dan mengelola risiko dengan lebih baik.</p></li>
+</ul>
 </section>
 <section id="rumusan-masalah">
 <h3>Rumusan Masalah<a class="headerlink" href="#rumusan-masalah" title="Link to this heading">#</a></h3>
-<p>•	Bagaimana cara untuk mengembangkan sebuah model prediksi harga saham PT Aneka Tambang Tbk (ANTAM) yang akurat dengan menggunakan data historis?</p>
-<p>•	Bagaimana hasil prediksi harga saham dapat dimanfaatkan untuk mendukung keputusan investasi yang lebih baik dan membantu ANTAM  merancang strategi agar meningkatkan nilai saham dan pertumbuhan perusahaan?</p>
+<ul class="simple">
+<li><p>Bagaimana mengembangkan model prediksi harga Solana (SOL) yang akurat dengan memanfaatkan data historis?</p></li>
+<li><p>Bagaimana hasil prediksi harga Solana dapat digunakan untuk mendukung keputusan investasi yang lebih baik di pasar cryptocurrency?</p></li>
+</ul>
 </section>
 </section>
 <section id="metodologi">
@@ -406,7 +411,8 @@ document.write(`
 <h3>Data Understanding<a class="headerlink" href="#data-understanding" title="Link to this heading">#</a></h3>
 <section id="a-sumber-data">
 <h4>a.	Sumber Data<a class="headerlink" href="#a-sumber-data" title="Link to this heading">#</a></h4>
-<p>Data yang dipakai pada proyek ini didapat dari website <a class="reference external" href="https://finance.yahoo.com/quote/ANTM.JK/history/">https://finance.yahoo.com/quote/ANTM.JK/history/</a>, yaitu sebuah platform online yang menyediakan data keuangan dan pasar saham secara real-time. Di website tersebut kita bisa menemukan informasi atau data historis harga saham dari PT Aneka Tambang Tbk (ANTM) di Bursa Efek Jakarta. Di dalam proyek ini, digunakan data histori dari tanggal 09-09-2015 sampai 10-09-2024 dalam bentuk dokumen csv.</p>
+<p>Data yang digunakan pada proyek ini diperoleh dari website <a class="reference external" href="https://finance.yahoo.com/quote/SOL-USD/history/">https://finance.yahoo.com/quote/SOL-USD/history/</a>, yaitu sebuah platform online yang menyediakan data keuangan dan pasar aset secara real-time. Di website tersebut, tersedia informasi atau data historis harga cryptocurrency Solana (SOL) dalam berbagai rentang waktu.</p>
+<p>Pada proyek ini, data historis yang digunakan mencakup periode dari tanggal 10-04-2020 hingga 05-12-2024, yang diunduh dalam format dokumen CSV</p>
 <!-- Dalam pengambilan data dari Yahoo Finance, kita bisa menggunakan google colab untuk mendownload data yang kita butuhkan. Berikut adalah code yang bisa digunakan : -->
 <!-- ```python
 import yfinance as yf
@@ -421,13 +427,29 @@ data.to_csv('data_saham_antam4.csv')
 <p>Untuk tampilan datanya bisa dilihat di bawah ini:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">MinMaxScaler</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeRegressor</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">PolynomialFeatures</span><span class="p">,</span> <span class="n">MinMaxScaler</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span><span class="p">,</span> <span class="n">r2_score</span><span class="p">,</span> <span class="n">mean_absolute_percentage_error</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 <span class="c1"># Membaca data</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/DeviDuwiSusanti/dataset/main/data_saham_antam4.csv&#39;</span><span class="p">)</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">float_format</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:.0f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span>
-<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/DeviDuwiSusanti/dataset/refs/heads/main/solana.csv&#39;</span><span class="p">)</span>
+
+<span class="c1"># mengubah kolom &#39;Date&#39; dalam format datetime</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">])</span>
+
+<span class="c1"># Mengatur kolom &#39;Date&#39; sebagai indeks</span>
+<span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Mensortir data berdasarkan kolom Date dari terkecil ke terbesar</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;Date&#39;</span><span class="p">)</span>
+<span class="n">df</span>
 </pre></div>
 </div>
 </div>
@@ -450,7 +472,6 @@ data.to_csv('data_saham_antam4.csv')
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>Date</th>
       <th>Open</th>
       <th>High</th>
       <th>Low</th>
@@ -458,60 +479,119 @@ data.to_csv('data_saham_antam4.csv')
       <th>Adj Close</th>
       <th>Volume</th>
     </tr>
+    <tr>
+      <th>Date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
   </thead>
   <tbody>
     <tr>
-      <th>0</th>
-      <td>2015-09-09</td>
-      <td>408</td>
-      <td>417</td>
-      <td>405</td>
-      <td>414</td>
-      <td>350</td>
-      <td>17822276</td>
+      <th>2020-04-10</th>
+      <td>0.83</td>
+      <td>1.31</td>
+      <td>0.69</td>
+      <td>0.95</td>
+      <td>0.95</td>
+      <td>87364276</td>
     </tr>
     <tr>
-      <th>1</th>
-      <td>2015-09-10</td>
-      <td>412</td>
-      <td>412</td>
-      <td>405</td>
-      <td>405</td>
-      <td>343</td>
-      <td>6254934</td>
+      <th>2020-04-11</th>
+      <td>0.95</td>
+      <td>1.05</td>
+      <td>0.77</td>
+      <td>0.78</td>
+      <td>0.78</td>
+      <td>43862444</td>
     </tr>
     <tr>
-      <th>2</th>
-      <td>2015-09-11</td>
-      <td>407</td>
-      <td>424</td>
-      <td>407</td>
-      <td>407</td>
-      <td>345</td>
-      <td>36223022</td>
+      <th>2020-04-12</th>
+      <td>0.79</td>
+      <td>0.96</td>
+      <td>0.76</td>
+      <td>0.88</td>
+      <td>0.88</td>
+      <td>38736897</td>
     </tr>
     <tr>
-      <th>3</th>
-      <td>2015-09-14</td>
-      <td>412</td>
-      <td>414</td>
-      <td>406</td>
-      <td>406</td>
-      <td>343</td>
-      <td>12273195</td>
+      <th>2020-04-13</th>
+      <td>0.89</td>
+      <td>0.89</td>
+      <td>0.77</td>
+      <td>0.78</td>
+      <td>0.78</td>
+      <td>18211285</td>
     </tr>
     <tr>
-      <th>4</th>
-      <td>2015-09-15</td>
-      <td>405</td>
-      <td>407</td>
-      <td>401</td>
-      <td>401</td>
-      <td>339</td>
-      <td>5246096</td>
+      <th>2020-04-14</th>
+      <td>0.78</td>
+      <td>0.80</td>
+      <td>0.63</td>
+      <td>0.66</td>
+      <td>0.66</td>
+      <td>16747614</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2024-12-01</th>
+      <td>237.74</td>
+      <td>239.81</td>
+      <td>234.53</td>
+      <td>237.07</td>
+      <td>237.07</td>
+      <td>3726118866</td>
+    </tr>
+    <tr>
+      <th>2024-12-02</th>
+      <td>237.07</td>
+      <td>237.88</td>
+      <td>220.55</td>
+      <td>225.76</td>
+      <td>225.76</td>
+      <td>7374176295</td>
+    </tr>
+    <tr>
+      <th>2024-12-03</th>
+      <td>225.77</td>
+      <td>239.27</td>
+      <td>216.47</td>
+      <td>234.20</td>
+      <td>234.20</td>
+      <td>8404095315</td>
+    </tr>
+    <tr>
+      <th>2024-12-04</th>
+      <td>234.20</td>
+      <td>240.72</td>
+      <td>225.25</td>
+      <td>229.12</td>
+      <td>229.12</td>
+      <td>6569129896</td>
+    </tr>
+    <tr>
+      <th>2024-12-05</th>
+      <td>229.12</td>
+      <td>244.68</td>
+      <td>223.46</td>
+      <td>234.00</td>
+      <td>234.00</td>
+      <td>8820663279</td>
     </tr>
   </tbody>
 </table>
+<p>1701 rows × 6 columns</p>
 </div></div></div>
 </div>
 </section>
@@ -520,14 +600,14 @@ data.to_csv('data_saham_antam4.csv')
 <p>Data set ini terdiri dari 8 fitur atau kolom, dan 2230 record atau baris.
 Atribut-atribut data set :</p>
 <ul class="simple">
-<li><p>Date		: tanggal data harga saham, biasanya memiliki format YYYY-MM-DD.</p></li>
-<li><p>Open		: harga pembukaan saham pada tanggal tersebut.</p></li>
+<li><p>Date		: tanggal data harga aset koin, biasanya memiliki format YYYY-MM-DD.</p></li>
+<li><p>Open		: harga pembukaan aset koin pada tanggal tersebut.</p></li>
 <li><p>High		: harga tertinggi yang dicapai pada tanggal tersebut.</p></li>
-<li><p>Low		: harga terendah saham pada tanggal tersebut.</p></li>
-<li><p>Close		: harga penutupan saham pada tanggal tersebut.</p></li>
-<li><p>Adj Close	: harga penutupan yang sudah disesuaikan dengan pembagian saham,<br />
-dividen, dan corporate actions lainnya.</p></li>
-<li><p>Volume	: jumlah saham yang diperdagangkan pada tanggal tersebut.</p></li>
+<li><p>Low		: harga terendah aset koin pada tanggal tersebut.</p></li>
+<li><p>Close		: harga penutupan aset koin pada tanggal tersebut.</p></li>
+<li><p>Adj Close	: harga penutupan yang sudah disesuaikan dengan pembagian aset koin,<br />
+dividen, dan coerporate actions lainnya.</p></li>
+<li><p>Volume	: jumlah aset koin yang diperdagangkan pada tanggal tersebut.</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -538,20 +618,19 @@ dividen, dan corporate actions lainnya.</p></li>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
-RangeIndex: 2231 entries, 0 to 2230
-Data columns (total 7 columns):
+DatetimeIndex: 1701 entries, 2020-04-10 to 2024-12-05
+Data columns (total 6 columns):
  #   Column     Non-Null Count  Dtype  
 ---  ------     --------------  -----  
- 0   Date       2231 non-null   object 
- 1   Open       2231 non-null   float64
- 2   High       2231 non-null   float64
- 3   Low        2231 non-null   float64
- 4   Close      2231 non-null   float64
- 5   Adj Close  2231 non-null   float64
- 6   Volume     2231 non-null   int64  
-dtypes: float64(5), int64(1), object(1)
-memory usage: 122.1+ KB
-Ukuran data  (2231, 7)
+ 0   Open       1701 non-null   float64
+ 1   High       1701 non-null   float64
+ 2   Low        1701 non-null   float64
+ 3   Close      1701 non-null   float64
+ 4   Adj Close  1701 non-null   float64
+ 5   Volume     1701 non-null   int64  
+dtypes: float64(5), int64(1)
+memory usage: 93.0 KB
+Ukuran data  (1701, 6)
 </pre></div>
 </div>
 </div>
@@ -592,75 +671,75 @@ Ukuran data  (2231, 7)
   <tbody>
     <tr>
       <th>count</th>
-      <td>2231</td>
-      <td>2231</td>
-      <td>2231</td>
-      <td>2231</td>
-      <td>2231</td>
-      <td>2231</td>
+      <td>1701.000000</td>
+      <td>1701.000000</td>
+      <td>1701.000000</td>
+      <td>1701.000000</td>
+      <td>1701.000000</td>
+      <td>1.701000e+03</td>
     </tr>
     <tr>
       <th>mean</th>
-      <td>1272</td>
-      <td>1294</td>
-      <td>1249</td>
-      <td>1269</td>
-      <td>1115</td>
-      <td>113350549</td>
+      <td>66.331699</td>
+      <td>69.043762</td>
+      <td>63.687113</td>
+      <td>66.452963</td>
+      <td>66.452963</td>
+      <td>1.524892e+09</td>
     </tr>
     <tr>
       <th>std</th>
-      <td>697</td>
-      <td>710</td>
-      <td>683</td>
-      <td>696</td>
-      <td>623</td>
-      <td>175615246</td>
+      <td>66.155666</td>
+      <td>68.569325</td>
+      <td>63.635783</td>
+      <td>66.233792</td>
+      <td>66.233792</td>
+      <td>1.850184e+09</td>
     </tr>
     <tr>
       <th>min</th>
-      <td>290</td>
-      <td>294</td>
-      <td>285</td>
-      <td>287</td>
-      <td>243</td>
-      <td>0</td>
+      <td>0.510000</td>
+      <td>0.560000</td>
+      <td>0.510000</td>
+      <td>0.520000</td>
+      <td>0.520000</td>
+      <td>6.520200e+05</td>
     </tr>
     <tr>
       <th>25%</th>
-      <td>725</td>
-      <td>740</td>
-      <td>715</td>
-      <td>725</td>
-      <td>618</td>
-      <td>36476700</td>
+      <td>16.480000</td>
+      <td>17.360000</td>
+      <td>15.710000</td>
+      <td>16.510000</td>
+      <td>16.510000</td>
+      <td>2.406654e+08</td>
     </tr>
     <tr>
       <th>50%</th>
-      <td>905</td>
-      <td>920</td>
-      <td>890</td>
-      <td>905</td>
-      <td>768</td>
-      <td>64158400</td>
+      <td>33.680000</td>
+      <td>35.170000</td>
+      <td>32.290000</td>
+      <td>33.680000</td>
+      <td>33.680000</td>
+      <td>9.512239e+08</td>
     </tr>
     <tr>
       <th>75%</th>
-      <td>1945</td>
-      <td>1965</td>
-      <td>1920</td>
-      <td>1945</td>
-      <td>1719</td>
-      <td>119523689</td>
+      <td>124.180000</td>
+      <td>131.450000</td>
+      <td>113.140000</td>
+      <td>124.990000</td>
+      <td>124.990000</td>
+      <td>2.272498e+09</td>
     </tr>
     <tr>
       <th>max</th>
-      <td>3300</td>
-      <td>3440</td>
-      <td>3060</td>
-      <td>3190</td>
-      <td>2763</td>
-      <td>2186652700</td>
+      <td>258.780000</td>
+      <td>263.830000</td>
+      <td>253.190000</td>
+      <td>258.930000</td>
+      <td>258.930000</td>
+      <td>1.706864e+10</td>
     </tr>
   </tbody>
 </table>
@@ -678,8 +757,7 @@ Ukuran data  (2231, 7)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Date         0
-Open         0
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Open         0
 High         0
 Low          0
 Close        0
@@ -696,13 +774,160 @@ duplicates = df[df.duplicated()]
 print(duplicates)
 ``` -->
 </section>
-<section id="mengubah-kolom-date-menjadi-index">
-<h5>Mengubah kolom Date menjadi Index<a class="headerlink" href="#mengubah-kolom-date-menjadi-index" title="Link to this heading">#</a></h5>
-<p>Hal ini agar memudahkan akses dan analisis data berdasarkan waktu.</p>
+<section id="menampilkan-trend-setiap-fitur">
+<h5>Menampilkan Trend Setiap Fitur<a class="headerlink" href="#menampilkan-trend-setiap-fitur" title="Link to this heading">#</a></h5>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">])</span>
-<span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="p">:</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Date&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">col</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Trend of </span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span> 
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/96b5241b343dc01e8a1018e42b64c75bacf1633f9c37739a82db92d103d1a812.png" src="_images/96b5241b343dc01e8a1018e42b64c75bacf1633f9c37739a82db92d103d1a812.png" />
+<img alt="_images/c9beaef4efc4d202bc18b98bf4913d2848088cfce2f3718adc3a41e617f2a8f9.png" src="_images/c9beaef4efc4d202bc18b98bf4913d2848088cfce2f3718adc3a41e617f2a8f9.png" />
+<img alt="_images/a589520d0183bf7024fb13d6b10f7047a9a2561002485bda1b8c814c3052b42d.png" src="_images/a589520d0183bf7024fb13d6b10f7047a9a2561002485bda1b8c814c3052b42d.png" />
+<img alt="_images/33193f0c3d9625a08585976279b359175823a9bc940bbe87dbe0b6cbbf1d7e94.png" src="_images/33193f0c3d9625a08585976279b359175823a9bc940bbe87dbe0b6cbbf1d7e94.png" />
+<img alt="_images/c12dc9ea36b28988ad84082120dfcb4851cc912b45c1260f5c7bc56255624d24.png" src="_images/c12dc9ea36b28988ad84082120dfcb4851cc912b45c1260f5c7bc56255624d24.png" />
+<img alt="_images/0c5e1705a450e1e83cdd5c411d7b5fa8796140c8521249923baf59084a313445.png" src="_images/0c5e1705a450e1e83cdd5c411d7b5fa8796140c8521249923baf59084a313445.png" />
+</div>
+</div>
+</section>
+<section id="mencari-outlier">
+<h5>Mencari Outlier<a class="headerlink" href="#mencari-outlier" title="Link to this heading">#</a></h5>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">col</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Boxplot of </span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/974d665ac79726d49c015cd55b5bf93e91e6470cebd46929ed7fa0603979ecbb.png" src="_images/974d665ac79726d49c015cd55b5bf93e91e6470cebd46929ed7fa0603979ecbb.png" />
+<img alt="_images/fd597a291e88236486c02cfec52d00baffb4b424e5e12a5d945ffb988b62114d.png" src="_images/fd597a291e88236486c02cfec52d00baffb4b424e5e12a5d945ffb988b62114d.png" />
+<img alt="_images/a170d5d5f2828db82b2e18689f8843915c17fab9630a487674ea729963961dc6.png" src="_images/a170d5d5f2828db82b2e18689f8843915c17fab9630a487674ea729963961dc6.png" />
+<img alt="_images/82c485396bbb14fcf0cbf0a26b93c578e2f640c54c909568311f935b07472e56.png" src="_images/82c485396bbb14fcf0cbf0a26b93c578e2f640c54c909568311f935b07472e56.png" />
+<img alt="_images/930d31dc01ac727ca8ae23b730c30b46df7132d6d45a6a7f0128a169c988178d.png" src="_images/930d31dc01ac727ca8ae23b730c30b46df7132d6d45a6a7f0128a169c988178d.png" />
+<img alt="_images/dc439a476f217ec325584a2162ee1452c6a165de4e75bec4250127489b2e84f3.png" src="_images/dc439a476f217ec325584a2162ee1452c6a165de4e75bec4250127489b2e84f3.png" />
+</div>
+</div>
+<p>Dari boxplot di atas terlihat bahwa fitur ‘Volume’ memiliki cukup banyak outlier.</p>
+</section>
+<section id="menangani-outliers">
+<h5>Menangani Outliers<a class="headerlink" href="#menangani-outliers" title="Link to this heading">#</a></h5>
+<p>Pada tahap ini akan dilakukan penaganan outlier terhadap fitur ‘volume’</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Menghitung Z-score untuk kolom Volume</span>
+<span class="n">mean_volume</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Volume&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>  <span class="c1"># Rata-rata kolom Volume</span>
+<span class="n">std_volume</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Volume&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>    <span class="c1"># Standar deviasi kolom Volume</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Z_score&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Volume&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">mean_volume</span><span class="p">)</span> <span class="o">/</span> <span class="n">std_volume</span>  <span class="c1"># Menghitung Z-score</span>
+
+<span class="c1"># Menampilkan outlier (Z-score di luar rentang -3 hingga 3)</span>
+<span class="n">outliers</span> <span class="o">=</span> <span class="n">df</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Z_score&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mi">3</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Z_score&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">)]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Jumlah outlier: </span><span class="si">{</span><span class="n">outliers</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">outliers</span><span class="p">[[</span><span class="s1">&#39;Volume&#39;</span><span class="p">,</span> <span class="s1">&#39;Z_score&#39;</span><span class="p">]])</span>  <span class="c1"># Menampilkan kolom yang relevan</span>
+
+<span class="c1"># Menghapus outlier dari dataset</span>
+<span class="n">df_cleaned</span> <span class="o">=</span> <span class="n">df</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Z_score&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="o">-</span><span class="mi">3</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Z_score&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">3</span><span class="p">)]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>  <span class="c1"># Buat salinan DataFrame bersih</span>
+
+<span class="c1"># Menghapus kolom Z_score setelah pembersihan</span>
+<span class="n">df_cleaned</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Z_score&#39;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># Hapus kolom Z_score</span>
+
+<span class="c1"># Menampilkan jumlah data setelah menghapus outlier</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Jumlah data setelah outlier dihapus: </span><span class="si">{</span><span class="n">df_cleaned</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">df_cleaned</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jumlah outlier: 33
+                 Volume   Z_score
+Date                             
+2021-08-31   7590894022  3.278593
+2021-09-03   7526373837  3.243721
+2021-09-07  17068643416  8.401190
+2021-09-08  13187213606  6.303329
+2021-09-09  12676272744  6.027172
+2021-09-10   7087524572  3.006528
+2021-10-22   7486821306  3.222343
+2024-03-05   8980294607  4.029545
+2024-03-07   7111178325  3.019313
+2024-03-14   8399967972  3.715887
+2024-03-15  14093348410  6.793083
+2024-03-16  11794134069  5.550388
+2024-03-17  10876218562  5.054267
+2024-03-18  11137647410  5.195566
+2024-03-19  11658593922  5.477130
+2024-03-20   8673957460  3.863974
+2024-04-05   7398400404  3.174553
+2024-04-13   8976793985  4.027653
+2024-04-14   7110974218  3.019203
+2024-08-05  14114308949  6.804412
+2024-11-06   9822932731  4.484980
+2024-11-10   8564655765  3.804898
+2024-11-11  10290809023  4.737861
+2024-11-12  11308516682  5.287918
+2024-11-13  11296665808  5.281513
+2024-11-14   8094554275  3.550815
+2024-11-17   9981076722  4.570455
+2024-11-18   8798714213  3.931404
+2024-11-21  10735314060  4.978110
+2024-11-22   7249493783  3.094071
+2024-12-02   7374176295  3.161460
+2024-12-03   8404095315  3.718117
+2024-12-05   8820663279  3.943267
+Jumlah data setelah outlier dihapus: 1668
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="korelasi-antar-fitur">
+<h5>Korelasi Antar Fitur<a class="headerlink" href="#korelasi-antar-fitur" title="Link to this heading">#</a></h5>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">correlation_matrix</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">correlation_matrix</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;coolwarm&#39;</span><span class="p">,</span> <span class="n">linewidths</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Heatmap Korelasi Antar Fitur&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/707a855f51828fa57e58164f43264aec5451aab783dc9e5181787bef0decb512.png" src="_images/707a855f51828fa57e58164f43264aec5451aab783dc9e5181787bef0decb512.png" />
+</div>
+</div>
+<p>Dari heatmap di atas, bisa dilihat bahwa:
+Fitur pembukaan (Open), tertinggi (High), penutupan (Close), dan harga pennutupan yang disesuaikan (Adj Close) mempunyai korelasi yang kuat antara satu sama lain (mendekati 1 atau 1). Hal ini menunjukkan fitur-fitur tersebut saling berkaitan dan bergerak sejalan. Sedangkan fitur ‘Volume’ mempunyai korelasi paling rendah dengan fitur lainnya (sekitar 0.78 - 0.8) yang menunjukkan bahwa perubahan volume tidak berpengaruh langsung dengan perubahan harga. Sehingga fitur volume tidak perlu digunakan untuk analisis prediksi pada projek ini.</p>
+</section>
+</section>
+</section>
+<section id="data-preprocessing">
+<h3>Data Preprocessing<a class="headerlink" href="#data-preprocessing" title="Link to this heading">#</a></h3>
+<p>Langkah-langkah pada tahap ini adalah sebagai berikut :</p>
+<section id="a-menghapus-fitur-yang-tidak-relevan">
+<h4>a. Menghapus Fitur yang tidak relevan<a class="headerlink" href="#a-menghapus-fitur-yang-tidak-relevan" title="Link to this heading">#</a></h4>
+<p>Pada tahap proses menghitung matriks korelasi, didapat bahwa fitur ‘volume’ tidak relevan atau tidak memiliki pengarus terhadap fitur lainnya, maka fitur ‘volume’ akan dihapus. Serta fitur ‘Adj Close’ dimana nilai dari fitur ini sama dengan fitur ‘Close’.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Volume&#39;</span><span class="p">,</span> <span class="s1">&#39;Adj Close&#39;</span><span class="p">])</span>
 <span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -730,13 +955,9 @@ print(duplicates)
       <th>High</th>
       <th>Low</th>
       <th>Close</th>
-      <th>Adj Close</th>
-      <th>Volume</th>
     </tr>
     <tr>
       <th>Date</th>
-      <th></th>
-      <th></th>
       <th></th>
       <th></th>
       <th></th>
@@ -745,225 +966,51 @@ print(duplicates)
   </thead>
   <tbody>
     <tr>
-      <th>2015-09-09</th>
-      <td>408</td>
-      <td>417</td>
-      <td>405</td>
-      <td>414</td>
-      <td>350</td>
-      <td>17822276</td>
+      <th>2020-04-10</th>
+      <td>0.83</td>
+      <td>1.31</td>
+      <td>0.69</td>
+      <td>0.95</td>
     </tr>
     <tr>
-      <th>2015-09-10</th>
-      <td>412</td>
-      <td>412</td>
-      <td>405</td>
-      <td>405</td>
-      <td>343</td>
-      <td>6254934</td>
+      <th>2020-04-11</th>
+      <td>0.95</td>
+      <td>1.05</td>
+      <td>0.77</td>
+      <td>0.78</td>
     </tr>
     <tr>
-      <th>2015-09-11</th>
-      <td>407</td>
-      <td>424</td>
-      <td>407</td>
-      <td>407</td>
-      <td>345</td>
-      <td>36223022</td>
+      <th>2020-04-12</th>
+      <td>0.79</td>
+      <td>0.96</td>
+      <td>0.76</td>
+      <td>0.88</td>
     </tr>
     <tr>
-      <th>2015-09-14</th>
-      <td>412</td>
-      <td>414</td>
-      <td>406</td>
-      <td>406</td>
-      <td>343</td>
-      <td>12273195</td>
+      <th>2020-04-13</th>
+      <td>0.89</td>
+      <td>0.89</td>
+      <td>0.77</td>
+      <td>0.78</td>
     </tr>
     <tr>
-      <th>2015-09-15</th>
-      <td>405</td>
-      <td>407</td>
-      <td>401</td>
-      <td>401</td>
-      <td>339</td>
-      <td>5246096</td>
+      <th>2020-04-14</th>
+      <td>0.78</td>
+      <td>0.80</td>
+      <td>0.63</td>
+      <td>0.66</td>
     </tr>
   </tbody>
 </table>
 </div></div></div>
 </div>
 </section>
-<section id="menampilkan-trend-setiap-fitur">
-<h5>Menampilkan Trend Setiap Fitur<a class="headerlink" href="#menampilkan-trend-setiap-fitur" title="Link to this heading">#</a></h5>
+<section id="b-rekayasa-fitur">
+<h4>b. Rekayasa Fitur<a class="headerlink" href="#b-rekayasa-fitur" title="Link to this heading">#</a></h4>
+<p>Karena dalam penelitian ini kita akan memprediksi harga Close pada hari berikutnya, maka perlu variabel baru untuk target. Dimana fitur ini dapat membantu kita untuk mengetahui seberapa rendah harga saham bisa turun. Para investor juga bisa menggunakan prediksi ini untuk membeli aset saat harganya rendah, dan meningkatkan peluang mendapatkan keuntungan saat harga saham naik lagi.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>seaborn
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: seaborn in c:\users\heviaa\appdata\local\programs\python\python312\lib\site-packages (0.13.2)
-Requirement already satisfied: numpy!=1.24.0,&gt;=1.20 in c:\users\heviaa\appdata\local\programs\python\python312\lib\site-packages (from seaborn) (1.26.3)
-Requirement already satisfied: pandas&gt;=1.2 in c:\users\heviaa\appdata\local\programs\python\python312\lib\site-packages (from seaborn) (2.1.4)
-Requirement already satisfied: matplotlib!=3.6.1,&gt;=3.4 in c:\users\heviaa\appdata\local\programs\python\python312\lib\site-packages (from seaborn) (3.8.2)
-Requirement already satisfied: contourpy&gt;=1.0.1 in c:\users\heviaa\appdata\local\programs\python\python312\lib\site-packages (from matplotlib!=3.6.1,&gt;=3.4-&gt;seaborn) (1.2.0)
-Requirement already satisfied: cycler&gt;=0.10 in c:\users\heviaa\appdata\local\programs\python\python312\lib\site-packages (from matplotlib!=3.6.1,&gt;=3.4-&gt;seaborn) (0.12.1)
-Requirement already satisfied: fonttools&gt;=4.22.0 in c:\users\heviaa\appdata\local\programs\python\python312\lib\site-packages (from matplotlib!=3.6.1,&gt;=3.4-&gt;seaborn) (4.47.0)
-Requirement already satisfied: kiwisolver&gt;=1.3.1 in c:\users\heviaa\appdata\local\programs\python\python312\lib\site-packages (from matplotlib!=3.6.1,&gt;=3.4-&gt;seaborn) (1.4.5)
-Requirement already satisfied: packaging&gt;=20.0 in c:\users\heviaa\appdata\local\programs\python\python312\lib\site-packages (from matplotlib!=3.6.1,&gt;=3.4-&gt;seaborn) (23.2)
-Requirement already satisfied: pillow&gt;=8 in c:\users\heviaa\appdata\local\programs\python\python312\lib\site-packages (from matplotlib!=3.6.1,&gt;=3.4-&gt;seaborn) (10.2.0)
-Requirement already satisfied: pyparsing&gt;=2.3.1 in c:\users\heviaa\appdata\local\programs\python\python312\lib\site-packages (from matplotlib!=3.6.1,&gt;=3.4-&gt;seaborn) (3.1.1)
-Requirement already satisfied: python-dateutil&gt;=2.7 in c:\users\heviaa\appdata\local\programs\python\python312\lib\site-packages (from matplotlib!=3.6.1,&gt;=3.4-&gt;seaborn) (2.8.2)
-Requirement already satisfied: pytz&gt;=2020.1 in c:\users\heviaa\appdata\local\programs\python\python312\lib\site-packages (from pandas&gt;=1.2-&gt;seaborn) (2023.3.post1)
-Requirement already satisfied: tzdata&gt;=2022.1 in c:\users\heviaa\appdata\local\programs\python\python312\lib\site-packages (from pandas&gt;=1.2-&gt;seaborn) (2023.4)
-Requirement already satisfied: six&gt;=1.5 in c:\users\heviaa\appdata\local\programs\python\python312\lib\site-packages (from python-dateutil&gt;=2.7-&gt;matplotlib!=3.6.1,&gt;=3.4-&gt;seaborn) (1.16.0)
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[notice] A new release of pip is available: 23.2.1 -&gt; 24.3.1
-[notice] To update, run: python.exe -m pip install --upgrade pip
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
-<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="p">:</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
-    <span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Date&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">col</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Trend of </span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span> 
-    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/a2faa76b72263e450708b1aa73e2512ebdcb31752a1782d8c087e9d23bc0c6f6.png" src="_images/a2faa76b72263e450708b1aa73e2512ebdcb31752a1782d8c087e9d23bc0c6f6.png" />
-<img alt="_images/c9370bf1d96578d0bf2baa0a3046f67e5c940ed7268712507e46c76fef929a8f.png" src="_images/c9370bf1d96578d0bf2baa0a3046f67e5c940ed7268712507e46c76fef929a8f.png" />
-<img alt="_images/0f070e39b5f63f534ab09f3726f7dc21c46b444aaabbc96fc76150040d6f0980.png" src="_images/0f070e39b5f63f534ab09f3726f7dc21c46b444aaabbc96fc76150040d6f0980.png" />
-<img alt="_images/991b2fe37dccb579c2b93ed950555216163af02837d52e75d9ad66aba2fb3a54.png" src="_images/991b2fe37dccb579c2b93ed950555216163af02837d52e75d9ad66aba2fb3a54.png" />
-<img alt="_images/16ba69cd46a1119670ac3f433de4e53b4a92a6d5639550ca1a89fac43a32583e.png" src="_images/16ba69cd46a1119670ac3f433de4e53b4a92a6d5639550ca1a89fac43a32583e.png" />
-<img alt="_images/cdc5ddb7ec363809ec5b6e615c5eb5b5fdfcda0a753dc7a1828e70fb8c126f43.png" src="_images/cdc5ddb7ec363809ec5b6e615c5eb5b5fdfcda0a753dc7a1828e70fb8c126f43.png" />
-</div>
-</div>
-</section>
-<section id="mencari-outlier">
-<h5>Mencari Outlier<a class="headerlink" href="#mencari-outlier" title="Link to this heading">#</a></h5>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
-    <span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">col</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Boxplot of </span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/6ccd74edb14813dcc18573f0e084e8cbe0434954c9bc7f1b3cb33dc5e39b3f05.png" src="_images/6ccd74edb14813dcc18573f0e084e8cbe0434954c9bc7f1b3cb33dc5e39b3f05.png" />
-<img alt="_images/7590bb35d1b375fa53e5ccb620ffcb311f3b27ff7eb6419e051862f54256b861.png" src="_images/7590bb35d1b375fa53e5ccb620ffcb311f3b27ff7eb6419e051862f54256b861.png" />
-<img alt="_images/cb3e2e27bc2b9bdd1e14df89fd2d6ecbba3c0758f9f089a201703c7bf4180fb2.png" src="_images/cb3e2e27bc2b9bdd1e14df89fd2d6ecbba3c0758f9f089a201703c7bf4180fb2.png" />
-<img alt="_images/a87b63b5c8eff064a304aab96ee0de6fb1c95b6dca2dfbe3ecb184c3e46bed49.png" src="_images/a87b63b5c8eff064a304aab96ee0de6fb1c95b6dca2dfbe3ecb184c3e46bed49.png" />
-<img alt="_images/97b2609b0b1dc6ed3b7404fdd6164037532d7d5b8068847688c8c69d4a78f1a8.png" src="_images/97b2609b0b1dc6ed3b7404fdd6164037532d7d5b8068847688c8c69d4a78f1a8.png" />
-<img alt="_images/4a023bba5e4fda21d52ddfd5db2bb12d2605dc6d275b909d3e7771f9b2f72c80.png" src="_images/4a023bba5e4fda21d52ddfd5db2bb12d2605dc6d275b909d3e7771f9b2f72c80.png" />
-</div>
-</div>
-<p>Dari boxplot di atas terlihat bahwa fitur ‘Volume’ memiliki cukup banyak outlier. Sehingga diperlukan adanya penananganan outliernya</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Menghitung Z-score untuk kolom Volume</span>
-<span class="n">mean_volume</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Volume&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>  <span class="c1"># Rata-rata kolom Volume</span>
-<span class="n">std_volume</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Volume&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>    <span class="c1"># Standar deviasi kolom Volume</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Z_score&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Volume&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">mean_volume</span><span class="p">)</span> <span class="o">/</span> <span class="n">std_volume</span>  <span class="c1"># Menghitung Z-score</span>
-
-<span class="c1"># Menampilkan outlier (Z-score di luar rentang -3 hingga 3)</span>
-<span class="n">outliers</span> <span class="o">=</span> <span class="n">df</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Z_score&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mi">3</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Z_score&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">)]</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Jumlah outlier: </span><span class="si">{</span><span class="n">outliers</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">outliers</span><span class="p">[[</span><span class="s1">&#39;Volume&#39;</span><span class="p">,</span> <span class="s1">&#39;Z_score&#39;</span><span class="p">]])</span>  <span class="c1"># Menampilkan kolom yang relevan</span>
-
-<span class="c1"># Menghapus outlier dari dataset</span>
-<span class="n">df_cleaned</span> <span class="o">=</span> <span class="n">df</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Z_score&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="o">-</span><span class="mi">3</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Z_score&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">3</span><span class="p">)]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>  <span class="c1"># Buat salinan DataFrame bersih</span>
-
-<span class="c1"># Menghapus kolom Z_score setelah pembersihan</span>
-<span class="n">df_cleaned</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Z_score&#39;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># Hapus kolom Z_score</span>
-
-<span class="c1"># Menampilkan jumlah data setelah menghapus outlier</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Jumlah data setelah outlier dihapus: </span><span class="si">{</span><span class="n">df_cleaned</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-
-<span class="n">df</span> <span class="o">=</span> <span class="n">df_cleaned</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jumlah outlier: 48
-                Volume  Z_score
-Date                           
-2015-10-28   720207900        3
-2020-10-14  1116793100        6
-2020-10-15  1510069900        8
-2020-10-19  1158293800        6
-2020-10-20   789265700        4
-2020-10-21  1370011500        7
-2020-11-09   846313500        4
-2020-11-18   853419900        4
-2020-12-02   803420400        4
-2020-12-10   686885600        3
-2020-12-16  1272844700        7
-2020-12-18  1083731700        6
-2020-12-22   678922000        3
-2020-12-23   659296400        3
-2020-12-28   992175000        5
-2020-12-29   739754900        4
-2021-01-04  1040753400        5
-2021-01-05  1139014700        6
-2021-01-07  1982112200       11
-2021-01-08  1052618000        5
-2021-01-12  1147172800        6
-2021-01-13  1280852600        7
-2021-01-14  1499058400        8
-2021-01-15   915912100        5
-2021-01-18   930618200        5
-2021-01-20  1983213100       11
-2021-01-21  1273877400        7
-2021-01-22   894766800        4
-2021-01-25  1222991300        6
-2021-01-26   786819300        4
-2021-01-27  1341364800        7
-2021-01-28   731854900        4
-2021-02-01  2186652700       12
-2021-02-02   942434300        5
-2021-02-03   948031000        5
-2021-02-04   874173400        4
-2021-02-05  1157647700        6
-2021-02-08   977135300        5
-2021-02-09   877784900        4
-2021-02-10  1401720500        7
-2021-02-22   834610300        4
-2021-02-26  1305042600        7
-2021-03-05   745024700        4
-2021-03-26   652293400        3
-2022-03-07   642031000        3
-2022-03-08  1404951500        7
-2022-03-09   706107000        3
-2024-08-30   764070300        4
-Jumlah data setelah outlier dihapus: 2183
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="rekayasa-fitur">
-<h5>Rekayasa Fitur<a class="headerlink" href="#rekayasa-fitur" title="Link to this heading">#</a></h5>
-<p>Karena dalam penelitian ini kita akan memprediksi harga Low pada hari berikutnya, maka perlu variabel baru untuk target. Dimana fitur ini dapat membantu kita untuk mengetahui seberapa rendah harga saham bisa turun. Para investor juga bisa menggunakan prediksi ini untuk membeli saham saat harganya rendah, dan meningkatkan peluang mendapatkan keuntungan saat harga saham naik lagi.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Low Target&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Low&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Close Target&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Close&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 <span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
@@ -993,14 +1040,10 @@ Jumlah data setelah outlier dihapus: 2183
       <th>High</th>
       <th>Low</th>
       <th>Close</th>
-      <th>Adj Close</th>
-      <th>Volume</th>
-      <th>Low Target</th>
+      <th>Close Target</th>
     </tr>
     <tr>
       <th>Date</th>
-      <th></th>
-      <th></th>
       <th></th>
       <th></th>
       <th></th>
@@ -1010,219 +1053,174 @@ Jumlah data setelah outlier dihapus: 2183
   </thead>
   <tbody>
     <tr>
-      <th>2015-09-09</th>
-      <td>408</td>
-      <td>417</td>
-      <td>405</td>
-      <td>414</td>
-      <td>350</td>
-      <td>17822276</td>
-      <td>405</td>
+      <th>2020-04-10</th>
+      <td>0.83</td>
+      <td>1.31</td>
+      <td>0.69</td>
+      <td>0.95</td>
+      <td>0.78</td>
     </tr>
     <tr>
-      <th>2015-09-10</th>
-      <td>412</td>
-      <td>412</td>
-      <td>405</td>
-      <td>405</td>
-      <td>343</td>
-      <td>6254934</td>
-      <td>407</td>
+      <th>2020-04-11</th>
+      <td>0.95</td>
+      <td>1.05</td>
+      <td>0.77</td>
+      <td>0.78</td>
+      <td>0.88</td>
     </tr>
     <tr>
-      <th>2015-09-11</th>
-      <td>407</td>
-      <td>424</td>
-      <td>407</td>
-      <td>407</td>
-      <td>345</td>
-      <td>36223022</td>
-      <td>406</td>
+      <th>2020-04-12</th>
+      <td>0.79</td>
+      <td>0.96</td>
+      <td>0.76</td>
+      <td>0.88</td>
+      <td>0.78</td>
     </tr>
     <tr>
-      <th>2015-09-14</th>
-      <td>412</td>
-      <td>414</td>
-      <td>406</td>
-      <td>406</td>
-      <td>343</td>
-      <td>12273195</td>
-      <td>401</td>
+      <th>2020-04-13</th>
+      <td>0.89</td>
+      <td>0.89</td>
+      <td>0.77</td>
+      <td>0.78</td>
+      <td>0.66</td>
     </tr>
     <tr>
-      <th>2015-09-15</th>
-      <td>405</td>
-      <td>407</td>
-      <td>401</td>
-      <td>401</td>
-      <td>339</td>
-      <td>5246096</td>
-      <td>400</td>
+      <th>2020-04-14</th>
+      <td>0.78</td>
+      <td>0.80</td>
+      <td>0.63</td>
+      <td>0.66</td>
+      <td>0.65</td>
     </tr>
   </tbody>
 </table>
 </div></div></div>
 </div>
+<p>Dari dataset yang sudah melalui beberapa proses agar siap digunakan, terlihat bahwa fitur input terdiri dari fitur Open, High, Low, Close, Adj Close di hari ini, dan fitur Close Target atau prediksi harga Low besok hari sebagai fitur output.</p>
 </section>
-<section id="menghitung-korelasi-antar-fitur">
-<h5>Menghitung Korelasi Antar Fitur<a class="headerlink" href="#menghitung-korelasi-antar-fitur" title="Link to this heading">#</a></h5>
+<section id="c-pembagian-data">
+<h4>c. Pembagian Data<a class="headerlink" href="#c-pembagian-data" title="Link to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">correlation_matrix</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Memisahkan fitur dan target</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;Open&#39;</span><span class="p">,</span> <span class="s1">&#39;High&#39;</span><span class="p">,</span> <span class="s1">&#39;Low&#39;</span><span class="p">,</span> <span class="s1">&#39;Close&#39;</span><span class="p">]]</span>  <span class="c1"># Fitur</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Close Target&#39;</span><span class="p">]</span>  <span class="c1"># Target</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">correlation_matrix</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;coolwarm&#39;</span><span class="p">,</span> <span class="n">linewidths</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Heatmap Korelasi Antar Fitur&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="c1"># Membagi data menjadi training dan testing</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="_images/a75ee90b1524ca650ae404b03d4e182139875a3b6b13676a50ff1fbb47f6c7bf.png" src="_images/a75ee90b1524ca650ae404b03d4e182139875a3b6b13676a50ff1fbb47f6c7bf.png" />
 </div>
-</div>
-<p>Dari heatmap di atas, bisa dilihat bahwa:
-Fitur pembukaan (Open), tertinggi (High), penutupan (Close), dan harga pennutupan yang disesuaikan (Adj Close) mempunyai korelasi yang kuat antara satu sama lain (mendekati 1 atau 1). Hal ini menunjukkan fitur-fitur tersebut saling berkaitan dan bergerak sejalan. Sedangkan fitur ‘Volume’ mempunyai korelasi rendah dengan fitur lainnya (sekitar 0.15 - 0.17) yang menunjukkan bahwa perubahan volume tidak berpengaruh langsung dengan perubahan harga. Sehingga fitur volume tidak perlu digunakan untuk analisis prediksi pada projek ini.</p>
+</section>
+<section id="normalisasi-data">
+<h4>Normalisasi Data<a class="headerlink" href="#normalisasi-data" title="Link to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Volume&#39;</span><span class="p">])</span>
-<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Melakukan scaling pada fitur</span>
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
+<span class="n">X_train_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">X_test_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="c1"># Melakukan scaling pada target (y)</span>
+<span class="n">scaler_target</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
+<span class="n">y_train_scaled</span> <span class="o">=</span> <span class="n">scaler_target</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">y_train</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">y_test_scaled</span> <span class="o">=</span> <span class="n">scaler_target</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">y_test</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Open</th>
-      <th>High</th>
-      <th>Low</th>
-      <th>Close</th>
-      <th>Adj Close</th>
-      <th>Low Target</th>
-    </tr>
-    <tr>
-      <th>Date</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>2015-09-09</th>
-      <td>408</td>
-      <td>417</td>
-      <td>405</td>
-      <td>414</td>
-      <td>350</td>
-      <td>405</td>
-    </tr>
-    <tr>
-      <th>2015-09-10</th>
-      <td>412</td>
-      <td>412</td>
-      <td>405</td>
-      <td>405</td>
-      <td>343</td>
-      <td>407</td>
-    </tr>
-    <tr>
-      <th>2015-09-11</th>
-      <td>407</td>
-      <td>424</td>
-      <td>407</td>
-      <td>407</td>
-      <td>345</td>
-      <td>406</td>
-    </tr>
-    <tr>
-      <th>2015-09-14</th>
-      <td>412</td>
-      <td>414</td>
-      <td>406</td>
-      <td>406</td>
-      <td>343</td>
-      <td>401</td>
-    </tr>
-    <tr>
-      <th>2015-09-15</th>
-      <td>405</td>
-      <td>407</td>
-      <td>401</td>
-      <td>401</td>
-      <td>339</td>
-      <td>400</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
-<p>Dari dataset yang sudah melalui beberapa proses agar siap digunakan, terlihat bahwa fitur input terdiri dari fitur Open, High, Low, Close, Adj Close di hari ini, dan fitur Target Low atau prediksi harga Low besok hari sebagai fitur output.</p>
-<!-- ###### Seleksi Fitur
-Fitur yang ingin diprediksi adalah fitur Low dimana ini dapat membantu kita untuk mengetahui seberapa rendah harga saham bisa turun. Para investor juga bisa menggunakan prediksi ini untuk membeli saham saat harganya rendah, dan meningkatkan peluang mendapatkan keuntungan saat harga saham naik lagi.
-```{code-cell}
-# SELEKSI FITUR
-df = df.drop(['Open', 'High', 'Adj Close', 'Close', 'Volume'], axis=1)
-
-df
-``` -->
 </section>
-</section>
-</section>
-<section id="data-preprocessing">
-<h3>Data Preprocessing<a class="headerlink" href="#data-preprocessing" title="Link to this heading">#</a></h3>
-<!-- Langkah-langkah pada tahap ini adalah sebagai berikut :
-##### a.	Mengecek missing value -->
-<!-- ```{code-cell}
-df.isnull().sum()
-```
-Tujuan : memeriksa apakah ada nilai yang hilang (missing values) dalam dataset.
-Fungsi : menampilkan jumlah nilai yang hilang untuk setiap kolom, sehingga jika memang terdapat missing values, kita dapat tangani dengan mengisinya atau menghapus baris-baris yang memiliki missing values. -->
-<!-- ##### b.	Pemisahan fitur dan target -->
-<!-- Tujuan : memisahkan dataset menjadi fitur (X) dan target (y).
-Fungsi : fitur (X) merupakan data yang akan digunakan untuk membuat predikski, sedangkan target (y) adalah nilai yang ingin diprediksi.  -->
-<!-- #####  c.	 Normalisasi data -->
-<!-- ```{code-cell}
-scaler = MinMaxScaler()
-X_scaled = scaler.fit_transform(X)
-```
-Tujuan : menormalkan data fitur ke dalam rentang [0,1].
-Fungsi : menggunakan MinMaxScaler untuk memastikan bahwa semua fitur berada dalam rentang yang sama supaya skla data konsisten, agar algoritma berfungsi dengan baik. -->
 </section>
 <section id="modelling">
 <h3>Modelling<a class="headerlink" href="#modelling" title="Link to this heading">#</a></h3>
-<p>Menjelaskan proses pembuatan model berdasarkan data yang sudah kita proses</p>
-<section id="a-pembagian-data">
-<h4>a.	Pembagian Data<a class="headerlink" href="#a-pembagian-data" title="Link to this heading">#</a></h4>
-<p>Data dibagi menjadi dua, yaitu data pelatihan untuk melatih model dan data pengujian untuk mengecek seberapa baik model bekerja.</p>
-</section>
-<section id="b-pembangunan-model">
-<h4>b.	Pembangunan Model<a class="headerlink" href="#b-pembangunan-model" title="Link to this heading">#</a></h4>
-<p>Pemilihan algoritma seperti SVM, Naïve Bayes, atau yang lainnya dan melatih model menggunakan data pelatihan untuk mengenali pola dalam data.</p>
-</section>
-<section id="c-pengujian-model">
-<h4>c.	Pengujian Model<a class="headerlink" href="#c-pengujian-model" title="Link to this heading">#</a></h4>
-<p>Model diuji dengan data pengujian untuk melihat seberapa akurat prediksi yang dihasilkan.</p>
-</section>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Membuat model</span>
+<span class="n">models</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Linear Regression&quot;</span><span class="p">:</span> <span class="n">LinearRegression</span><span class="p">(),</span>
+    <span class="s2">&quot;Polynomial Regression&quot;</span><span class="p">:</span> <span class="n">PolynomialFeatures</span><span class="p">(</span><span class="n">degree</span><span class="o">=</span><span class="mi">3</span><span class="p">),</span>  <span class="c1"># Degree polinomial bisa disesuaikan</span>
+    <span class="s2">&quot;Decision Tree Regression&quot;</span><span class="p">:</span> <span class="n">DecisionTreeRegressor</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1"># Dictionary untuk menyimpan hasil evaluasi</span>
+<span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="c1"># Iterasi setiap model</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">models</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;Polynomial Regression&quot;</span><span class="p">:</span>
+        <span class="c1"># Membuat transformasi polinomial</span>
+        <span class="n">poly</span> <span class="o">=</span> <span class="n">PolynomialFeatures</span><span class="p">(</span><span class="n">degree</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+        <span class="n">X_train_poly</span> <span class="o">=</span> <span class="n">poly</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train_scaled</span><span class="p">)</span>  <span class="c1"># Transformasi data pelatihan</span>
+        <span class="n">X_test_poly</span> <span class="o">=</span> <span class="n">poly</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test_scaled</span><span class="p">)</span>  <span class="c1"># Transformasi data uji</span>
+        
+        <span class="c1"># Gunakan Linear Regression di atas data polinomial</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_poly</span><span class="p">,</span> <span class="n">y_train_scaled</span><span class="p">)</span>  <span class="c1"># Latih model polinomial</span>
+        
+        <span class="c1"># Prediksi pada data uji</span>
+        <span class="n">y_pred_scaled</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_poly</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Untuk Linear Regression dan Decision Tree Regression</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_scaled</span><span class="p">,</span> <span class="n">y_train_scaled</span><span class="p">)</span>  <span class="c1"># Latih model biasa</span>
+        
+        <span class="c1"># Prediksi pada data uji</span>
+        <span class="n">y_pred_scaled</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_scaled</span><span class="p">)</span>
+
+    <span class="c1"># Kembalikan hasil prediksi ke skala asli</span>
+    <span class="n">y_pred_original</span> <span class="o">=</span> <span class="n">scaler_target</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span><span class="n">y_pred_scaled</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">y_test_original</span> <span class="o">=</span> <span class="n">scaler_target</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span><span class="n">y_test_scaled</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+    
+    <span class="c1"># Evaluasi</span>
+    <span class="n">mse</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test_original</span><span class="p">,</span> <span class="n">y_pred_original</span><span class="p">)</span>
+    <span class="n">rmse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mse</span><span class="p">)</span>
+    <span class="n">mape</span> <span class="o">=</span> <span class="n">mean_absolute_percentage_error</span><span class="p">(</span><span class="n">y_test_original</span><span class="p">,</span> <span class="n">y_pred_original</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>  <span class="c1"># Dalam persen</span>
+    
+    <span class="c1"># Simpan hasil evaluasi</span>
+    <span class="n">results</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;RMSE&quot;</span><span class="p">:</span> <span class="n">rmse</span><span class="p">,</span> <span class="s2">&quot;MAPE&quot;</span><span class="p">:</span> <span class="n">mape</span><span class="p">}</span>
+    
+    <span class="c1"># Plot hasil prediksi</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y_test</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">y_test_original</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Actual&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y_test</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">y_pred_original</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Predicted (</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># Tambahkan detail plot</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Actual vs Predicted Values (</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Tanggal&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Kurs&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    
+    <span class="c1"># Tampilkan plot</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Tampilkan hasil evaluasi</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;HASIL EVALUASI MODEL&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">model</span><span class="p">,</span> <span class="n">metrics</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">model</span><span class="si">}</span><span class="s2">:</span><span class="se">\n</span><span class="s2">  RMSE: </span><span class="si">{</span><span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;RMSE&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="se">\n</span><span class="s2">  MAPE: </span><span class="si">{</span><span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;MAPE&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/45bf623c61205452afa9ea87e0f4eedadf80d732667fcd20b294a03fc70d98e4.png" src="_images/45bf623c61205452afa9ea87e0f4eedadf80d732667fcd20b294a03fc70d98e4.png" />
+<img alt="_images/e3df725a42c6fb4cb2496246513bb2434ffe5653eea177bd7bf004060a3c8f8a.png" src="_images/e3df725a42c6fb4cb2496246513bb2434ffe5653eea177bd7bf004060a3c8f8a.png" />
+<img alt="_images/63c9b29431130f295dff6440c290f1aa34ae3993ded54da01e7bb7d7c19798c4.png" src="_images/63c9b29431130f295dff6440c290f1aa34ae3993ded54da01e7bb7d7c19798c4.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>HASIL EVALUASI MODEL
+Linear Regression:
+  RMSE: 6.45
+  MAPE: 3.36%
+
+Polynomial Regression:
+  RMSE: 6.93
+  MAPE: 3.62%
+
+Decision Tree Regression:
+  RMSE: 10.32
+  MAPE: 5.52%
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="evaluation">
 <h3>Evaluation<a class="headerlink" href="#evaluation" title="Link to this heading">#</a></h3>
@@ -1301,7 +1299,7 @@ Fungsi : menggunakan MinMaxScaler untuk memastikan bahwa semua fitur berada dala
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pengembangan-model-prediksi-harga-saham-pt-aneka-tambang-tbk-antam-menggunakan-data-historis-untuk-mendukung-keputusan-investasi">Pengembangan Model Prediksi Harga Saham PT Aneka Tambang Tbk (ANTAM) Menggunakan Data Historis untuk Mendukung Keputusan Investasi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pengembangan-model-prediksi-harga-cryptocurrency-solana-sol-menggunakan-data-historis-untuk-mendukung-keputusan-investasi">Pengembangan Model Prediksi Harga Cryptocurrency Solana (SOL) Menggunakan Data Historis untuk Mendukung Keputusan Investasi</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pendahuluan">Pendahuluan</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#latar-belakang">Latar Belakang</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tujuan-proyek">Tujuan Proyek</a></li>
@@ -1314,22 +1312,22 @@ Fungsi : menggunakan MinMaxScaler untuk memastikan bahwa semua fitur berada dala
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-deskripsi-data-set">b.	Deskripsi Data Set</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#c-eksplorasi-data">c. Eksplorasi Data</a><ul class="nav section-nav flex-column">
 <li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#mencari-missing-value">Mencari Missing Value</a></li>
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#mengubah-kolom-date-menjadi-index">Mengubah kolom Date menjadi Index</a></li>
 <li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#menampilkan-trend-setiap-fitur">Menampilkan Trend Setiap Fitur</a></li>
 <li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#mencari-outlier">Mencari Outlier</a></li>
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#rekayasa-fitur">Rekayasa Fitur</a></li>
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#menghitung-korelasi-antar-fitur">Menghitung Korelasi Antar Fitur</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#menangani-outliers">Menangani Outliers</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#korelasi-antar-fitur">Korelasi Antar Fitur</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preprocessing">Data Preprocessing</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelling">Modelling</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-pembagian-data">a.	Pembagian Data</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-pembangunan-model">b.	Pembangunan Model</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#c-pengujian-model">c.	Pengujian Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preprocessing">Data Preprocessing</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-menghapus-fitur-yang-tidak-relevan">a. Menghapus Fitur yang tidak relevan</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-rekayasa-fitur">b. Rekayasa Fitur</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#c-pembagian-data">c. Pembagian Data</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#normalisasi-data">Normalisasi Data</a></li>
 </ul>
 </li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelling">Modelling</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation">Evaluation</a></li>
 </ul>
 </li>

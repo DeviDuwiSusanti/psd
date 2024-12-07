@@ -13,30 +13,32 @@ kernelspec:
 ---
 
 # Laporan Proyek 1
-## Pengembangan Model Prediksi Harga Saham PT Aneka Tambang Tbk (ANTAM) Menggunakan Data Historis untuk Mendukung Keputusan Investasi
+## Pengembangan Model Prediksi Harga Cryptocurrency Solana (SOL) Menggunakan Data Historis untuk Mendukung Keputusan Investasi
 ## Pendahuluan
 
 ### Latar Belakang
-Saham merupakan tanda kepemilikan dalam suatu perusahaan yang dapat memberikan hak bagi pemegang saham untuk mendapatkan keuntungan dan ikut serta dalam pengambilan keputusan perusahaan. PT Aneka Tambang Tbk (ANTAM) adalah perusahaan sektor tambang yang memproduksi nikel, emas, dan bauksit, serta sudah terdaftar di Bursa Efek Indonesia sejak 1997. 
+Cryptocurrency adalah aset digital yang menggunakan teknologi blockchain untuk mencatat transaksi secara transparan dan aman. Salah satu cryptocurrency yang berkembang pesat adalah Solana (SOL), sebuah platform blockchain yang dikenal karena kecepatan transaksi dan biaya rendah. Solana telah menarik perhatian investor karena potensinya dalam mendukung aplikasi terdesentralisasi (dApps) dan proyek berbasis blockchain lainnya.
 
-ANTAM mempunyai visi untuk menjadi korporasi global terkemuka melalui diversifikasi dan integrasi usaha berbasis sumber daya alam. Untuk memenuhi visi ini, ANTAM memiliki misi yaitu memaksimalkan nilai perusahaan bagi pemegang saham dan pemangku kepentingan dengan cara mengelola biaya secara efisien dan meningkatkan produksi.
+Namun, seperti aset cryptocurrency lainnya, harga Solana sangat fluktuatif, dipengaruhi oleh berbagai faktor seperti sentimen pasar, perkembangan teknologi, regulasi, dan kondisi ekonomi global. Fluktuasi ini sering kali menyulitkan investor untuk membuat keputusan investasi yang tepat.
 
-Namun, harga saham ANTAM kerap mengalami fluktuasi yang disebabkan oleh faktor-faktor eksternal seperti harga komoditas global dan kondisi ekonomi yang dapat mempersulit para investor dalam membuat keputusan investasi yang tepat.
-
-Untuk mengatasi tantangan ini, diperlukan adanya teknologi yang dapat memprediksi pergerakan harga saham di masa depan, seperti machine learning. Hal ini bertujuan untuk meminimalkan risiko dan membantu investor dalam mengambil keputusan yang tepat.
+Untuk membantu investor memahami pergerakan harga Solana, diperlukan teknologi yang dapat memprediksi harga di masa depan, seperti machine learning. Dengan analisis berbasis data historis, teknologi ini dapat membantu meminimalkan risiko dan mendukung pengambilan keputusan investasi yang lebih baik.
 
 ### Tujuan Proyek
-Proyek ini bertujuan untuk mengembangkan model prediksi harga saham di PT Aneka Tambang Tbk (ANTAM)  berakurasi tinggi dengan menggunakan data historis. Dengan analisis ini, diharapkan bisa membantu investor dalam mengambil keputusan investasi, serta dapat memberikan wawasan yang dapat membantu ANTAM dalam merumuskan strategi yang lebih baik untuk meningkatkan nilai saham dan mencapai tujuan pertumbuhannya.
+Proyek ini bertujuan untuk mengembangkan model prediksi harga cryptocurrency Solana (SOL) menggunakan data historis. Analisis ini diharapkan dapat:
+
+- Membantu investor dalam membuat keputusan investasi yang lebih terinformasi.
+- Memberikan wawasan terkait potenonnsi pergerakan harga Solana untuk memaksimalkan keuntungan dan mengelola risiko dengan lebih baik.
 
 ### Rumusan Masalah
-•	Bagaimana cara untuk mengembangkan sebuah model prediksi harga saham PT Aneka Tambang Tbk (ANTAM) yang akurat dengan menggunakan data historis?
-
-•	Bagaimana hasil prediksi harga saham dapat dimanfaatkan untuk mendukung keputusan investasi yang lebih baik dan membantu ANTAM  merancang strategi agar meningkatkan nilai saham dan pertumbuhan perusahaan?
+- Bagaimana mengembangkan model prediksi harga Solana (SOL) yang akurat dengan memanfaatkan data historis?
+- Bagaimana hasil prediksi harga Solana dapat digunakan untuk mendukung keputusan investasi yang lebih baik di pasar cryptocurrency?
 
 ## METODOLOGI
 ### Data Understanding
 #### a.	Sumber Data
-Data yang dipakai pada proyek ini didapat dari website https://finance.yahoo.com/quote/ANTM.JK/history/, yaitu sebuah platform online yang menyediakan data keuangan dan pasar saham secara real-time. Di website tersebut kita bisa menemukan informasi atau data historis harga saham dari PT Aneka Tambang Tbk (ANTM) di Bursa Efek Jakarta. Di dalam proyek ini, digunakan data histori dari tanggal 09-09-2015 sampai 10-09-2024 dalam bentuk dokumen csv. 
+Data yang digunakan pada proyek ini diperoleh dari website https://finance.yahoo.com/quote/SOL-USD/history/, yaitu sebuah platform online yang menyediakan data keuangan dan pasar aset secara real-time. Di website tersebut, tersedia informasi atau data historis harga cryptocurrency Solana (SOL) dalam berbagai rentang waktu.
+
+Pada proyek ini, data historis yang digunakan mencakup periode dari tanggal 10-04-2020 hingga 05-12-2024, yang diunduh dalam format dokumen CSV
 <!-- Dalam pengambilan data dari Yahoo Finance, kita bisa menggunakan google colab untuk mendownload data yang kita butuhkan. Berikut adalah code yang bisa digunakan : -->
 
 <!-- ```python
@@ -52,26 +54,42 @@ data.to_csv('data_saham_antam4.csv')
 
 Untuk tampilan datanya bisa dilihat di bawah ini:
 ```{code-cell}
-import pandas as pd
 import numpy as np
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.linear_model import LinearRegression
+from sklearn.tree import DecisionTreeRegressor
+from sklearn.preprocessing import PolynomialFeatures, MinMaxScaler
+from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_percentage_error
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 # Membaca data
-df = pd.read_csv('https://raw.githubusercontent.com/DeviDuwiSusanti/dataset/main/data_saham_antam4.csv')
-pd.options.display.float_format = '{:.0f}'.format
-df.head()
+df = pd.read_csv('https://raw.githubusercontent.com/DeviDuwiSusanti/dataset/refs/heads/main/solana.csv')
+
+# mengubah kolom 'Date' dalam format datetime
+df['Date'] = pd.to_datetime(df['Date'])
+
+# Mengatur kolom 'Date' sebagai indeks
+df.set_index('Date', inplace=True)
+
+# Mensortir data berdasarkan kolom Date dari terkecil ke terbesar
+df = df.sort_values(by='Date')
+df
 ```
 
 #### b.	Deskripsi Data Set
 Data set ini terdiri dari 8 fitur atau kolom, dan 2230 record atau baris.
 Atribut-atribut data set :
-- Date		: tanggal data harga saham, biasanya memiliki format YYYY-MM-DD.
-- Open		: harga pembukaan saham pada tanggal tersebut.
+- Date		: tanggal data harga aset koin, biasanya memiliki format YYYY-MM-DD.
+- Open		: harga pembukaan aset koin pada tanggal tersebut.
 - High		: harga tertinggi yang dicapai pada tanggal tersebut.
-- Low		: harga terendah saham pada tanggal tersebut.
-- Close		: harga penutupan saham pada tanggal tersebut.
-- Adj Close	: harga penutupan yang sudah disesuaikan dengan pembagian saham,     
-  		       dividen, dan corporate actions lainnya.
-- Volume	: jumlah saham yang diperdagangkan pada tanggal tersebut.
+- Low		: harga terendah aset koin pada tanggal tersebut.
+- Close		: harga penutupan aset koin pada tanggal tersebut.
+- Adj Close	: harga penutupan yang sudah disesuaikan dengan pembagian aset koin,     
+  		       dividen, dan coerporate actions lainnya.
+- Volume	: jumlah aset koin yang diperdagangkan pada tanggal tersebut.
 
 ```{code-cell}
 df.info()
@@ -91,17 +109,8 @@ df.isnull().sum()
 duplicates = df[df.duplicated()]
 print(duplicates)
 ``` -->
-###### Mengubah kolom Date menjadi Index
-Hal ini agar memudahkan akses dan analisis data berdasarkan waktu.
-```{code-cell}
-df['Date'] = pd.to_datetime(df['Date'])
-df.set_index('Date', inplace=True)
-df.head()
-```
+
 ###### Menampilkan Trend Setiap Fitur
-```{code-cell}
-!pip install seaborn
-```
 ```{code-cell}
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -114,7 +123,6 @@ for col in df:
     plt.grid(True)
     plt.xticks(rotation=45) 
     plt.show()
-
 ```
 ###### Mencari Outlier
 ```{code-cell}
@@ -125,8 +133,10 @@ for col in df.columns:
     plt.grid(True)
     plt.show()
 ```
-Dari boxplot di atas terlihat bahwa fitur 'Volume' memiliki cukup banyak outlier. Sehingga diperlukan adanya penananganan outliernya
+Dari boxplot di atas terlihat bahwa fitur 'Volume' memiliki cukup banyak outlier.
 
+###### Menangani Outliers
+Pada tahap ini akan dilakukan penaganan outlier terhadap fitur 'volume'
 ```{code-cell}
 # Menghitung Z-score untuk kolom Volume
 mean_volume = df['Volume'].mean()  # Rata-rata kolom Volume
@@ -149,15 +159,7 @@ print(f'Jumlah data setelah outlier dihapus: {df_cleaned.shape[0]}')
 
 df = df_cleaned
 ```
-###### Rekayasa Fitur
-Karena dalam penelitian ini kita akan memprediksi harga Low pada hari berikutnya, maka perlu variabel baru untuk target. Dimana fitur ini dapat membantu kita untuk mengetahui seberapa rendah harga saham bisa turun. Para investor juga bisa menggunakan prediksi ini untuk membeli saham saat harganya rendah, dan meningkatkan peluang mendapatkan keuntungan saat harga saham naik lagi.
-```{code-cell}
-df['Low Target'] = df['Low'].shift(-1)
-
-df = df[:-1]
-df.head()
-```
-###### Menghitung Korelasi Antar Fitur
+###### Korelasi Antar Fitur
 ```{code-cell}
 correlation_matrix = df.corr()
 
@@ -167,53 +169,117 @@ plt.title('Heatmap Korelasi Antar Fitur')
 plt.show()
 ```
 Dari heatmap di atas, bisa dilihat bahwa:
-Fitur pembukaan (Open), tertinggi (High), penutupan (Close), dan harga pennutupan yang disesuaikan (Adj Close) mempunyai korelasi yang kuat antara satu sama lain (mendekati 1 atau 1). Hal ini menunjukkan fitur-fitur tersebut saling berkaitan dan bergerak sejalan. Sedangkan fitur 'Volume' mempunyai korelasi rendah dengan fitur lainnya (sekitar 0.15 - 0.17) yang menunjukkan bahwa perubahan volume tidak berpengaruh langsung dengan perubahan harga. Sehingga fitur volume tidak perlu digunakan untuk analisis prediksi pada projek ini.
+Fitur pembukaan (Open), tertinggi (High), penutupan (Close), dan harga pennutupan yang disesuaikan (Adj Close) mempunyai korelasi yang kuat antara satu sama lain (mendekati 1 atau 1). Hal ini menunjukkan fitur-fitur tersebut saling berkaitan dan bergerak sejalan. Sedangkan fitur 'Volume' mempunyai korelasi paling rendah dengan fitur lainnya (sekitar 0.78 - 0.8) yang menunjukkan bahwa perubahan volume tidak berpengaruh langsung dengan perubahan harga. Sehingga fitur volume tidak perlu digunakan untuk analisis prediksi pada projek ini.
 
+### Data Preprocessing
+Langkah-langkah pada tahap ini adalah sebagai berikut :
+
+#### a. Menghapus Fitur yang tidak relevan
+Pada tahap proses menghitung matriks korelasi, didapat bahwa fitur 'volume' tidak relevan atau tidak memiliki pengarus terhadap fitur lainnya, maka fitur 'volume' akan dihapus. Serta fitur 'Adj Close' dimana nilai dari fitur ini sama dengan fitur 'Close'.
 ```{code-cell}
-df = df.drop(columns=['Volume'])
+df = df.drop(columns=['Volume', 'Adj Close'])
 df.head()
 ```
-Dari dataset yang sudah melalui beberapa proses agar siap digunakan, terlihat bahwa fitur input terdiri dari fitur Open, High, Low, Close, Adj Close di hari ini, dan fitur Target Low atau prediksi harga Low besok hari sebagai fitur output.
-<!-- ###### Seleksi Fitur
-Fitur yang ingin diprediksi adalah fitur Low dimana ini dapat membantu kita untuk mengetahui seberapa rendah harga saham bisa turun. Para investor juga bisa menggunakan prediksi ini untuk membeli saham saat harganya rendah, dan meningkatkan peluang mendapatkan keuntungan saat harga saham naik lagi.
+
+#### b. Rekayasa Fitur
+Karena dalam penelitian ini kita akan memprediksi harga Close pada hari berikutnya, maka perlu variabel baru untuk target. Dimana fitur ini dapat membantu kita untuk mengetahui seberapa rendah harga saham bisa turun. Para investor juga bisa menggunakan prediksi ini untuk membeli aset saat harganya rendah, dan meningkatkan peluang mendapatkan keuntungan saat harga saham naik lagi.
 ```{code-cell}
-# SELEKSI FITUR
-df = df.drop(['Open', 'High', 'Adj Close', 'Close', 'Volume'], axis=1)
+df['Close Target'] = df['Close'].shift(-1)
 
-df
-``` -->
-### Data Preprocessing
-<!-- Langkah-langkah pada tahap ini adalah sebagai berikut :
-##### a.	Mengecek missing value -->
-
-<!-- ```{code-cell}
-df.isnull().sum()
+df = df[:-1]
+df.head()
 ```
-Tujuan : memeriksa apakah ada nilai yang hilang (missing values) dalam dataset.
-Fungsi : menampilkan jumlah nilai yang hilang untuk setiap kolom, sehingga jika memang terdapat missing values, kita dapat tangani dengan mengisinya atau menghapus baris-baris yang memiliki missing values. -->
+Dari dataset yang sudah melalui beberapa proses agar siap digunakan, terlihat bahwa fitur input terdiri dari fitur Open, High, Low, Close, Adj Close di hari ini, dan fitur Close Target atau prediksi harga Low besok hari sebagai fitur output.
 
-<!-- ##### b.	Pemisahan fitur dan target -->
-<!-- Tujuan : memisahkan dataset menjadi fitur (X) dan target (y).
-Fungsi : fitur (X) merupakan data yang akan digunakan untuk membuat predikski, sedangkan target (y) adalah nilai yang ingin diprediksi.  -->
 
-<!-- #####  c.	 Normalisasi data -->
-<!-- ```{code-cell}
+#### c. Pembagian Data
+```{code-cell}
+# Memisahkan fitur dan target
+X = df[['Open', 'High', 'Low', 'Close']]  # Fitur
+y = df['Close Target']  # Target
+
+# Membagi data menjadi training dan testing
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, shuffle=False)
+```
+
+#### Normalisasi Data
+```{code-cell}
+# Melakukan scaling pada fitur
 scaler = MinMaxScaler()
-X_scaled = scaler.fit_transform(X)
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+
+# Melakukan scaling pada target (y)
+scaler_target = MinMaxScaler()
+y_train_scaled = scaler_target.fit_transform(y_train.values.reshape(-1, 1))
+y_test_scaled = scaler_target.transform(y_test.values.reshape(-1, 1))
 ```
-Tujuan : menormalkan data fitur ke dalam rentang [0,1].
-Fungsi : menggunakan MinMaxScaler untuk memastikan bahwa semua fitur berada dalam rentang yang sama supaya skla data konsisten, agar algoritma berfungsi dengan baik. -->
 
 ### Modelling
-Menjelaskan proses pembuatan model berdasarkan data yang sudah kita proses
-##### a.	Pembagian Data
-Data dibagi menjadi dua, yaitu data pelatihan untuk melatih model dan data pengujian untuk mengecek seberapa baik model bekerja.
+```{code-cell}
+# Membuat model
+models = {
+    "Linear Regression": LinearRegression(),
+    "Polynomial Regression": PolynomialFeatures(degree=3),  # Degree polinomial bisa disesuaikan
+    "Decision Tree Regression": DecisionTreeRegressor(random_state=32)
+}
 
-##### b.	Pembangunan Model
-Pemilihan algoritma seperti SVM, Naïve Bayes, atau yang lainnya dan melatih model menggunakan data pelatihan untuk mengenali pola dalam data.
+# Dictionary untuk menyimpan hasil evaluasi
+results = {}
 
-##### c.	Pengujian Model
-Model diuji dengan data pengujian untuk melihat seberapa akurat prediksi yang dihasilkan.
+# Iterasi setiap model
+for name, model in models.items():
+    if name == "Polynomial Regression":
+        # Membuat transformasi polinomial
+        poly = PolynomialFeatures(degree=3)
+        X_train_poly = poly.fit_transform(X_train_scaled)  # Transformasi data pelatihan
+        X_test_poly = poly.transform(X_test_scaled)  # Transformasi data uji
+        
+        # Gunakan Linear Regression di atas data polinomial
+        model = LinearRegression()
+        model.fit(X_train_poly, y_train_scaled)  # Latih model polinomial
+        
+        # Prediksi pada data uji
+        y_pred_scaled = model.predict(X_test_poly)
+    else:
+        # Untuk Linear Regression dan Decision Tree Regression
+        model.fit(X_train_scaled, y_train_scaled)  # Latih model biasa
+        
+        # Prediksi pada data uji
+        y_pred_scaled = model.predict(X_test_scaled)
+
+    # Kembalikan hasil prediksi ke skala asli
+    y_pred_original = scaler_target.inverse_transform(y_pred_scaled.reshape(-1, 1))
+    y_test_original = scaler_target.inverse_transform(y_test_scaled.reshape(-1, 1))
+    
+    # Evaluasi
+    mse = mean_squared_error(y_test_original, y_pred_original)
+    rmse = np.sqrt(mse)
+    mape = mean_absolute_percentage_error(y_test_original, y_pred_original) * 100  # Dalam persen
+    
+    # Simpan hasil evaluasi
+    results[name] = {"RMSE": rmse, "MAPE": mape}
+    
+    # Plot hasil prediksi
+    plt.figure(figsize=(15, 6))
+    plt.plot(y_test.index, y_test_original, label="Actual", color="blue")
+    plt.plot(y_test.index, y_pred_original, label=f"Predicted ({name})", color="red")
+    
+    # Tambahkan detail plot
+    plt.title(f'Actual vs Predicted Values ({name})')
+    plt.xlabel('Tanggal')
+    plt.ylabel('Kurs')
+    plt.legend()
+    plt.grid(True)
+    
+    # Tampilkan plot
+    plt.show()
+
+# Tampilkan hasil evaluasi
+print("HASIL EVALUASI MODEL")
+for model, metrics in results.items():
+    print(f"{model}:\n  RMSE: {metrics['RMSE']:.2f}\n  MAPE: {metrics['MAPE']:.2f}%\n")
+```
 
 ### Evaluation
 Di sini adalah tempat kita untuk mengukur kinerja model menggunakan metrik yang relevan seperi akurasi contohnya. Hal ini menentukan apakah model yang kita capai sudah memadai untuk digunakan dalam aplikasi nyata atau tidak.

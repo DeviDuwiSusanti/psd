@@ -46,6 +46,8 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.linear_model import LinearRegression
+from sklearn.svm import SVR
+from sklearn.neighbors import KNeighborsRegressor
 from sklearn.ensemble import BaggingRegressor
 from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_percentage_error
 import seaborn as sns
@@ -71,6 +73,26 @@ Atribut-atribut data set :
 - Date		: tanggal data harga kurs berlaku, biasanya memiliki format YYYY-MM-DD.
 - Kurs		: harga kurs pada tanggal tersebut.
 
+
+
+####  c. Eksplorasi Data
+###### Mencari Missing Value
+```{code-cell}
+df.isnull().sum()
+```
+Selanjutnya, dikarenakan dihari libur seperti sabtu dan minggu, data tidak tersedia, maka perlu diberlakukannya interpolasi, berikut ini adalah codenya:
+```{code-cell}
+# Melengkapi tanggal yang terlewat dengan frekuensi harian
+df = df.asfreq('D')
+
+# Mengisi nilai yang hilang menggunakan interpolasi linear
+df.interpolate(method='linear', inplace=True)
+
+# metode linear :
+# Menampilkan data setelah interpolasi
+df
+df.plot()
+```
 ```{code-cell}
 df.info()
 print('Ukuran data ', df.shape)
@@ -79,142 +101,115 @@ print('Ukuran data ', df.shape)
 df.describe()
 ```
 
-####  c. Eksplorasi Data
-###### Mencari Missing Value
-```{code-cell}
-df.isnull().sum()
-```
-<!-- ###### Mencari Data yang Duplikat
-```{code-cell}
-duplicates = df[df.duplicated()]
-print(duplicates)
-``` -->
-###### Mengubah kolom Date menjadi Index
-Hal ini agar memudahkan akses dan analisis data berdasarkan waktu.
-```{code-cell}
-df['Date'] = pd.to_datetime(df['Date'])
-df.set_index('Date', inplace=True)
-df.head()
-```
-###### Menampilkan Trend Setiap Fitur
-```{code-cell}
-!pip install seaborn
-```
-```{code-cell}
-import matplotlib.pyplot as plt
-import seaborn as sns
-for col in df:
-    plt.figure(figsize=(7, 3))
-    sns.lineplot(data=df, x='Date', y=col)
-    plt.title(f'Trend of {col}')
-    plt.xlabel('Date')
-    plt.ylabel(col)
-    plt.grid(True)
-    plt.xticks(rotation=45) 
-    plt.show()
-
-```
-###### Mencari Outlier
-```{code-cell}
-for col in df.columns:
-    plt.subplots(figsize=(6, 2))
-    sns.boxplot(data=df, x=col)
-    plt.title(f'Boxplot of {col}')
-    plt.grid(True)
-    plt.show()
-```
-Dari boxplot di atas terlihat bahwa fitur 'Volume' memiliki cukup banyak outlier. Sehingga diperlukan adanya penananganan outliernya
-
-```{code-cell}
-# Menghitung Z-score untuk kolom Volume
-mean_volume = df['Volume'].mean()  # Rata-rata kolom Volume
-std_volume = df['Volume'].std()    # Standar deviasi kolom Volume
-df['Z_score'] = (df['Volume'] - mean_volume) / std_volume  # Menghitung Z-score
-
-# Menampilkan outlier (Z-score di luar rentang -3 hingga 3)
-outliers = df[(df['Z_score'] < -3) | (df['Z_score'] > 3)]
-print(f'Jumlah outlier: {outliers.shape[0]}')
-print(outliers[['Volume', 'Z_score']])  # Menampilkan kolom yang relevan
-
-# Menghapus outlier dari dataset
-df_cleaned = df[(df['Z_score'] >= -3) & (df['Z_score'] <= 3)].copy()  # Buat salinan DataFrame bersih
-
-# Menghapus kolom Z_score setelah pembersihan
-df_cleaned.drop(columns=['Z_score'], inplace=True)  # Hapus kolom Z_score
-
-# Menampilkan jumlah data setelah menghapus outlier
-print(f'Jumlah data setelah outlier dihapus: {df_cleaned.shape[0]}')
-
-df = df_cleaned
-```
-###### Rekayasa Fitur
-Karena dalam penelitian ini kita akan memprediksi harga Low pada hari berikutnya, maka perlu variabel baru untuk target. Dimana fitur ini dapat membantu kita untuk mengetahui seberapa rendah harga saham bisa turun. Para investor juga bisa menggunakan prediksi ini untuk membeli saham saat harganya rendah, dan meningkatkan peluang mendapatkan keuntungan saat harga saham naik lagi.
-```{code-cell}
-df['Low Target'] = df['Low'].shift(-1)
-
-df = df[:-1]
-df.head()
-```
-###### Menghitung Korelasi Antar Fitur
-```{code-cell}
-correlation_matrix = df.corr()
-
-plt.figure(figsize=(7, 3))
-sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', linewidths=0.5)
-plt.title('Heatmap Korelasi Antar Fitur')
-plt.show()
-```
-Dari heatmap di atas, bisa dilihat bahwa:
-Fitur pembukaan (Open), tertinggi (High), penutupan (Close), dan harga pennutupan yang disesuaikan (Adj Close) mempunyai korelasi yang kuat antara satu sama lain (mendekati 1 atau 1). Hal ini menunjukkan fitur-fitur tersebut saling berkaitan dan bergerak sejalan. Sedangkan fitur 'Volume' mempunyai korelasi rendah dengan fitur lainnya (sekitar 0.15 - 0.17) yang menunjukkan bahwa perubahan volume tidak berpengaruh langsung dengan perubahan harga. Sehingga fitur volume tidak perlu digunakan untuk analisis prediksi pada projek ini.
-
-```{code-cell}
-df = df.drop(columns=['Volume'])
-df.head()
-```
-Dari dataset yang sudah melalui beberapa proses agar siap digunakan, terlihat bahwa fitur input terdiri dari fitur Open, High, Low, Close, Adj Close di hari ini, dan fitur Target Low atau prediksi harga Low besok hari sebagai fitur output.
-<!-- ###### Seleksi Fitur
-Fitur yang ingin diprediksi adalah fitur Low dimana ini dapat membantu kita untuk mengetahui seberapa rendah harga saham bisa turun. Para investor juga bisa menggunakan prediksi ini untuk membeli saham saat harganya rendah, dan meningkatkan peluang mendapatkan keuntungan saat harga saham naik lagi.
-```{code-cell}
-# SELEKSI FITUR
-df = df.drop(['Open', 'High', 'Adj Close', 'Close', 'Volume'], axis=1)
-
-df
-``` -->
 ### Data Preprocessing
-<!-- Langkah-langkah pada tahap ini adalah sebagai berikut :
-##### a.	Mengecek missing value -->
+#### Sliding Window
+```{code-cell}
+def s_windows(jumlah):
+    for i in range(1, jumlah):
+        df[f'Kurs-{i}'] = df['Kurs'].shift(i)
+    df.dropna(inplace=True)
+    return df
 
-<!-- ```{code-cell}
-df.isnull().sum()
+df = s_windows(4)
+df
 ```
-Tujuan : memeriksa apakah ada nilai yang hilang (missing values) dalam dataset.
-Fungsi : menampilkan jumlah nilai yang hilang untuk setiap kolom, sehingga jika memang terdapat missing values, kita dapat tangani dengan mengisinya atau menghapus baris-baris yang memiliki missing values. -->
 
-<!-- ##### b.	Pemisahan fitur dan target -->
-<!-- Tujuan : memisahkan dataset menjadi fitur (X) dan target (y).
-Fungsi : fitur (X) merupakan data yang akan digunakan untuk membuat predikski, sedangkan target (y) adalah nilai yang ingin diprediksi.  -->
+### Normalisasi Data
+```{code-cell}
+# Inisialisasi scaler untuk fitur (input) dan target (output)
+scaler_features = MinMaxScaler()
+scaler_target = MinMaxScaler()
 
-<!-- #####  c.	 Normalisasi data -->
-<!-- ```{code-cell}
-scaler = MinMaxScaler()
-X_scaled = scaler.fit_transform(X)
+# Normalisasi fitur (Kurs-1, Kurs-2, Kurs-3, Kurs-4, Kurs-5)
+df_features_normalized = pd.DataFrame(scaler_features.fit_transform(df[['Kurs-1', 'Kurs-2', 'Kurs-3']]),
+                                      columns=['Kurs-1', 'Kurs-2', 'Kurs-3'],
+                                      index=df.index)
+
+# Normalisasi target (Kurs)
+df_target_normalized = pd.DataFrame(scaler_target.fit_transform(df[['Kurs']]),
+                                    columns=['Kurs'],
+                                    index=df.index)
+
+# Gabungkan kembali dataframe yang sudah dinormalisasi
+df_normalized = pd.concat([df_target_normalized, df_features_normalized], axis=1)
+df_normalized.head()
 ```
-Tujuan : menormalkan data fitur ke dalam rentang [0,1].
-Fungsi : menggunakan MinMaxScaler untuk memastikan bahwa semua fitur berada dalam rentang yang sama supaya skla data konsisten, agar algoritma berfungsi dengan baik. -->
 
 ### Modelling
 Menjelaskan proses pembuatan model berdasarkan data yang sudah kita proses
 ##### a.	Pembagian Data
 Data dibagi menjadi dua, yaitu data pelatihan untuk melatih model dan data pengujian untuk mengecek seberapa baik model bekerja.
+```{code-cell}
+# Mengatur fitur (X) dan target (y)
+X = df_normalized[['Kurs-1', 'Kurs-2', 'Kurs-3']]
+y = df_normalized['Kurs']
+
+# Membagi data menjadi training dan testing (60% training, 40% testing)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, shuffle=False)
+```
 
 ##### b.	Pembangunan Model
-Pemilihan algoritma seperti SVM, Naïve Bayes, atau yang lainnya dan melatih model menggunakan data pelatihan untuk mengenali pola dalam data.
+Di sini dilakukan percobaan dnegan 3 model ditambah dengan ensamble bagging, yaitu Regresi Linear, SVR, dan KNN
+```{code-cell}
+# List model untuk ensemble Bagging
+models = {
+    "Linear Regression": LinearRegression(),
+    "SVR": SVR(),
+    "KNN": KNeighborsRegressor(n_neighbors=5)
+}
 
-##### c.	Pengujian Model
-Model diuji dengan data pengujian untuk melihat seberapa akurat prediksi yang dihasilkan.
+# Dictionary untuk menyimpan hasil evaluasi
+results = {}
 
-### Evaluation
-Di sini adalah tempat kita untuk mengukur kinerja model menggunakan metrik yang relevan seperi akurasi contohnya. Hal ini menentukan apakah model yang kita capai sudah memadai untuk digunakan dalam aplikasi nyata atau tidak.
+# Iterasi setiap model
+for i, (name, base_model) in enumerate(models.items()):
+    # Inisialisasi Bagging Regressor
+    bagging_model = BaggingRegressor(
+        estimator=base_model, 
+        n_estimators=10, 
+        max_samples=0.7, 
+        random_state=32, 
+        bootstrap=True
+    )
+    
+    # Latih model
+    bagging_model.fit(X_train, y_train)
+    
+    # Prediksi pada data uji
+    y_pred = bagging_model.predict(X_test)
+    
+    # Evaluasi
+    mse = mean_squared_error(y_test, y_pred)
+    rmse = np.sqrt(mse)
+    mape = mean_absolute_percentage_error(y_test, y_pred) * 100  # Dalam persen
+    
+    # Simpan hasil evaluasi
+    results[name] = {"RMSE": rmse, "MAPE": mape}
+    
+    # Kembalikan hasil prediksi ke skala asli
+    y_pred_original = scaler_target.inverse_transform(y_pred.reshape(-1, 1))
+    y_test_original = scaler_target.inverse_transform(y_test.values.reshape(-1, 1))
+    
+    # Plot hasil prediksi
+    plt.figure(figsize=(15, 6))
+    plt.plot(y_test.index, y_test_original, label="Actual", color="blue")
+    plt.plot(y_test.index, y_pred_original, label=f"Predicted ({name})", color="red")
+    
+    # Tambahkan detail plot
+    plt.title(f'Actual vs Predicted Values ({name})')
+    plt.xlabel('Tanggal')
+    plt.ylabel('Kurs')
+    plt.legend()
+    plt.grid(True)
+    
+    # Tampilkan plot
+    plt.show()
+
+# Tampilkan hasil evaluasi
+print("HASIL EVALUASI MODEL")
+for model, metrics in results.items():
+    print(f"{model}:\n  RMSE: {metrics['RMSE']:.2f}\n  MAPE: {metrics['MAPE']:.2f}%\n")
+```
 
 ## Kesimpulan
 

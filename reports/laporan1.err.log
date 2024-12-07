@@ -18,38 +18,22 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-# Inisialisasi scaler untuk fitur (input) dan target (output)
-scaler_features = MinMaxScaler()
-scaler_target = MinMaxScaler()
+# Memisahkan fitur dan target
+X = df[['Open', 'High', 'Low', 'Close', 'Volume']]  # Fitur
+y = df['Close Target']  # Target
 
-# Normalisasi fitur (Kurs-1, Kurs-2, Kurs-3, Kurs-4, Kurs-5)
-df_features_normalized = pd.DataFrame(scaler_features.fit_transform(df[['Kurs-1', 'Kurs-2', 'Kurs-3']]),
-                                      columns=['Kurs-1', 'Kurs-2', 'Kurs-3'],
-                                      index=df.index)
-
-# Normalisasi target (Kurs)
-df_target_normalized = pd.DataFrame(scaler_target.fit_transform(df[['Kurs']]),
-                                    columns=['Kurs'],
-                                    index=df.index)
-
-# Gabungkan kembali dataframe yang sudah dinormalisasi
-df_normalized = pd.concat([df_target_normalized, df_features_normalized], axis=1)
-df_normalized.head()
+# Membagi data menjadi training dan testing
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, shuffle=False)
 ------------------
 
 
 [1;31m---------------------------------------------------------------------------[0m
 [1;31mKeyError[0m                                  Traceback (most recent call last)
-Cell [1;32mIn[7], line 6[0m
-[0;32m      3[0m scaler_target [38;5;241m=[39m MinMaxScaler()
-[0;32m      5[0m [38;5;66;03m# Normalisasi fitur (Kurs-1, Kurs-2, Kurs-3, Kurs-4, Kurs-5)[39;00m
-[1;32m----> 6[0m df_features_normalized [38;5;241m=[39m pd[38;5;241m.[39mDataFrame(scaler_features[38;5;241m.[39mfit_transform([43mdf[49m[43m[[49m[43m[[49m[38;5;124;43m'[39;49m[38;5;124;43mKurs-1[39;49m[38;5;124;43m'[39;49m[43m,[49m[43m [49m[38;5;124;43m'[39;49m[38;5;124;43mKurs-2[39;49m[38;5;124;43m'[39;49m[43m,[49m[43m [49m[38;5;124;43m'[39;49m[38;5;124;43mKurs-3[39;49m[38;5;124;43m'[39;49m[43m][49m[43m][49m),
-[0;32m      7[0m                                       columns[38;5;241m=[39m[[38;5;124m'[39m[38;5;124mKurs-1[39m[38;5;124m'[39m, [38;5;124m'[39m[38;5;124mKurs-2[39m[38;5;124m'[39m, [38;5;124m'[39m[38;5;124mKurs-3[39m[38;5;124m'[39m],
-[0;32m      8[0m                                       index[38;5;241m=[39mdf[38;5;241m.[39mindex)
-[0;32m     10[0m [38;5;66;03m# Normalisasi target (Kurs)[39;00m
-[0;32m     11[0m df_target_normalized [38;5;241m=[39m pd[38;5;241m.[39mDataFrame(scaler_target[38;5;241m.[39mfit_transform(df[[[38;5;124m'[39m[38;5;124mKurs[39m[38;5;124m'[39m]]),
-[0;32m     12[0m                                     columns[38;5;241m=[39m[[38;5;124m'[39m[38;5;124mKurs[39m[38;5;124m'[39m],
-[0;32m     13[0m                                     index[38;5;241m=[39mdf[38;5;241m.[39mindex)
+Cell [1;32mIn[11], line 2[0m
+[0;32m      1[0m [38;5;66;03m# Memisahkan fitur dan target[39;00m
+[1;32m----> 2[0m X [38;5;241m=[39m [43mdf[49m[43m[[49m[43m[[49m[38;5;124;43m'[39;49m[38;5;124;43mOpen[39;49m[38;5;124;43m'[39;49m[43m,[49m[43m [49m[38;5;124;43m'[39;49m[38;5;124;43mHigh[39;49m[38;5;124;43m'[39;49m[43m,[49m[43m [49m[38;5;124;43m'[39;49m[38;5;124;43mLow[39;49m[38;5;124;43m'[39;49m[43m,[49m[43m [49m[38;5;124;43m'[39;49m[38;5;124;43mClose[39;49m[38;5;124;43m'[39;49m[43m,[49m[43m [49m[38;5;124;43m'[39;49m[38;5;124;43mVolume[39;49m[38;5;124;43m'[39;49m[43m][49m[43m][49m  [38;5;66;03m# Fitur[39;00m
+[0;32m      3[0m y [38;5;241m=[39m df[[38;5;124m'[39m[38;5;124mClose Target[39m[38;5;124m'[39m]  [38;5;66;03m# Target[39;00m
+[0;32m      5[0m [38;5;66;03m# Membagi data menjadi training dan testing[39;00m
 
 File [1;32m~\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\frame.py:3899[0m, in [0;36mDataFrame.__getitem__[1;34m(self, key)[0m
 [0;32m   3897[0m     [38;5;28;01mif[39;00m is_iterator(key):
@@ -71,5 +55,5 @@ File [1;32m~\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\c
 [0;32m   6178[0m not_found [38;5;241m=[39m [38;5;28mlist[39m(ensure_index(key)[missing_mask[38;5;241m.[39mnonzero()[[38;5;241m0[39m]][38;5;241m.[39munique())
 [1;32m-> 6179[0m [38;5;28;01mraise[39;00m [38;5;167;01mKeyError[39;00m([38;5;124mf[39m[38;5;124m"[39m[38;5;132;01m{[39;00mnot_found[38;5;132;01m}[39;00m[38;5;124m not in index[39m[38;5;124m"[39m)
 
-[1;31mKeyError[0m: "['Kurs-3'] not in index"
+[1;31mKeyError[0m: "['Volume'] not in index"
 
