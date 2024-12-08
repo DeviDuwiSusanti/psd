@@ -63,7 +63,8 @@ from sklearn.tree import DecisionTreeRegressor
 from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_percentage_error
 import seaborn as sns
 import matplotlib.pyplot as plt
-
+```
+```{code-cell}
 # Membaca data
 df = pd.read_csv('https://raw.githubusercontent.com/DeviDuwiSusanti/dataset/refs/heads/main/solana.csv')
 
@@ -77,7 +78,6 @@ df.set_index('Date', inplace=True)
 df = df.sort_values(by='Date')
 df
 ```
-
 #### b.	Deskripsi Data Set
 Data set ini terdiri dari 8 fitur atau kolom, dan 2230 record atau baris.
 Atribut-atribut data set :
