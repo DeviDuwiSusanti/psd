@@ -58,9 +58,8 @@ import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler
-from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import LinearRegression, Ridge
 from sklearn.tree import DecisionTreeRegressor
-from sklearn.preprocessing import PolynomialFeatures, MinMaxScaler
 from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_percentage_error
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -228,69 +227,53 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.4, shuffle
 
 #### Membangun Model
 ```{code-cell}
-from sklearn.linear_model import LinearRegression
-from sklearn.svm import SVR
-from sklearn.neighbors import KNeighborsRegressor
-from sklearn.ensemble import BaggingRegressor
-from sklearn.metrics import mean_squared_error, mean_absolute_percentage_error
-import numpy as np
-import matplotlib.pyplot as plt
-
-# List model untuk ensemble Bagging
+# List model regresi
 models = {
     "Linear Regression": LinearRegression(),
-    "SVR": SVR(),
-    "KNN": KNeighborsRegressor(n_neighbors=5)
+    "Decision Tree": DecisionTreeRegressor(random_state=32),
+    "Ridge Regression": Ridge(alpha=1.0)
 }
 
 # Dictionary untuk menyimpan hasil evaluasi
 results = {}
 
 # Iterasi setiap model
-for i, (name, base_model) in enumerate(models.items()):
-    # Inisialisasi Bagging Regressor
-    bagging_model = BaggingRegressor(
-        estimator=base_model,
-        n_estimators=10,
-        max_samples=0.7,
-        random_state=32,
-        bootstrap=True
-    )
-
+for name, model in models.items():
     # Latih model
-    bagging_model.fit(X_train, y_train)
-
+    model.fit(X_train, y_train)
+    
     # Prediksi pada data uji
-    y_pred = bagging_model.predict(X_test)
-
+    y_pred = model.predict(X_test)
+    
     # Evaluasi
     mse = mean_squared_error(y_test, y_pred)
     rmse = np.sqrt(mse)
     mape = mean_absolute_percentage_error(y_test, y_pred) * 100  # Dalam persen
-
+    
     # Simpan hasil evaluasi
     results[name] = {"RMSE": rmse, "MAPE": mape}
-
+    
     # Kembalikan hasil prediksi ke skala asli
     y_pred_original = scaler_target.inverse_transform(y_pred.reshape(-1, 1))
     y_test_original = scaler_target.inverse_transform(y_test.values.reshape(-1, 1))
-
+    
     # Plot hasil prediksi
     plt.figure(figsize=(15, 6))
     plt.plot(y_test.index, y_test_original, label="Actual", color="blue")
     plt.plot(y_test.index, y_pred_original, label=f"Predicted ({name})", color="red")
-
+    
     # Tambahkan detail plot
     plt.title(f'Actual vs Predicted Values ({name})')
     plt.xlabel('Tanggal')
     plt.ylabel('Kurs')
     plt.legend()
     plt.grid(True)
-
+    
     # Tampilkan plot
     plt.show()
 
 # Tampilkan hasil evaluasi
+print("HASIL EVALUASI MODEL")
 for model, metrics in results.items():
     print(f"{model}:\n  RMSE: {metrics['RMSE']:.2f}\n  MAPE: {metrics['MAPE']:.2f}%\n")
 
