@@ -1,4 +1,17 @@
 Traceback (most recent call last):
+  File "C:\Users\Heviaa\AppData\Local\Programs\Python\Python312\Lib\site-packages\nbclient\client.py", line 782, in _async_poll_for_reply
+    msg = await ensure_async(self.kc.shell_channel.get_msg(timeout=new_timeout))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Heviaa\AppData\Local\Programs\Python\Python312\Lib\site-packages\jupyter_core\utils\__init__.py", line 198, in ensure_async
+    result = await obj
+             ^^^^^^^^^
+  File "C:\Users\Heviaa\AppData\Local\Programs\Python\Python312\Lib\site-packages\jupyter_client\channels.py", line 315, in get_msg
+    raise Empty
+_queue.Empty
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
   File "C:\Users\Heviaa\AppData\Local\Programs\Python\Python312\Lib\site-packages\jupyter_cache\executors\utils.py", line 58, in single_nb_execution
     executenb(
   File "C:\Users\Heviaa\AppData\Local\Programs\Python\Python312\Lib\site-packages\nbclient\client.py", line 1314, in execute
@@ -12,95 +25,20 @@ Traceback (most recent call last):
            ^^^^^^^^^^^^^^^
   File "C:\Users\Heviaa\AppData\Local\Programs\Python\Python312\Lib\site-packages\nbclient\client.py", line 709, in async_execute
     await self.async_execute_cell(
-  File "C:\Users\Heviaa\AppData\Local\Programs\Python\Python312\Lib\site-packages\nbclient\client.py", line 1062, in async_execute_cell
-    await self._check_raise_for_error(cell, cell_index, exec_reply)
-  File "C:\Users\Heviaa\AppData\Local\Programs\Python\Python312\Lib\site-packages\nbclient\client.py", line 918, in _check_raise_for_error
-    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
-nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
-------------------
-# Membuat model
-models = {
-    "Linear Regression": LinearRegression(),
-    "Polynomial Regression": PolynomialFeatures(degree=3),  # Degree polinomial bisa disesuaikan
-    "Decision Tree Regression": DecisionTreeRegressor(random_state=32)
-}
-
-# Dictionary untuk menyimpan hasil evaluasi
-results = {}
-
-# Iterasi setiap model
-for name, model in models.items():
-    if name == "Polynomial Regression":
-        # Membuat transformasi polinomial
-        poly = PolynomialFeatures(degree=3)
-        X_train_poly = poly.fit_transform(X_train)  # Transformasi data pelatihan
-        X_test_poly = poly.transform(X_test)  # Transformasi data uji
-        
-        # Gunakan Linear Regression di atas data polinomial
-        model = LinearRegression()
-        model.fit(X_train_poly, y_train)  # Latih model polinomial
-        
-        # Prediksi pada data uji
-        y_pred = model.predict(X_test_poly)
-    else:
-        # Untuk Linear Regression dan Decision Tree Regression
-        model.fit(X_train, y_train)  # Latih model biasa
-        
-        # Prediksi pada data uji
-        y_pred = model.predict(X_test)
-
-    # Kembalikan hasil prediksi ke skala asli
-    y_pred_original = scaler_target.inverse_transform(y_pred.reshape(-1, 1))
-    y_test_original = scaler_target.inverse_transform(y_test.reshape(-1, 1))
-    
-    # Evaluasi
-    mse = mean_squared_error(y_test_original, y_pred_original)
-    rmse = np.sqrt(mse)
-    mape = mean_absolute_percentage_error(y_test_original, y_pred_original) * 100  # Dalam persen
-    
-    # Simpan hasil evaluasi
-    results[name] = {"RMSE": rmse, "MAPE": mape}
-    
-    # Plot hasil prediksi
-    plt.figure(figsize=(15, 6))
-    plt.plot(y_test.index, y_test_original, label="Actual", color="blue")
-    plt.plot(y_test.index, y_pred_original, label=f"Predicted ({name})", color="red")
-    
-    # Tambahkan detail plot
-    plt.title(f'Actual vs Predicted Values ({name})')
-    plt.xlabel('Tanggal')
-    plt.ylabel('Kurs')
-    plt.legend()
-    plt.grid(True)
-    
-    # Tampilkan plot
-    plt.show()
-
-# Tampilkan hasil evaluasi
-print("HASIL EVALUASI MODEL")
-for model, metrics in results.items():
-    print(f"{model}:\n  RMSE: {metrics['RMSE']:.2f}\n  MAPE: {metrics['MAPE']:.2f}%\n")
-------------------
-
-
-[1;31m---------------------------------------------------------------------------[0m
-[1;31mAttributeError[0m                            Traceback (most recent call last)
-[1;32m~\AppData\Local\Temp\ipykernel_20216\262427269.py[0m in [0;36m?[1;34m()[0m
-[0;32m     30[0m         [0my_pred[0m [1;33m=[0m [0mmodel[0m[1;33m.[0m[0mpredict[0m[1;33m([0m[0mX_test[0m[1;33m)[0m[1;33m[0m[1;33m[0m[0m
-[0;32m     31[0m [1;33m[0m[0m
-[0;32m     32[0m     [1;31m# Kembalikan hasil prediksi ke skala asli[0m[1;33m[0m[1;33m[0m[0m
-[0;32m     33[0m     [0my_pred_original[0m [1;33m=[0m [0mscaler_target[0m[1;33m.[0m[0minverse_transform[0m[1;33m([0m[0my_pred[0m[1;33m.[0m[0mreshape[0m[1;33m([0m[1;33m-[0m[1;36m1[0m[1;33m,[0m [1;36m1[0m[1;33m)[0m[1;33m)[0m[1;33m[0m[1;33m[0m[0m
-[1;32m---> 34[1;33m     [0my_test_original[0m [1;33m=[0m [0mscaler_target[0m[1;33m.[0m[0minverse_transform[0m[1;33m([0m[0my_test[0m[1;33m.[0m[0mreshape[0m[1;33m([0m[1;33m-[0m[1;36m1[0m[1;33m,[0m [1;36m1[0m[1;33m)[0m[1;33m)[0m[1;33m[0m[1;33m[0m[0m
-[0m[0;32m     35[0m [1;33m[0m[0m
-[0;32m     36[0m     [1;31m# Evaluasi[0m[1;33m[0m[1;33m[0m[0m
-[0;32m     37[0m     [0mmse[0m [1;33m=[0m [0mmean_squared_error[0m[1;33m([0m[0my_test_original[0m[1;33m,[0m [0my_pred_original[0m[1;33m)[0m[1;33m[0m[1;33m[0m[0m
-
-[1;32m~\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\generic.py[0m in [0;36m?[1;34m(self, name)[0m
-[0;32m   6200[0m             [1;32mand[0m [0mname[0m [1;32mnot[0m [1;32min[0m [0mself[0m[1;33m.[0m[0m_accessors[0m[1;33m[0m[1;33m[0m[0m
-[0;32m   6201[0m             [1;32mand[0m [0mself[0m[1;33m.[0m[0m_info_axis[0m[1;33m.[0m[0m_can_hold_identifiers_and_holds_name[0m[1;33m([0m[0mname[0m[1;33m)[0m[1;33m[0m[1;33m[0m[0m
-[0;32m   6202[0m         [1;33m)[0m[1;33m:[0m[1;33m[0m[1;33m[0m[0m
-[0;32m   6203[0m             [1;32mreturn[0m [0mself[0m[1;33m[[0m[0mname[0m[1;33m][0m[1;33m[0m[1;33m[0m[0m
-[1;32m-> 6204[1;33m         [1;32mreturn[0m [0mobject[0m[1;33m.[0m[0m__getattribute__[0m[1;33m([0m[0mself[0m[1;33m,[0m [0mname[0m[1;33m)[0m[1;33m[0m[1;33m[0m[0m
-[0m
-[1;31mAttributeError[0m: 'Series' object has no attribute 'reshape'
+  File "C:\Users\Heviaa\AppData\Local\Programs\Python\Python312\Lib\site-packages\nbclient\client.py", line 1005, in async_execute_cell
+    exec_reply = await self.task_poll_for_reply
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Heviaa\AppData\Local\Programs\Python\Python312\Lib\site-packages\nbclient\client.py", line 806, in _async_poll_for_reply
+    error_on_timeout_execute_reply = await self._async_handle_timeout(timeout, cell)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Heviaa\AppData\Local\Programs\Python\Python312\Lib\site-packages\nbclient\client.py", line 856, in _async_handle_timeout
+    raise CellTimeoutError.error_from_timeout_and_cell(
+nbclient.exceptions.CellTimeoutError: A cell timed out while it was being executed, after 30 seconds.
+The message was: Cell execution timed out.
+Here is a preview of the cell contents:
+-------------------
+['import numpy as np', 'import pandas as pd', 'from sklearn.model_selection import train_test_split', 'from sklearn.preprocessing import MinMaxScaler', 'from sklearn.linear_model import LinearRegression, Ridge']
+...
+["df.set_index('Date', inplace=True)", '', '# Mensortir data berdasarkan kolom Date dari terkecil ke terbesar', "df = df.sort_values(by='Date')", 'df']
+-------------------
 

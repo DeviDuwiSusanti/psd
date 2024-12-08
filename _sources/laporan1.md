@@ -281,6 +281,9 @@ for model, metrics in results.items():
 ### Evaluation
 Dari hasil percobaan beberapa model, didapatkan model terbaik dengan metode Linear Regression dengan hasil RMSE sebesar 0,02 dan MAPE 3,41%.
 
+### Deployment
+Hasil deployment dapat diakses di link berikut ini : https://huggingface.co/spaces/heviaa/projek1_prediksiSolana
+
 ## Kesimpulan
 
 ## Referensi
