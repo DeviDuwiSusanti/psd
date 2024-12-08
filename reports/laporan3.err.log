@@ -1,0 +1,87 @@
+Traceback (most recent call last):
+  File "C:\Users\Heviaa\AppData\Local\Programs\Python\Python312\Lib\site-packages\jupyter_cache\executors\utils.py", line 58, in single_nb_execution
+    executenb(
+  File "C:\Users\Heviaa\AppData\Local\Programs\Python\Python312\Lib\site-packages\nbclient\client.py", line 1314, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Heviaa\AppData\Local\Programs\Python\Python312\Lib\site-packages\jupyter_core\utils\__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Heviaa\AppData\Local\Programs\Python\Python312\Lib\asyncio\base_events.py", line 684, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\Heviaa\AppData\Local\Programs\Python\Python312\Lib\site-packages\nbclient\client.py", line 709, in async_execute
+    await self.async_execute_cell(
+  File "C:\Users\Heviaa\AppData\Local\Programs\Python\Python312\Lib\site-packages\nbclient\client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "C:\Users\Heviaa\AppData\Local\Programs\Python\Python312\Lib\site-packages\nbclient\client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+# List model regresi
+models = {
+    "Linear Regression": LinearRegression(),
+    "Decision Tree": DecisionTreeRegressor(random_state=32),
+    "Ridge Regression": Ridge(alpha=1.0)
+}
+
+# Dictionary untuk menyimpan hasil evaluasi
+results = {}
+
+# Iterasi setiap model
+for name, model in models.items():
+    # Latih model
+    model.fit(X_train, y_train)
+    
+    # Prediksi pada data uji
+    y_pred = model.predict(X_test)
+    
+    # Evaluasi
+    mse = mean_squared_error(y_test, y_pred)
+    rmse = np.sqrt(mse)
+    mape = mean_absolute_percentage_error(y_test, y_pred) * 100  # Dalam persen
+    
+    # Simpan hasil evaluasi
+    results[name] = {"RMSE": rmse, "MAPE": mape}
+    
+    # Kembalikan hasil prediksi ke skala asli
+    y_pred_original = scaler_target.inverse_transform(y_pred.reshape(-1, 1))
+    y_test_original = scaler_target.inverse_transform(y_test.values.reshape(-1, 1))
+    
+    # Plot hasil prediksi
+    plt.figure(figsize=(15, 6))
+    plt.plot(y_test.index, y_test_original, label="Actual", color="blue")
+    plt.plot(y_test.index, y_pred_original, label=f"Predicted ({name})", color="red")
+    
+    # Tambahkan detail plot
+    plt.title(f'Actual vs Predicted Values ({name})')
+    plt.xlabel('Tanggal')
+    plt.ylabel('Kurs')
+    plt.legend()
+    plt.grid(True)
+    
+    # Tampilkan plot
+    plt.show()
+
+# Tampilkan hasil evaluasi
+print("HASIL EVALUASI MODEL")
+for model, metrics in results.items():
+    print(f"{model}:\n  RMSE: {metrics['RMSE']:.2f}\n  MAPE: {metrics['MAPE']:.2f}%\n")
+
+------------------
+
+
+[1;31m---------------------------------------------------------------------------[0m
+[1;31mNameError[0m                                 Traceback (most recent call last)
+Cell [1;32mIn[11], line 3[0m
+[0;32m      1[0m [38;5;66;03m# List model regresi[39;00m
+[0;32m      2[0m models [38;5;241m=[39m {
+[1;32m----> 3[0m     [38;5;124m"[39m[38;5;124mLinear Regression[39m[38;5;124m"[39m: [43mLinearRegression[49m(),
+[0;32m      4[0m     [38;5;124m"[39m[38;5;124mDecision Tree[39m[38;5;124m"[39m: DecisionTreeRegressor(random_state[38;5;241m=[39m[38;5;241m32[39m),
+[0;32m      5[0m     [38;5;124m"[39m[38;5;124mRidge Regression[39m[38;5;124m"[39m: Ridge(alpha[38;5;241m=[39m[38;5;241m1.0[39m)
+[0;32m      6[0m }
+[0;32m      8[0m [38;5;66;03m# Dictionary untuk menyimpan hasil evaluasi[39;00m
+[0;32m      9[0m results [38;5;241m=[39m {}
+
+[1;31mNameError[0m: name 'LinearRegression' is not defined
+

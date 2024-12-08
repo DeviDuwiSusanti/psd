@@ -12,8 +12,8 @@ kernelspec:
   name: python3
 ---
 
-# Laporan Proyek 1
-## Pengembangan Model Prediksi Harga Cryptocurrency Solana (SOL) Menggunakan Data Historis untuk Mendukung Keputusan Investasi
+# Laporan Proyek 3
+## Pengembangan Model Prediksi Harga Cryptocurrency Etherium (ETH) Menggunakan Data Historis untuk Mendukung Keputusan Investasi
 ## Pendahuluan
 
 ### Latar Belakang
@@ -38,19 +38,7 @@ Proyek ini bertujuan untuk mengembangkan model prediksi harga cryptocurrency Sol
 #### a.	Sumber Data
 Data yang digunakan pada proyek ini diperoleh dari website https://finance.yahoo.com/quote/SOL-USD/history/, yaitu sebuah platform online yang menyediakan data keuangan dan pasar aset secara real-time. Di website tersebut, tersedia informasi atau data historis harga cryptocurrency Solana (SOL) dalam berbagai rentang waktu.
 
-Pada proyek ini, data historis yang digunakan mencakup periode dari tanggal 10-04-2020 hingga 05-12-2024, yang diunduh dalam format dokumen CSV
-<!-- Dalam pengambilan data dari Yahoo Finance, kita bisa menggunakan google colab untuk mendownload data yang kita butuhkan. Berikut adalah code yang bisa digunakan : -->
-
-<!-- ```python
-import yfinance as yf
-import pandas as pd
-
-# Unduh data saham ANTAM dari Yahoo Finance
-data = yf.download("ANTM.JK", start="2015-09-09", end="2024-09-10")
-
-# Simpan data ke file CSV
-data.to_csv('data_saham_antam4.csv')
-``` -->
+Pada proyek ini, data historis yang digunakan mencakup periode dari tanggal 10-04-2020 hingga 05-12-2024, yang diunduh dalam format dokumen CSV.
 
 Untuk tampilan datanya bisa dilihat di bawah ini:
 ```{code-cell}
@@ -58,14 +46,15 @@ import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler
-from sklearn.linear_model import LinearRegression, Ridge
-from sklearn.tree import DecisionTreeRegressor
+from sklearn.linear_model import ElasticNet
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.neighbors import KNeighborsRegressor
 from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_percentage_error
 import seaborn as sns
 import matplotlib.pyplot as plt
 
 # Membaca data
-df = pd.read_csv('https://raw.githubusercontent.com/DeviDuwiSusanti/dataset/refs/heads/main/solana.csv')
+df = pd.read_csv('https://raw.githubusercontent.com/DeviDuwiSusanti/dataset/refs/heads/main/etherium.csv')
 
 # mengubah kolom 'Date' dalam format datetime
 df['Date'] = pd.to_datetime(df['Date'])
@@ -103,11 +92,6 @@ df[['Open', 'High', 'Low', 'Close', 'Adj Close', 'Volume']].describe()
 ```{code-cell}
 df.isnull().sum()
 ```
-<!-- ###### Mencari Data yang Duplikat
-```{code-cell}
-duplicates = df[df.duplicated()]
-print(duplicates)
-``` -->
 
 ###### Menampilkan Trend Setiap Fitur
 ```{code-cell}
@@ -123,41 +107,7 @@ for col in df:
     plt.xticks(rotation=45) 
     plt.show()
 ```
-<!-- ###### Mencari Outlier
-```{code-cell}
-for col in df.columns:
-    plt.subplots(figsize=(6, 2))
-    sns.boxplot(data=df, x=col)
-    plt.title(f'Boxplot of {col}')
-    plt.grid(True)
-    plt.show()
-```
-Dari boxplot di atas terlihat bahwa fitur 'Volume' memiliki cukup banyak outlier.
 
-###### Menangani Outliers
-Pada tahap ini akan dilakukan penaganan outlier terhadap fitur 'volume'
-```{code-cell}
-# Menghitung Z-score untuk kolom Volume
-mean_volume = df['Volume'].mean()  # Rata-rata kolom Volume
-std_volume = df['Volume'].std()    # Standar deviasi kolom Volume
-df['Z_score'] = (df['Volume'] - mean_volume) / std_volume  # Menghitung Z-score
-
-# Menampilkan outlier (Z-score di luar rentang -3 hingga 3)
-outliers = df[(df['Z_score'] < -3) | (df['Z_score'] > 3)]
-print(f'Jumlah outlier: {outliers.shape[0]}')
-print(outliers[['Volume', 'Z_score']])  # Menampilkan kolom yang relevan
-
-# Menghapus outlier dari dataset
-df_cleaned = df[(df['Z_score'] >= -3) & (df['Z_score'] <= 3)].copy()  # Buat salinan DataFrame bersih
-
-# Menghapus kolom Z_score setelah pembersihan
-df_cleaned.drop(columns=['Z_score'], inplace=True)  # Hapus kolom Z_score
-
-# Menampilkan jumlah data setelah menghapus outlier
-print(f'Jumlah data setelah outlier dihapus: {df_cleaned.shape[0]}')
-
-df = df_cleaned
-``` -->
 ###### Korelasi Antar Fitur
 ```{code-cell}
 correlation_matrix = df.corr()
@@ -229,9 +179,9 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.4, shuffle
 ```{code-cell}
 # List model regresi
 models = {
-    "Linear Regression": LinearRegression(),
-    "Decision Tree": DecisionTreeRegressor(random_state=32),
-    "Ridge Regression": Ridge(alpha=1.0)
+    "KNN Regressor": KNeighborsRegressor(n_neighbors=5),
+    "Random Forest": RandomForestRegressor(n_estimators=100, random_state=32),
+    "ElasticNet": ElasticNet(alpha=0.1, l1_ratio=0.5)
 }
 
 # Dictionary untuk menyimpan hasil evaluasi
@@ -276,10 +226,11 @@ for name, model in models.items():
 print("HASIL EVALUASI MODEL")
 for model, metrics in results.items():
     print(f"{model}:\n  RMSE: {metrics['RMSE']:.2f}\n  MAPE: {metrics['MAPE']:.2f}%\n")
+
 ```
 
 ### Evaluation
-Dari hasil percobaan beberapa model, didapatkan model terbaik dengan metode Linear Regression dengan hasil RMSE sebesar 0,02 dan MAPE 3,41%.
+Di sini adalah tempat kita untuk mengukur kinerja model menggunakan metrik yang relevan seperi akurasi contohnya. Hal ini menentukan apakah model yang kita capai sudah memadai untuk digunakan dalam aplikasi nyata atau tidak.
 
 ## Kesimpulan
 

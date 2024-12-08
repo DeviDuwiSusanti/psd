@@ -103,6 +103,7 @@ df.describe()
 
 ### Data Preprocessing
 #### Sliding Window
+Di sini dilakukan proses sliding windows dengan tujuan untuk menambah fitur dari nilai historis kurs(lag) ke dalam dataset.
 ```{code-cell}
 def s_windows(jumlah):
     for i in range(1, jumlah):
@@ -210,6 +211,11 @@ print("HASIL EVALUASI MODEL")
 for model, metrics in results.items():
     print(f"{model}:\n  RMSE: {metrics['RMSE']:.2f}\n  MAPE: {metrics['MAPE']:.2f}%\n")
 ```
+### Evaluation
+Dari hasil percobaan beberapa model, didapatkan model terbaik dengan metode Linear Regression dengan hasil RMSE sebesar 0,02 dan MAPE 1,50%.
+
+### Deployment
+Hasil deployment dapat diakses di link berikut ini : https://huggingface.co/spaces/heviaa/projek2_prediksiKurs
 
 ## Kesimpulan
 
