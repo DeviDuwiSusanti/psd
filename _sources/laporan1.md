@@ -124,7 +124,7 @@ for col in df:
     plt.xticks(rotation=45) 
     plt.show()
 ```
-###### Mencari Outlier
+<!-- ###### Mencari Outlier
 ```{code-cell}
 for col in df.columns:
     plt.subplots(figsize=(6, 2))
@@ -158,7 +158,7 @@ df_cleaned.drop(columns=['Z_score'], inplace=True)  # Hapus kolom Z_score
 print(f'Jumlah data setelah outlier dihapus: {df_cleaned.shape[0]}')
 
 df = df_cleaned
-```
+``` -->
 ###### Korelasi Antar Fitur
 ```{code-cell}
 correlation_matrix = df.corr()
@@ -192,93 +192,108 @@ df.head()
 Dari dataset yang sudah melalui beberapa proses agar siap digunakan, terlihat bahwa fitur input terdiri dari fitur Open, High, Low, Close, Adj Close di hari ini, dan fitur Close Target atau prediksi harga Low besok hari sebagai fitur output.
 
 
-#### c. Pembagian Data
+#### c. Normalisasi Data
 ```{code-cell}
-# Memisahkan fitur dan target
-X = df[['Open', 'High', 'Low', 'Close']]  # Fitur
-y = df['Close Target']  # Target
 
-# Membagi data menjadi training dan testing
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, shuffle=False)
-```
-
-#### Normalisasi Data
-```{code-cell}
-# Melakukan scaling pada fitur
-scaler = MinMaxScaler()
-X_train_scaled = scaler.fit_transform(X_train)
-X_test_scaled = scaler.transform(X_test)
-
-# Melakukan scaling pada target (y)
+# Inisialisasi scaler untuk fitur (input) dan target (output)
+scaler_features = MinMaxScaler()
 scaler_target = MinMaxScaler()
-y_train_scaled = scaler_target.fit_transform(y_train.values.reshape(-1, 1))
-y_test_scaled = scaler_target.transform(y_test.values.reshape(-1, 1))
+
+# Normalisasi fitur (Open, High, Low,, 'Close' Close Target-4, Close Target-5)
+df_features_normalized = pd.DataFrame(scaler_features.fit_transform(df[['Open', 'High', 'Low', 'Close']]),
+                                      columns=['Open', 'High', 'Low', 'Close'],
+                                      index=df.index)
+
+# Normalisasi target (Close Target)
+df_target_normalized = pd.DataFrame(scaler_target.fit_transform(df[['Close Target']]),
+                                    columns=['Close Target'],
+                                    index=df.index)
+
+# Gabungkan kembali dataframe yang sudah dinormalisasi
+df_normalized = pd.concat([df_target_normalized, df_features_normalized], axis=1)
+df_normalized.head()
 ```
 
 ### Modelling
+
+#### Pembagian Data
 ```{code-cell}
-# Membuat model
+# Mengatur fitur (X) dan target (y)
+X = df_normalized[['Open', 'High', 'Low', 'Close']]
+y = df_normalized['Close Target']
+
+# Membagi data menjadi training dan testing (60% training, 40% testing)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.4, shuffle=False)
+```
+
+#### Membangun Model
+```{code-cell}
+from sklearn.linear_model import LinearRegression
+from sklearn.svm import SVR
+from sklearn.neighbors import KNeighborsRegressor
+from sklearn.ensemble import BaggingRegressor
+from sklearn.metrics import mean_squared_error, mean_absolute_percentage_error
+import numpy as np
+import matplotlib.pyplot as plt
+
+# List model untuk ensemble Bagging
 models = {
     "Linear Regression": LinearRegression(),
-    "Polynomial Regression": PolynomialFeatures(degree=3),  # Degree polinomial bisa disesuaikan
-    "Decision Tree Regression": DecisionTreeRegressor(random_state=32)
+    "SVR": SVR(),
+    "KNN": KNeighborsRegressor(n_neighbors=5)
 }
 
 # Dictionary untuk menyimpan hasil evaluasi
 results = {}
 
 # Iterasi setiap model
-for name, model in models.items():
-    if name == "Polynomial Regression":
-        # Membuat transformasi polinomial
-        poly = PolynomialFeatures(degree=3)
-        X_train_poly = poly.fit_transform(X_train_scaled)  # Transformasi data pelatihan
-        X_test_poly = poly.transform(X_test_scaled)  # Transformasi data uji
-        
-        # Gunakan Linear Regression di atas data polinomial
-        model = LinearRegression()
-        model.fit(X_train_poly, y_train_scaled)  # Latih model polinomial
-        
-        # Prediksi pada data uji
-        y_pred_scaled = model.predict(X_test_poly)
-    else:
-        # Untuk Linear Regression dan Decision Tree Regression
-        model.fit(X_train_scaled, y_train_scaled)  # Latih model biasa
-        
-        # Prediksi pada data uji
-        y_pred_scaled = model.predict(X_test_scaled)
+for i, (name, base_model) in enumerate(models.items()):
+    # Inisialisasi Bagging Regressor
+    bagging_model = BaggingRegressor(
+        estimator=base_model,
+        n_estimators=10,
+        max_samples=0.7,
+        random_state=32,
+        bootstrap=True
+    )
 
-    # Kembalikan hasil prediksi ke skala asli
-    y_pred_original = scaler_target.inverse_transform(y_pred_scaled.reshape(-1, 1))
-    y_test_original = scaler_target.inverse_transform(y_test_scaled.reshape(-1, 1))
-    
+    # Latih model
+    bagging_model.fit(X_train, y_train)
+
+    # Prediksi pada data uji
+    y_pred = bagging_model.predict(X_test)
+
     # Evaluasi
-    mse = mean_squared_error(y_test_original, y_pred_original)
+    mse = mean_squared_error(y_test, y_pred)
     rmse = np.sqrt(mse)
-    mape = mean_absolute_percentage_error(y_test_original, y_pred_original) * 100  # Dalam persen
-    
+    mape = mean_absolute_percentage_error(y_test, y_pred) * 100  # Dalam persen
+
     # Simpan hasil evaluasi
     results[name] = {"RMSE": rmse, "MAPE": mape}
-    
+
+    # Kembalikan hasil prediksi ke skala asli
+    y_pred_original = scaler_target.inverse_transform(y_pred.reshape(-1, 1))
+    y_test_original = scaler_target.inverse_transform(y_test.values.reshape(-1, 1))
+
     # Plot hasil prediksi
     plt.figure(figsize=(15, 6))
     plt.plot(y_test.index, y_test_original, label="Actual", color="blue")
     plt.plot(y_test.index, y_pred_original, label=f"Predicted ({name})", color="red")
-    
+
     # Tambahkan detail plot
     plt.title(f'Actual vs Predicted Values ({name})')
     plt.xlabel('Tanggal')
     plt.ylabel('Kurs')
     plt.legend()
     plt.grid(True)
-    
+
     # Tampilkan plot
     plt.show()
 
 # Tampilkan hasil evaluasi
-print("HASIL EVALUASI MODEL")
 for model, metrics in results.items():
     print(f"{model}:\n  RMSE: {metrics['RMSE']:.2f}\n  MAPE: {metrics['MAPE']:.2f}%\n")
+
 ```
 
 ### Evaluation
