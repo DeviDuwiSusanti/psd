@@ -54,7 +54,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 # Membaca data
-df = pd.read_csv('https://raw.githubusercontent.com/DeviDuwiSusanti/dataset/refs/heads/main/etherium.csv')
+df = pd.read_csv('https://raw.githubusercontent.com/DeviDuwiSusanti/dataset/refs/heads/main/xrp.csv')
 
 # mengubah kolom 'Date' dalam format datetime
 df['Date'] = pd.to_datetime(df['Date'])
@@ -231,6 +231,9 @@ for model, metrics in results.items():
 
 ### Evaluation
 Di sini adalah tempat kita untuk mengukur kinerja model menggunakan metrik yang relevan seperi akurasi contohnya. Hal ini menentukan apakah model yang kita capai sudah memadai untuk digunakan dalam aplikasi nyata atau tidak.
+
+### Deployment
+Hasil deployment dapat diakses di link berikut ini : https://huggingface.co/spaces/heviaa/projek3_prediksiXRP
 
 ## Kesimpulan
 
