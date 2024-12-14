@@ -68,7 +68,7 @@ df
 ```
 
 #### b.	Deskripsi Data Set
-Data set ini terdiri dari 8 fitur atau kolom, dan 2230 record atau baris.
+Data set ini terdiri dari 1 fitur atau kolom, dan 1006 record atau baris.
 Atribut-atribut data set :
 - Date		: tanggal data harga kurs berlaku, biasanya memiliki format YYYY-MM-DD.
 - Kurs		: harga kurs pada tanggal tersebut.

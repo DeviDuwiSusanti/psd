@@ -437,86 +437,11 @@ document.write(`
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Kurs</th>
-    </tr>
-    <tr>
-      <th>Tanggal</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>2020-08-03</th>
-      <td>14713</td>
-    </tr>
-    <tr>
-      <th>2020-08-04</th>
-      <td>14697</td>
-    </tr>
-    <tr>
-      <th>2020-08-05</th>
-      <td>14623</td>
-    </tr>
-    <tr>
-      <th>2020-08-06</th>
-      <td>14587</td>
-    </tr>
-    <tr>
-      <th>2020-08-07</th>
-      <td>14647</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>2024-09-23</th>
-      <td>15191</td>
-    </tr>
-    <tr>
-      <th>2024-09-24</th>
-      <td>15186</td>
-    </tr>
-    <tr>
-      <th>2024-09-25</th>
-      <td>15092</td>
-    </tr>
-    <tr>
-      <th>2024-09-26</th>
-      <td>15171</td>
-    </tr>
-    <tr>
-      <th>2024-09-27</th>
-      <td>15138</td>
-    </tr>
-  </tbody>
-</table>
-<p>1006 rows × 1 columns</p>
-</div></div></div>
 </div>
 </section>
 <section id="b-deskripsi-data-set">
 <h4>b.	Deskripsi Data Set<a class="headerlink" href="#b-deskripsi-data-set" title="Link to this heading">#</a></h4>
-<p>Data set ini terdiri dari 8 fitur atau kolom, dan 2230 record atau baris.
+<p>Data set ini terdiri dari 1 fitur atau kolom, dan 1006 record atau baris.
 Atribut-atribut data set :</p>
 <ul class="simple">
 <li><p>Date		: tanggal data harga kurs berlaku, biasanya memiliki format YYYY-MM-DD.</p></li>
@@ -530,12 +455,6 @@ Atribut-atribut data set :</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Kurs    0
-dtype: int64
 </pre></div>
 </div>
 </div>
@@ -556,31 +475,11 @@ dtype: int64
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;Tanggal&#39;&gt;
-</pre></div>
-</div>
-<img alt="_images/109f964e4891c43125ba025b1983a3f2f2accf00a90bd85fe942dd708544aa2a.png" src="_images/109f964e4891c43125ba025b1983a3f2f2accf00a90bd85fe942dd708544aa2a.png" />
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Ukuran data &#39;</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
-DatetimeIndex: 1517 entries, 2020-08-03 to 2024-09-27
-Freq: D
-Data columns (total 1 columns):
- #   Column  Non-Null Count  Dtype  
----  ------  --------------  -----  
- 0   Kurs    1517 non-null   float64
-dtypes: float64(1)
-memory usage: 23.7 KB
-Ukuran data  (1517, 1)
 </pre></div>
 </div>
 </div>
@@ -591,64 +490,6 @@ Ukuran data  (1517, 1)
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Kurs</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>count</th>
-      <td>1517.000000</td>
-    </tr>
-    <tr>
-      <th>mean</th>
-      <td>14968.199407</td>
-    </tr>
-    <tr>
-      <th>std</th>
-      <td>636.234284</td>
-    </tr>
-    <tr>
-      <th>min</th>
-      <td>13875.000000</td>
-    </tr>
-    <tr>
-      <th>25%</th>
-      <td>14377.333333</td>
-    </tr>
-    <tr>
-      <th>50%</th>
-      <td>14888.000000</td>
-    </tr>
-    <tr>
-      <th>75%</th>
-      <td>15504.000000</td>
-    </tr>
-    <tr>
-      <th>max</th>
-      <td>16458.000000</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 </section>
 </section>
@@ -671,120 +512,6 @@ Ukuran data  (1517, 1)
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Kurs</th>
-      <th>Kurs-1</th>
-      <th>Kurs-2</th>
-      <th>Kurs-3</th>
-    </tr>
-    <tr>
-      <th>Tanggal</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>2020-08-06</th>
-      <td>14587.000000</td>
-      <td>14623.000000</td>
-      <td>14697.000000</td>
-      <td>14713.000000</td>
-    </tr>
-    <tr>
-      <th>2020-08-07</th>
-      <td>14647.000000</td>
-      <td>14587.000000</td>
-      <td>14623.000000</td>
-      <td>14697.000000</td>
-    </tr>
-    <tr>
-      <th>2020-08-08</th>
-      <td>14681.333333</td>
-      <td>14647.000000</td>
-      <td>14587.000000</td>
-      <td>14623.000000</td>
-    </tr>
-    <tr>
-      <th>2020-08-09</th>
-      <td>14715.666667</td>
-      <td>14681.333333</td>
-      <td>14647.000000</td>
-      <td>14587.000000</td>
-    </tr>
-    <tr>
-      <th>2020-08-10</th>
-      <td>14750.000000</td>
-      <td>14715.666667</td>
-      <td>14681.333333</td>
-      <td>14647.000000</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>2024-09-23</th>
-      <td>15191.000000</td>
-      <td>15160.666667</td>
-      <td>15130.333333</td>
-      <td>15100.000000</td>
-    </tr>
-    <tr>
-      <th>2024-09-24</th>
-      <td>15186.000000</td>
-      <td>15191.000000</td>
-      <td>15160.666667</td>
-      <td>15130.333333</td>
-    </tr>
-    <tr>
-      <th>2024-09-25</th>
-      <td>15092.000000</td>
-      <td>15186.000000</td>
-      <td>15191.000000</td>
-      <td>15160.666667</td>
-    </tr>
-    <tr>
-      <th>2024-09-26</th>
-      <td>15171.000000</td>
-      <td>15092.000000</td>
-      <td>15186.000000</td>
-      <td>15191.000000</td>
-    </tr>
-    <tr>
-      <th>2024-09-27</th>
-      <td>15138.000000</td>
-      <td>15171.000000</td>
-      <td>15092.000000</td>
-      <td>15186.000000</td>
-    </tr>
-  </tbody>
-</table>
-<p>1514 rows × 4 columns</p>
-</div></div></div>
 </div>
 </section>
 </section>
@@ -812,77 +539,6 @@ Ukuran data  (1517, 1)
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Kurs</th>
-      <th>Kurs-1</th>
-      <th>Kurs-2</th>
-      <th>Kurs-3</th>
-    </tr>
-    <tr>
-      <th>Tanggal</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>2020-08-06</th>
-      <td>0.275648</td>
-      <td>0.289586</td>
-      <td>0.318235</td>
-      <td>0.324429</td>
-    </tr>
-    <tr>
-      <th>2020-08-07</th>
-      <td>0.298877</td>
-      <td>0.275648</td>
-      <td>0.289586</td>
-      <td>0.318235</td>
-    </tr>
-    <tr>
-      <th>2020-08-08</th>
-      <td>0.312169</td>
-      <td>0.298877</td>
-      <td>0.275648</td>
-      <td>0.289586</td>
-    </tr>
-    <tr>
-      <th>2020-08-09</th>
-      <td>0.325461</td>
-      <td>0.312169</td>
-      <td>0.298877</td>
-      <td>0.275648</td>
-    </tr>
-    <tr>
-      <th>2020-08-10</th>
-      <td>0.338753</td>
-      <td>0.325461</td>
-      <td>0.312169</td>
-      <td>0.298877</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 </section>
 <section id="modelling">
@@ -967,25 +623,6 @@ Ukuran data  (1517, 1)
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;HASIL EVALUASI MODEL&quot;</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">model</span><span class="p">,</span> <span class="n">metrics</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">model</span><span class="si">}</span><span class="s2">:</span><span class="se">\n</span><span class="s2">  RMSE: </span><span class="si">{</span><span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;RMSE&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="se">\n</span><span class="s2">  MAPE: </span><span class="si">{</span><span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;MAPE&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/c97268c7b34dbe42e51b54a4cc4f379cf9c57be289af86657e7d6ee7d2a95fcd.png" src="_images/c97268c7b34dbe42e51b54a4cc4f379cf9c57be289af86657e7d6ee7d2a95fcd.png" />
-<img alt="_images/a906538c997f1c84a88c33199ff632e6fee279019d13fe8473906f6127e80ce8.png" src="_images/a906538c997f1c84a88c33199ff632e6fee279019d13fe8473906f6127e80ce8.png" />
-<img alt="_images/b50a765b44f4acf0e8d6841e60cce803f6200ec5fb61fa5cf7fd4db95ca1b34d.png" src="_images/b50a765b44f4acf0e8d6841e60cce803f6200ec5fb61fa5cf7fd4db95ca1b34d.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>HASIL EVALUASI MODEL
-Linear Regression:
-  RMSE: 0.02
-  MAPE: 1.50%
-
-SVR:
-  RMSE: 0.21
-  MAPE: 17.40%
-
-KNN:
-  RMSE: 0.08
-  MAPE: 6.56%
 </pre></div>
 </div>
 </div>

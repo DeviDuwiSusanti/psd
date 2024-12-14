@@ -17,28 +17,28 @@ kernelspec:
 ## Pendahuluan
 
 ### Latar Belakang
-Cryptocurrency adalah aset digital yang menggunakan teknologi blockchain untuk mencatat transaksi secara transparan dan aman. Salah satu cryptocurrency yang berkembang pesat adalah Solana (SOL), sebuah platform blockchain yang dikenal karena kecepatan transaksi dan biaya rendah. Solana telah menarik perhatian investor karena potensinya dalam mendukung aplikasi terdesentralisasi (dApps) dan proyek berbasis blockchain lainnya.
+Cryptocurrency adalah aset digital yang memanfaatkan teknologi blockchain untuk mencatat transaksi secara transparan dan aman. Salah satu cryptocurrency yang menarik perhatian adalah XRP, sebuah token digital yang dirancang untuk memfasilitasi pembayaran lintas batas dengan cepat dan efisien. XRP sering digunakan dalam platform Ripple, yang fokus pada solusi pembayaran global untuk institusi keuangan.
 
-Namun, seperti aset cryptocurrency lainnya, harga Solana sangat fluktuatif, dipengaruhi oleh berbagai faktor seperti sentimen pasar, perkembangan teknologi, regulasi, dan kondisi ekonomi global. Fluktuasi ini sering kali menyulitkan investor untuk membuat keputusan investasi yang tepat.
+Seperti halnya aset cryptocurrency lainnya, harga XRP sangat fluktuatif dan dipengaruhi oleh berbagai faktor, termasuk sentimen pasar, perkembangan teknologi, regulasi, dan dinamika ekonomi global. Fluktuasi ini sering menjadi tantangan bagi investor dalam membuat keputusan investasi yang strategis.
 
-Untuk membantu investor memahami pergerakan harga Solana, diperlukan teknologi yang dapat memprediksi harga di masa depan, seperti machine learning. Dengan analisis berbasis data historis, teknologi ini dapat membantu meminimalkan risiko dan mendukung pengambilan keputusan investasi yang lebih baik.
+Untuk membantu memahami pergerakan harga XRP, diperlukan teknologi prediktif seperti machine learning, yang memanfaatkan data historis untuk memberikan wawasan mengenai potensi pergerakan harga di masa depan. Pendekatan ini dapat membantu meminimalkan risiko dan meningkatkan kualitas keputusan investasi.
 
 ### Tujuan Proyek
-Proyek ini bertujuan untuk mengembangkan model prediksi harga cryptocurrency Solana (SOL) menggunakan data historis. Analisis ini diharapkan dapat:
+Proyek ini bertujuan untuk mengembangkan model prediksi harga cryptocurrency XRP berdasarkan data historis. Analisis ini diharapkan dapat:
 
-- Membantu investor dalam membuat keputusan investasi yang lebih terinformasi.
-- Memberikan wawasan terkait potenonnsi pergerakan harga Solana untuk memaksimalkan keuntungan dan mengelola risiko dengan lebih baik.
+- Mendukung investor dalam membuat keputusan investasi yang lebih terinformasi.
+- Memberikan wawasan mengenai potensi fluktuasi harga XRP untuk mengoptimalkan keuntungan dan mengelola risiko dengan lebih baik.
 
 ### Rumusan Masalah
-- Bagaimana mengembangkan model prediksi harga Solana (SOL) yang akurat dengan memanfaatkan data historis?
-- Bagaimana hasil prediksi harga Solana dapat digunakan untuk mendukung keputusan investasi yang lebih baik di pasar cryptocurrency?
+- Bagaimana membangun model prediksi harga XRP yang akurat dengan memanfaatkan data historis?
+- Bagaimana prediksi harga XRP dapat digunakan untuk mendukung pengambilan keputusan investasi yang lebih efektif di pasar cryptocurrency?
 
 ## METODOLOGI
 ### Data Understanding
 #### a.	Sumber Data
-Data yang digunakan pada proyek ini diperoleh dari website https://finance.yahoo.com/quote/SOL-USD/history/, yaitu sebuah platform online yang menyediakan data keuangan dan pasar aset secara real-time. Di website tersebut, tersedia informasi atau data historis harga cryptocurrency Solana (SOL) dalam berbagai rentang waktu.
+Data yang digunakan pada proyek ini diperoleh dari website https://finance.yahoo.com/quote/XRP-USD/history/, yaitu sebuah platform online yang menyediakan data keuangan dan pasar aset secara real-time. Di website tersebut, tersedia informasi atau data historis harga cryptocurrency Solana (SOL) dalam berbagai rentang waktu.
 
-Pada proyek ini, data historis yang digunakan mencakup periode dari tanggal 10-04-2020 hingga 05-12-2024, yang diunduh dalam format dokumen CSV.
+Pada proyek ini, data historis yang digunakan mencakup periode dari tanggal 01-01-2020 hingga 06-12-2024, yang diunduh dalam format dokumen CSV.
 
 Untuk tampilan datanya bisa dilihat di bawah ini:
 ```{code-cell}
@@ -68,7 +68,7 @@ df
 ```
 
 #### b.	Deskripsi Data Set
-Data set ini terdiri dari 8 fitur atau kolom, dan 2230 record atau baris.
+Data set ini terdiri dari 6 fitur atau kolom, dan 1802 record atau baris.
 Atribut-atribut data set :
 - Date		: tanggal data harga aset koin, biasanya memiliki format YYYY-MM-DD.
 - Open		: harga pembukaan aset koin pada tanggal tersebut.
@@ -118,7 +118,7 @@ plt.title('Heatmap Korelasi Antar Fitur')
 plt.show()
 ```
 Dari heatmap di atas, bisa dilihat bahwa:
-Fitur pembukaan (Open), tertinggi (High), penutupan (Close), dan harga pennutupan yang disesuaikan (Adj Close) mempunyai korelasi yang kuat antara satu sama lain (mendekati 1 atau 1). Hal ini menunjukkan fitur-fitur tersebut saling berkaitan dan bergerak sejalan. Sedangkan fitur 'Volume' mempunyai korelasi paling rendah dengan fitur lainnya (sekitar 0.78 - 0.8) yang menunjukkan bahwa perubahan volume tidak berpengaruh langsung dengan perubahan harga. Sehingga fitur volume tidak perlu digunakan untuk analisis prediksi pada projek ini.
+Fitur pembukaan (Open), tertinggi (High), penutupan (Close), dan harga pennutupan yang disesuaikan (Adj Close) mempunyai korelasi yang kuat antara satu sama lain (mendekati 1 atau 1). Hal ini menunjukkan fitur-fitur tersebut saling berkaitan dan bergerak sejalan. Sedangkan fitur 'Volume' mempunyai korelasi paling rendah dengan fitur lainnya (sekitar 0.44 - 0.5) yang menunjukkan bahwa perubahan volume tidak berpengaruh langsung dengan perubahan harga. Sehingga fitur volume tidak perlu digunakan untuk analisis prediksi pada projek ini.
 
 ### Data Preprocessing
 Langkah-langkah pada tahap ini adalah sebagai berikut :

@@ -79,7 +79,7 @@ df = df.sort_values(by='Date')
 df
 ```
 #### b.	Deskripsi Data Set
-Data set ini terdiri dari 8 fitur atau kolom, dan 2230 record atau baris.
+Data set ini terdiri dari 6 fitur atau kolom, dan 1701 record atau baris.
 Atribut-atribut data set :
 - Date		: tanggal data harga aset koin, biasanya memiliki format YYYY-MM-DD.
 - Open		: harga pembukaan aset koin pada tanggal tersebut.
@@ -168,7 +168,7 @@ plt.title('Heatmap Korelasi Antar Fitur')
 plt.show()
 ```
 Dari heatmap di atas, bisa dilihat bahwa:
-Fitur pembukaan (Open), tertinggi (High), penutupan (Close), dan harga pennutupan yang disesuaikan (Adj Close) mempunyai korelasi yang kuat antara satu sama lain (mendekati 1 atau 1). Hal ini menunjukkan fitur-fitur tersebut saling berkaitan dan bergerak sejalan. Sedangkan fitur 'Volume' mempunyai korelasi paling rendah dengan fitur lainnya (sekitar 0.78 - 0.8) yang menunjukkan bahwa perubahan volume tidak berpengaruh langsung dengan perubahan harga. Sehingga fitur volume tidak perlu digunakan untuk analisis prediksi pada projek ini.
+Fitur pembukaan (Open), tertinggi (High), penutupan (Close), dan harga pennutupan yang disesuaikan (Adj Close) mempunyai korelasi yang kuat antara satu sama lain (mendekati 1 atau 1). Hal ini menunjukkan fitur-fitur tersebut saling berkaitan dan bergerak sejalan. Sedangkan fitur 'Volume' mempunyai korelasi paling rendah dengan fitur lainnya (sekitar 0.72 - 0.75) yang menunjukkan bahwa perubahan volume tidak berpengaruh langsung dengan perubahan harga. Sehingga fitur volume tidak perlu digunakan untuk analisis prediksi pada projek ini.
 
 ### Data Preprocessing
 Langkah-langkah pada tahap ini adalah sebagai berikut :

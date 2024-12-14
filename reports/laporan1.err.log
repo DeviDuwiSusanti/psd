@@ -37,7 +37,7 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-['import numpy as np', 'import pandas as pd', 'from sklearn.model_selection import train_test_split', 'from sklearn.preprocessing import MinMaxScaler', 'from sklearn.linear_model import LinearRegression, Ridge']
+['# Membaca data', "df = pd.read_csv('https://raw.githubusercontent.com/DeviDuwiSusanti/dataset/refs/heads/main/solana.csv')", '', "# mengubah kolom 'Date' dalam format datetime", "df['Date'] = pd.to_datetime(df['Date'])"]
 ...
 ["df.set_index('Date', inplace=True)", '', '# Mensortir data berdasarkan kolom Date dari terkecil ke terbesar', "df = df.sort_values(by='Date')", 'df']
 -------------------
