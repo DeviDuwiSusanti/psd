@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="_static/myfile.css?v=77c4b62d" />
@@ -444,6 +444,146 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Open</th>
+      <th>High</th>
+      <th>Low</th>
+      <th>Close</th>
+      <th>Adj Close</th>
+      <th>Volume</th>
+    </tr>
+    <tr>
+      <th>Date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2020-01-01</th>
+      <td>0.1929</td>
+      <td>0.1944</td>
+      <td>0.1921</td>
+      <td>0.1927</td>
+      <td>0.1927</td>
+      <td>1041134003</td>
+    </tr>
+    <tr>
+      <th>2020-01-02</th>
+      <td>0.1927</td>
+      <td>0.1929</td>
+      <td>0.1869</td>
+      <td>0.1880</td>
+      <td>0.1880</td>
+      <td>1085351426</td>
+    </tr>
+    <tr>
+      <th>2020-01-03</th>
+      <td>0.1879</td>
+      <td>0.1941</td>
+      <td>0.1858</td>
+      <td>0.1935</td>
+      <td>0.1935</td>
+      <td>1270017043</td>
+    </tr>
+    <tr>
+      <th>2020-01-04</th>
+      <td>0.1935</td>
+      <td>0.1947</td>
+      <td>0.1918</td>
+      <td>0.1944</td>
+      <td>0.1944</td>
+      <td>999331594</td>
+    </tr>
+    <tr>
+      <th>2020-01-05</th>
+      <td>0.1944</td>
+      <td>0.1992</td>
+      <td>0.1939</td>
+      <td>0.1955</td>
+      <td>0.1955</td>
+      <td>1168067557</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2024-12-02</th>
+      <td>2.3207</td>
+      <td>2.8497</td>
+      <td>2.2439</td>
+      <td>2.7138</td>
+      <td>2.7138</td>
+      <td>51723383809</td>
+    </tr>
+    <tr>
+      <th>2024-12-03</th>
+      <td>2.7139</td>
+      <td>2.8649</td>
+      <td>2.3610</td>
+      <td>2.5255</td>
+      <td>2.5255</td>
+      <td>43498034453</td>
+    </tr>
+    <tr>
+      <th>2024-12-04</th>
+      <td>2.5256</td>
+      <td>2.6703</td>
+      <td>2.2956</td>
+      <td>2.3544</td>
+      <td>2.3544</td>
+      <td>22033216003</td>
+    </tr>
+    <tr>
+      <th>2024-12-05</th>
+      <td>2.3544</td>
+      <td>2.4850</td>
+      <td>2.1889</td>
+      <td>2.2952</td>
+      <td>2.2952</td>
+      <td>21253973296</td>
+    </tr>
+    <tr>
+      <th>2024-12-06</th>
+      <td>2.2509</td>
+      <td>2.4605</td>
+      <td>2.2395</td>
+      <td>2.4247</td>
+      <td>2.4247</td>
+      <td>13380810341</td>
+    </tr>
+  </tbody>
+</table>
+<p>1802 rows × 6 columns</p>
+</div></div></div>
 </div>
 </section>
 <section id="b-deskripsi-data-set">
@@ -467,6 +607,24 @@ dividen, dan coerporate actions lainnya.</p></li>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+DatetimeIndex: 1802 entries, 2020-01-01 to 2024-12-06
+Data columns (total 6 columns):
+ #   Column     Non-Null Count  Dtype  
+---  ------     --------------  -----  
+ 0   Open       1802 non-null   float64
+ 1   High       1802 non-null   float64
+ 2   Low        1802 non-null   float64
+ 3   Close      1802 non-null   float64
+ 4   Adj Close  1802 non-null   float64
+ 5   Volume     1802 non-null   int64  
+dtypes: float64(5), int64(1)
+memory usage: 98.5 KB
+Ukuran data  (1802, 6)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -474,6 +632,109 @@ dividen, dan coerporate actions lainnya.</p></li>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Open</th>
+      <th>High</th>
+      <th>Low</th>
+      <th>Close</th>
+      <th>Adj Close</th>
+      <th>Volume</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>1802.000000</td>
+      <td>1802.000000</td>
+      <td>1802.000000</td>
+      <td>1802.000000</td>
+      <td>1802.000000</td>
+      <td>1.802000e+03</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>0.552644</td>
+      <td>0.573065</td>
+      <td>0.532110</td>
+      <td>0.553899</td>
+      <td>0.553899</td>
+      <td>2.977120e+09</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>0.301073</td>
+      <td>0.322727</td>
+      <td>0.282207</td>
+      <td>0.304309</td>
+      <td>0.304309</td>
+      <td>4.114861e+09</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>0.140500</td>
+      <td>0.146900</td>
+      <td>0.115100</td>
+      <td>0.139600</td>
+      <td>0.139600</td>
+      <td>2.253910e+08</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>0.356825</td>
+      <td>0.368125</td>
+      <td>0.344775</td>
+      <td>0.357550</td>
+      <td>0.357550</td>
+      <td>1.077488e+09</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>0.508800</td>
+      <td>0.521350</td>
+      <td>0.497450</td>
+      <td>0.509350</td>
+      <td>0.509350</td>
+      <td>1.716341e+09</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>0.629200</td>
+      <td>0.649350</td>
+      <td>0.612150</td>
+      <td>0.629200</td>
+      <td>0.629200</td>
+      <td>2.945095e+09</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>2.713900</td>
+      <td>2.864900</td>
+      <td>2.361000</td>
+      <td>2.713800</td>
+      <td>2.713800</td>
+      <td>5.172338e+10</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 </section>
 <section id="c-eksplorasi-data">
@@ -483,6 +744,17 @@ dividen, dan coerporate actions lainnya.</p></li>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Open         0
+High         0
+Low          0
+Close        0
+Adj Close    0
+Volume       0
+dtype: int64
 </pre></div>
 </div>
 </div>
@@ -506,6 +778,14 @@ dividen, dan coerporate actions lainnya.</p></li>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="_images/ef46fe15d6a67310ecbfe9fec949cde8c4bcebd9d703b64c9476a7b50c8914e0.png" src="_images/ef46fe15d6a67310ecbfe9fec949cde8c4bcebd9d703b64c9476a7b50c8914e0.png" />
+<img alt="_images/927485d61f1eab3f79ec38af954d940b61dc20f5556d32122bcc7557a5190e9c.png" src="_images/927485d61f1eab3f79ec38af954d940b61dc20f5556d32122bcc7557a5190e9c.png" />
+<img alt="_images/3a94aeaada8d8ec8276c3a7fa0ecea1e661e6f2571c341f26a00667a94edf361.png" src="_images/3a94aeaada8d8ec8276c3a7fa0ecea1e661e6f2571c341f26a00667a94edf361.png" />
+<img alt="_images/e82cd0ed11881de8856cfd73d831b664f6518c25be1f7351090040764fa4ea79.png" src="_images/e82cd0ed11881de8856cfd73d831b664f6518c25be1f7351090040764fa4ea79.png" />
+<img alt="_images/a5924380114d290cecdbdc32e2846ef283a0a212b3d9ec0e8c1067b00f00a136.png" src="_images/a5924380114d290cecdbdc32e2846ef283a0a212b3d9ec0e8c1067b00f00a136.png" />
+<img alt="_images/8b2a3b17f765dd7059153bbe2de66688b4d60b4c1fade3b0eeebf634c8392ba9.png" src="_images/8b2a3b17f765dd7059153bbe2de66688b4d60b4c1fade3b0eeebf634c8392ba9.png" />
+</div>
 </div>
 </section>
 <section id="korelasi-antar-fitur">
@@ -520,6 +800,9 @@ dividen, dan coerporate actions lainnya.</p></li>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/0c09b6906376ab67325d65c854d4f4875a94e16fcccc486c0eba4b95ea45beb8.png" src="_images/0c09b6906376ab67325d65c854d4f4875a94e16fcccc486c0eba4b95ea45beb8.png" />
 </div>
 </div>
 <p>Dari heatmap di atas, bisa dilihat bahwa:
@@ -540,6 +823,77 @@ Fitur pembukaan (Open), tertinggi (High), penutupan (Close), dan harga pennutupa
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Open</th>
+      <th>High</th>
+      <th>Low</th>
+      <th>Close</th>
+    </tr>
+    <tr>
+      <th>Date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2020-01-01</th>
+      <td>0.1929</td>
+      <td>0.1944</td>
+      <td>0.1921</td>
+      <td>0.1927</td>
+    </tr>
+    <tr>
+      <th>2020-01-02</th>
+      <td>0.1927</td>
+      <td>0.1929</td>
+      <td>0.1869</td>
+      <td>0.1880</td>
+    </tr>
+    <tr>
+      <th>2020-01-03</th>
+      <td>0.1879</td>
+      <td>0.1941</td>
+      <td>0.1858</td>
+      <td>0.1935</td>
+    </tr>
+    <tr>
+      <th>2020-01-04</th>
+      <td>0.1935</td>
+      <td>0.1947</td>
+      <td>0.1918</td>
+      <td>0.1944</td>
+    </tr>
+    <tr>
+      <th>2020-01-05</th>
+      <td>0.1944</td>
+      <td>0.1992</td>
+      <td>0.1939</td>
+      <td>0.1955</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 </section>
 <section id="b-rekayasa-fitur">
@@ -554,6 +908,84 @@ Fitur pembukaan (Open), tertinggi (High), penutupan (Close), dan harga pennutupa
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Open</th>
+      <th>High</th>
+      <th>Low</th>
+      <th>Close</th>
+      <th>Close Target</th>
+    </tr>
+    <tr>
+      <th>Date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2020-01-01</th>
+      <td>0.1929</td>
+      <td>0.1944</td>
+      <td>0.1921</td>
+      <td>0.1927</td>
+      <td>0.1880</td>
+    </tr>
+    <tr>
+      <th>2020-01-02</th>
+      <td>0.1927</td>
+      <td>0.1929</td>
+      <td>0.1869</td>
+      <td>0.1880</td>
+      <td>0.1935</td>
+    </tr>
+    <tr>
+      <th>2020-01-03</th>
+      <td>0.1879</td>
+      <td>0.1941</td>
+      <td>0.1858</td>
+      <td>0.1935</td>
+      <td>0.1944</td>
+    </tr>
+    <tr>
+      <th>2020-01-04</th>
+      <td>0.1935</td>
+      <td>0.1947</td>
+      <td>0.1918</td>
+      <td>0.1944</td>
+      <td>0.1955</td>
+    </tr>
+    <tr>
+      <th>2020-01-05</th>
+      <td>0.1944</td>
+      <td>0.1992</td>
+      <td>0.1939</td>
+      <td>0.1955</td>
+      <td>0.2215</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>Dari dataset yang sudah melalui beberapa proses agar siap digunakan, terlihat bahwa fitur input terdiri dari fitur Open, High, Low, Close, Adj Close di hari ini, dan fitur Close Target atau prediksi harga Low besok hari sebagai fitur output.</p>
 </section>
@@ -581,6 +1013,84 @@ Fitur pembukaan (Open), tertinggi (High), penutupan (Close), dan harga pennutupa
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Open</th>
+      <th>High</th>
+      <th>Low</th>
+      <th>Close</th>
+      <th>Close Target</th>
+    </tr>
+    <tr>
+      <th>Date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2020-01-01</th>
+      <td>0.020362</td>
+      <td>0.017476</td>
+      <td>0.034285</td>
+      <td>0.020628</td>
+      <td>0.018802</td>
+    </tr>
+    <tr>
+      <th>2020-01-02</th>
+      <td>0.020284</td>
+      <td>0.016924</td>
+      <td>0.031969</td>
+      <td>0.018802</td>
+      <td>0.020939</td>
+    </tr>
+    <tr>
+      <th>2020-01-03</th>
+      <td>0.018419</td>
+      <td>0.017366</td>
+      <td>0.031480</td>
+      <td>0.020939</td>
+      <td>0.021288</td>
+    </tr>
+    <tr>
+      <th>2020-01-04</th>
+      <td>0.020595</td>
+      <td>0.017586</td>
+      <td>0.034151</td>
+      <td>0.021288</td>
+      <td>0.021715</td>
+    </tr>
+    <tr>
+      <th>2020-01-05</th>
+      <td>0.020945</td>
+      <td>0.019242</td>
+      <td>0.035086</td>
+      <td>0.021715</td>
+      <td>0.031816</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 </section>
 </section>
@@ -654,6 +1164,25 @@ Fitur pembukaan (Open), tertinggi (High), penutupan (Close), dan harga pennutupa
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;HASIL EVALUASI MODEL&quot;</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">model</span><span class="p">,</span> <span class="n">metrics</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">model</span><span class="si">}</span><span class="s2">:</span><span class="se">\n</span><span class="s2">  RMSE: </span><span class="si">{</span><span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;RMSE&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="se">\n</span><span class="s2">  MAPE: </span><span class="si">{</span><span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;MAPE&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/dac2a6c080d5765424e09bd0eb52ba2c21351dc74bdd3ba03d76d132716d4f41.png" src="_images/dac2a6c080d5765424e09bd0eb52ba2c21351dc74bdd3ba03d76d132716d4f41.png" />
+<img alt="_images/90ab4fc09ba2f56899cf4334f19b890a29983480a79e336b6a8b059c110d476d.png" src="_images/90ab4fc09ba2f56899cf4334f19b890a29983480a79e336b6a8b059c110d476d.png" />
+<img alt="_images/34886199fc89b3485ffb2cba094f6fe73e4722e1c126c774d64278d63d58d5a7.png" src="_images/34886199fc89b3485ffb2cba094f6fe73e4722e1c126c774d64278d63d58d5a7.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>HASIL EVALUASI MODEL
+KNN Regressor:
+  RMSE: 0.03
+  MAPE: 4.67%
+
+Random Forest:
+  RMSE: 0.03
+  MAPE: 5.11%
+
+ElasticNet:
+  RMSE: 0.09
+  MAPE: 23.03%
 </pre></div>
 </div>
 </div>
