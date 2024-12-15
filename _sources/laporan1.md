@@ -283,7 +283,3 @@ Dari hasil percobaan beberapa model, didapatkan model terbaik dengan metode Line
 
 ### Deployment
 Hasil deployment dapat diakses di link berikut ini : https://huggingface.co/spaces/heviaa/projek1_prediksiSolana
-
-## Kesimpulan
-
-## Referensi
