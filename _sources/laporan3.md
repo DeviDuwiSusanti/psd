@@ -108,27 +108,8 @@ Semua fitur memiliki hubungan yang kuat satu sama lain.
 ### Data Preprocessing
 Langkah-langkah pada tahap ini adalah sebagai berikut :
 
-#### a. Normalisasi
-```{code-cell}
-import numpy as np
-
-def normalize(df):
-    from sklearn.preprocessing import RobustScaler, MinMaxScaler
-
-    np_data_unscaled = np.array(df)
-    scaler = MinMaxScaler()
-    np_data_scaled = scaler.fit_transform(np_data_unscaled)
-    print(np_data_unscaled)
-    normalized_df = pd.DataFrame(np_data_scaled, columns=df.columns, index=df.index)
-    pd.set_option('display.float_format', '{:.4f}'.format)  # Menampilkan 4 desimal
-    return normalized_df, scaler
-
-normalized_df, scaler = normalize(df)
-normalized_df
-```
-
-#### b. Sliding Windows
-Untuk memprediksi transaksi Bank Indonesia terhadap mata uang JPY beberapa hari ke depan dibutuhkan data beberapa hari yang lalu.
+#### a. Sliding Window
+ntuk memprediksi transaksi Bank Indonesia terhadap mata uang JPY beberapa hari ke depan dibutuhkan data beberapa hari yang lalu.
 ```{code-cell}
 import pandas as pd
 
@@ -140,7 +121,7 @@ def sliding_window(data, lag):
     # Menambahkan kolom lag untuk 'sell'
     for l in lag:
         result[f'Kurs Jual-{l}'] = series_sell.shift(l)
-    
+
     # Menambahkan kolom lag untuk 'buy'
     for l in lag:
         result[f'Kurs Beli-{l}'] = series_buy.shift(l)
@@ -149,177 +130,124 @@ def sliding_window(data, lag):
     # Menambahkan kolom 'sell' dan 'buy' asli tanpa perubahan
     result['Kurs Jual'] = series_sell[l:]
     result['Kurs Beli'] = series_buy[l:]
-    
+
     # Menghapus nilai yang hilang (NaN)
     result = result.dropna()
-    
+
     # Mengatur index sesuai dengan nilai lag
     result.index = series_sell.index[l:]
-    
+
     return result
 
-windowed_data = sliding_window(normalized_df, [1, 2, 3, 4, 5, 6, 7])
-windowed_data = windowed_data[['Kurs Jual', 'Kurs Jual-1', 'Kurs Jual-2', 'Kurs Jual-3', 'Kurs Jual-4', 'Kurs Jual-5', 'Kurs Jual-6', 'Kurs Jual-7', 'Kurs Beli', 'Kurs Beli-1', 'Kurs Beli-2', 'Kurs Beli-3', 'Kurs Beli-4', 'Kurs Beli-5', 'Kurs Beli-6', 'Kurs Beli-7']]
-print(windowed_data)
+windowed_data = sliding_window(df, [1, 2, 3])
+windowed_data = windowed_data[['Kurs Jual', 'Kurs Jual-1', 'Kurs Jual-2', 'Kurs Jual-3', 'Kurs Beli', 'Kurs Beli-1', 'Kurs Beli-2', 'Kurs Beli-3']]
+windowed_data
+```
+
+#### b. Normalisasi
+```{code-cell}
+from sklearn.preprocessing import MinMaxScaler
+
+# Inisialisasi scaler untuk fitur (input) dan target (output)
+scaler_features = MinMaxScaler()
+scaler_target = MinMaxScaler()
+
+# Normalisasi fitur (Kurs Jual-1, Kurs Jual-2, Kurs Jual-3, Kurs Beli-1, Kurs Beli-2, Kurs Beli-3)
+df_features_normalized = pd.DataFrame(
+    scaler_features.fit_transform(windowed_data[['Kurs Jual-1', 'Kurs Jual-2', 'Kurs Jual-3', 'Kurs Beli-1', 'Kurs Beli-2', 'Kurs Beli-3']]),
+    columns=['Kurs Jual-1', 'Kurs Jual-2', 'Kurs Jual-3', 'Kurs Beli-1', 'Kurs Beli-2', 'Kurs Beli-3'],
+    index=windowed_data.index
+)
+
+# Normalisasi target (Kurs Jual dan Kurs Beli)
+df_target_normalized = pd.DataFrame(
+    scaler_target.fit_transform(windowed_data[['Kurs Jual', 'Kurs Beli']]),
+    columns=['Kurs Jual', 'Kurs Beli'],
+    index=windowed_data.index
+)
+
+# Gabungkan kembali dataframe yang sudah dinormalisasi
+df_normalized = pd.concat([df_features_normalized, df_target_normalized], axis=1)
+df_normalized.head()
 ```
 
 #### c. Splitting Data
 ```{code-cell}
-def split_data(data, target, train_size):
-    split_index = int(len(data) * train_size)
+# Mengatur fitur (X) dan target (y)
+X = df_normalized[['Kurs Jual-1', 'Kurs Jual-2', 'Kurs Jual-3', 'Kurs Beli-1', 'Kurs Beli-2', 'Kurs Beli-3']]
+y = df_normalized[['Kurs Jual', 'Kurs Beli']]
 
-    x_train = data[:split_index]
-    y_train = target[:split_index]
-    x_test = data[split_index:]
-    y_test = target[split_index:]
-
-    return x_train, y_train, x_test, y_test
-
-input_df = windowed_data.drop(columns=['Kurs Jual', 'Kurs Beli'])
-target_df = windowed_data[['Kurs Jual', 'Kurs Beli']]
-
-x_train, y_train, x_test, y_test = split_data(input_df, target_df, 0.8)
-
-print("X_train shape:", x_train.shape)
-print("y_train shape:", y_train.shape)
-print("X_test shape:", x_test.shape)
-print("y_test shape:", y_test.shape)
+# Membagi data menjadi training dan testing (60% training, 40% testing)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.4, shuffle=False)
 ```
 
 ### Modelling
 #### Membangun Model
-##### Regresi Linear
 ```{code-cell}
-from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_squared_error, mean_absolute_percentage_error
+models = {
+    "Linear Regression": LinearRegression(),
+    "Decision Tree": DecisionTreeRegressor(random_state=32),
+    "Ridge Regression": Ridge(alpha=1.0)
+}
 
-linear_model = LinearRegression()
-linear_model.fit(x_train, y_train)
+# Dictionary untuk menyimpan hasil evaluasi
+results = {}
+
+# Iterasi setiap model
+for name, model in models.items():
+    # Latih model
+    model.fit(X_train, y_train)
+
+    # Prediksi pada data uji
+    y_pred = model.predict(X_test)
+
+    # Evaluasi untuk setiap target (Kurs Jual dan Kurs Beli)
+    mse = mean_squared_error(y_test, y_pred)
+    rmse = np.sqrt(mse)
+    mape = mean_absolute_percentage_error(y_test, y_pred) * 100  # Dalam persen
+
+    # Simpan hasil evaluasi
+    results[name] = {"RMSE": rmse, "MAPE": mape}
+
+    # Kembalikan hasil prediksi ke skala asli untuk kedua target
+    y_pred_original = scaler_target.inverse_transform(y_pred)
+    y_test_original = scaler_target.inverse_transform(y_test)
+
+    # Plot hasil prediksi untuk Kurs Jual dan Kurs Beli dalam satu plot
+    plt.figure(figsize=(15, 6))
+
+    # Plot untuk Kurs Jual dan Kurs Beli
+    plt.plot(y_test.index, y_test_original[:, 0], label="Actual Kurs Jual", color="blue", linestyle='-')
+    plt.plot(y_test.index, y_pred_original[:, 0], label=f"Predicted Kurs Jual ({name})", color="red", linestyle='--')
+    
+    plt.plot(y_test.index, y_test_original[:, 1], label="Actual Kurs Beli", color="green", linestyle='-')
+    plt.plot(y_test.index, y_pred_original[:, 1], label=f"Predicted Kurs Beli ({name})", color="orange", linestyle='--')
+
+    # Tambahkan detail plot
+    plt.title(f'Actual vs Predicted Kurs Jual and Kurs Beli ({name})')
+    plt.xlabel('Tanggal')
+    plt.ylabel('Kurs')
+    plt.legend()
+    plt.grid(True)
+
+    # Tampilkan plot
+    plt.show()
+
+# Tampilkan hasil evaluasi
+print("HASIL EVALUASI MODEL")
+for model, metrics in results.items():
+    print(f"{model}:\n  RMSE: {metrics['RMSE']}\n ")
+
+<!-- MAPE: {metrics['MAPE']}%\n -->
+
+# Menentukan model terbaik berdasarkan RMSE atau MAPE (misalnya RMSE terendah)
+best_model_name = min(results, key=lambda x: results[x]['RMSE'])  # Model dengan RMSE terendah
+best_model_rmse = results[best_model_name]['RMSE']
+best_model_mape = results[best_model_name]['MAPE']
+
 ```
-
-```{code-cell}
-# Melakukan prediksi
-y_pred = linear_model.predict(x_test)
-
-# Menghitung error
-mse = mean_squared_error(y_test, y_pred)
-rmse = np.sqrt(mse)
-mape = mean_absolute_percentage_error(y_test, y_pred)
-
-print("Mean Squared Error (MSE):", mse)
-print("Root Mean Squared Error (RMSE):", rmse)
-print("Mean Absolute Percentage Error (MAPE):", mape, " %")
-```
-
-```{code-cell}
-import matplotlib.pyplot as plt
-
-# Membuat grafik perbandingan
-plt.figure(figsize=(10, 6))
-
-# Nilai aktual
-plt.plot(
-    y_test.index, 
-    scaler.inverse_transform(y_test.values)[:, 0], 
-    color='blue', marker='o', linestyle='-', markersize=4, label='Aktual Sell'
-)
-plt.plot(
-    y_test.index, 
-    scaler.inverse_transform(y_test.values)[:, 1], 
-    color='green', marker='o', linestyle='-', markersize=4, label='Aktual Buy'
-)
-
-# Nilai prediksi
-plt.plot(
-    y_test.index, 
-    scaler.inverse_transform(y_pred)[:, 0], 
-    color='orange', marker='x', linestyle='--', markersize=4, label='Prediksi Sell'
-)
-plt.plot(
-    y_test.index, 
-    scaler.inverse_transform(y_pred)[:, 1], 
-    color='red', marker='x', linestyle='--', markersize=4, label='Prediksi Buy'
-)
-
-# Menambahkan judul dan label sumbu
-plt.title('Perbandingan Nilai Aktual dan Prediksi Model Regresi Linear')
-plt.xlabel('Tanggal')
-plt.ylabel('Harga')
-
-# Menampilkan grid
-plt.grid()
-
-# Menambahkan legenda
-plt.legend()
-
-# Menampilkan grafik
-plt.show()
-```
-
-##### Regresi Linear + Ensamble Bagging
-```{code-cell}
-from sklearn.ensemble import BaggingRegressor
-base_model = LinearRegression()
-bagging_model = BaggingRegressor(estimator=base_model, n_estimators=10, bootstrap=True)
-bagging_model.fit(x_train, y_train)
-y_pred = bagging_model.predict(x_test)
-
-mse = mean_squared_error(y_test, y_pred)
-rmse = np.sqrt(mse)
-mape = mean_absolute_percentage_error(y_test, y_pred)
-
-print(f'Mean Squared Error: {mse}')
-print(f'Root Mean Squared Error: {rmse}')
-print(f'Mean Absolute Percentage Error (MAPE): {mape} %')
-```
-
-```{code-cell}
-import matplotlib.pyplot as plt
-
-# Membuat grafik perbandingan
-plt.figure(figsize=(10, 6))
-
-# Nilai aktual
-plt.plot(
-    y_test.index, 
-    scaler.inverse_transform(y_test.values)[:, 0], 
-    color='blue', marker='o', linestyle='-', markersize=4, label='Aktual Sell'
-)
-plt.plot(
-    y_test.index, 
-    scaler.inverse_transform(y_test.values)[:, 1], 
-    color='green', marker='o', linestyle='-', markersize=4, label='Aktual Buy'
-)
-
-# Nilai prediksi
-plt.plot(
-    y_test.index, 
-    scaler.inverse_transform(y_pred)[:, 0], 
-    color='orange', marker='x', linestyle='--', markersize=4, label='Prediksi Sell'
-)
-plt.plot(
-    y_test.index, 
-    scaler.inverse_transform(y_pred)[:, 1], 
-    color='red', marker='x', linestyle='--', markersize=4, label='Prediksi Buy'
-)
-
-# Menambahkan judul dan label sumbu
-plt.title('Perbandingan Nilai Aktual dan Prediksi Model Regresi Linear')
-plt.xlabel('Tanggal')
-plt.ylabel('Harga')
-
-# Menampilkan grid
-plt.grid()
-
-# Menambahkan legenda
-plt.legend()
-
-# Menampilkan grafik
-plt.show()
-```
-
 ### Evaluation
-Dari model-model di atas didapatkan bahwa model Regresi Linear lebih baik dibandingkan Regresi Linear ditambah degan Ensamble Bagging.
+Dari model-model di atas didapatkan bahwa model Regresi Linear lebih baik dibandingkan dengan model Decision Tree dan Ridge Regression.
 
 ### Deployment
 Hasil deployment dapat diakses di link berikut ini : https://huggingface.co/spaces/heviaa/projek3_prediksiXRP
