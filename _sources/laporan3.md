@@ -96,6 +96,8 @@ df.plot()
 ```{code-cell}
 sns.boxplot(data=df)
 ```
+Terlihat bahwa fitur pada data ini tidak memiliki outlier.
+
 ###### Korelasi Antar Fitur
 ```{code-cell}
 correlation_matrix = df.corr()
@@ -238,12 +240,9 @@ print("HASIL EVALUASI MODEL")
 for model, metrics in results.items():
     print(f"{model}:\n  RMSE: {metrics['RMSE']}\n ")
 
-<!-- MAPE: {metrics['MAPE']}%\n -->
-
 # Menentukan model terbaik berdasarkan RMSE atau MAPE (misalnya RMSE terendah)
 best_model_name = min(results, key=lambda x: results[x]['RMSE'])  # Model dengan RMSE terendah
 best_model_rmse = results[best_model_name]['RMSE']
-best_model_mape = results[best_model_name]['MAPE']
 
 ```
 ### Evaluation

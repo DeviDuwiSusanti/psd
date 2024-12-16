@@ -689,6 +689,7 @@ dtype: int64
 <img alt="_images/edb221f932e5c82424a4586ee076e663578267ef2fce6c4b70924245580d9f3c.png" src="_images/edb221f932e5c82424a4586ee076e663578267ef2fce6c4b70924245580d9f3c.png" />
 </div>
 </div>
+<p>Terlihat bahwa fitur pada data ini tidak memiliki outlier.</p>
 </section>
 <section id="korelasi-antar-fitur">
 <h5>Korelasi Antar Fitur<a class="headerlink" href="#korelasi-antar-fitur" title="Link to this heading">#</a></h5>
@@ -1134,20 +1135,26 @@ Semua fitur memiliki hubungan yang kuat satu sama lain.</p>
 <span class="k">for</span> <span class="n">model</span><span class="p">,</span> <span class="n">metrics</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">model</span><span class="si">}</span><span class="s2">:</span><span class="se">\n</span><span class="s2">  RMSE: </span><span class="si">{</span><span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;RMSE&#39;</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2"> &quot;</span><span class="p">)</span>
 
-<span class="o">&lt;!</span>--<span class="w"> </span>MAPE:<span class="w"> </span><span class="o">{</span>metrics<span class="o">[</span><span class="s1">&#39;MAPE&#39;</span><span class="o">]}</span>%<span class="se">\n</span><span class="w"> </span>--&gt;
-
 <span class="c1"># Menentukan model terbaik berdasarkan RMSE atau MAPE (misalnya RMSE terendah)</span>
 <span class="n">best_model_name</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">results</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;RMSE&#39;</span><span class="p">])</span>  <span class="c1"># Model dengan RMSE terendah</span>
 <span class="n">best_model_rmse</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="n">best_model_name</span><span class="p">][</span><span class="s1">&#39;RMSE&#39;</span><span class="p">]</span>
-<span class="n">best_model_mape</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="n">best_model_name</span><span class="p">][</span><span class="s1">&#39;MAPE&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>  <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">11</span><span class="p">],</span> <span class="n">line</span> <span class="mi">55</span>
-    <span class="o">&lt;!</span>--<span class="w"> </span>MAPE:<span class="w"> </span><span class="o">{</span>metrics<span class="o">[</span><span class="s1">&#39;MAPE&#39;</span><span class="o">]}</span>%<span class="se">\n</span><span class="w"> </span>--&gt;
-    <span class="o">^</span>
-<span class="ne">SyntaxError</span>: invalid syntax
+<img alt="_images/c62ffe3426330e3bbeb753d071ae2b6fd3c6b6f4cff71a5c5f9f99255598fa6e.png" src="_images/c62ffe3426330e3bbeb753d071ae2b6fd3c6b6f4cff71a5c5f9f99255598fa6e.png" />
+<img alt="_images/4155af7187893cd1f85d6511dbfd67929b228e99c4615d428d25b01de208bd46.png" src="_images/4155af7187893cd1f85d6511dbfd67929b228e99c4615d428d25b01de208bd46.png" />
+<img alt="_images/defebf7e895c8e5ba67f21b298b5a3b80b7d283717135f372cc3e918fbfa160d.png" src="_images/defebf7e895c8e5ba67f21b298b5a3b80b7d283717135f372cc3e918fbfa160d.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>HASIL EVALUASI MODEL
+Linear Regression:
+  RMSE: 0.012330306009707947
+ 
+Decision Tree:
+  RMSE: 0.027718941961754597
+ 
+Ridge Regression:
+  RMSE: 0.013966409891479863
+ 
 </pre></div>
 </div>
 </div>
